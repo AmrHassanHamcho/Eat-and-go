@@ -15,6 +15,9 @@ class CreateRestaurantsTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('adress');
+            $table->string('bankAccount');
             $table->timestamps();
         });
     }
