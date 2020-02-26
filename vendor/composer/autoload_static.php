@@ -412,7 +412,6 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
     public static $classMap = array (
         'App\\AdminApp' => __DIR__ . '/../..' . '/app/AdminApp.php',
         'App\\AdminRestaurant' => __DIR__ . '/../..' . '/app/AdminRestaurant.php',
-        'App\\City' => __DIR__ . '/../..' . '/app/City.php',
         'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -437,6 +436,7 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Restaurant' => __DIR__ . '/../..' . '/app/Restaurant.php',
+        'App\\Review' => __DIR__ . '/../..' . '/app/Review.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
         'Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',
