@@ -18,6 +18,9 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('adress');
             $table->string('bankAccount');
+            
+            $table->unsignedBigInteger('adminRestaurant_id');
+            $table->foreign('adminRestaurant_id')->references('id')->on('admin_restaurants');
             $table->timestamps();
         });
     }

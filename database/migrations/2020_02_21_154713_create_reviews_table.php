@@ -17,6 +17,13 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->string('comment');
             $table->float('score');
+
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')->references('id')->on('restaurant')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
