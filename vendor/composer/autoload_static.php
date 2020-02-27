@@ -410,6 +410,9 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
     );
 
     public static $classMap = array (
+        'AdminApps' => __DIR__ . '/../..' . '/database/seeds/AdminApps.php',
+        'AdminResataurants' => __DIR__ . '/../..' . '/database/seeds/AdminResataurants.php',
+        'AdminRestaurants' => __DIR__ . '/../..' . '/database/seeds/AdminRestaurants.php',
         'App\\AdminApp' => __DIR__ . '/../..' . '/app/AdminApp.php',
         'App\\AdminRestaurant' => __DIR__ . '/../..' . '/app/AdminRestaurant.php',
         'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
@@ -474,6 +477,8 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Clients' => __DIR__ . '/../..' . '/database/seeds/Clients.php',
+        'CreateClients' => __DIR__ . '/../..' . '/database/seeds/CreateClients.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -3484,6 +3489,8 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
+        'Restaurants' => __DIR__ . '/../..' . '/database/seeds/Restaurants.php',
+        'Reviews' => __DIR__ . '/../..' . '/database/seeds/Reviews.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
