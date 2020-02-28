@@ -13,6 +13,7 @@ class Reviews extends Seeder
     {
         DB::table('reviews')->delete();
         DB::table('reviews')->insert([
+            'id'=>1,
             'client_id'=>1,
             'restaurant_id'=>1,
             'comment'=> 'Testcomment',
