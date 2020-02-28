@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdminApps' => $baseDir . '/database/seeds/AdminApps.php',
+    'AdminResataurants' => $baseDir . '/database/seeds/AdminResataurants.php',
+    'AdminRestaurants' => $baseDir . '/database/seeds/AdminRestaurants.php',
     'App\\AdminApp' => $baseDir . '/app/AdminApp.php',
     'App\\AdminRestaurant' => $baseDir . '/app/AdminRestaurant.php',
     'App\\Client' => $baseDir . '/app/Client.php',
@@ -70,6 +73,8 @@ return array(
     'Carbon\\Traits\\Units' => $vendorDir . '/nesbot/carbon/src/Carbon/Traits/Units.php',
     'Carbon\\Traits\\Week' => $vendorDir . '/nesbot/carbon/src/Carbon/Traits/Week.php',
     'Carbon\\Translator' => $vendorDir . '/nesbot/carbon/src/Carbon/Translator.php',
+    'Clients' => $baseDir . '/database/seeds/Clients.php',
+    'CreateClients' => $baseDir . '/database/seeds/CreateClients.php',
     'Cron\\AbstractField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
     'Cron\\DayOfMonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -3080,6 +3085,8 @@ return array(
     'Ramsey\\Uuid\\UuidFactory' => $vendorDir . '/ramsey/uuid/src/UuidFactory.php',
     'Ramsey\\Uuid\\UuidFactoryInterface' => $vendorDir . '/ramsey/uuid/src/UuidFactoryInterface.php',
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
+    'Restaurants' => $baseDir . '/database/seeds/Restaurants.php',
+    'Reviews' => $baseDir . '/database/seeds/Reviews.php',
     'SebastianBergmann\\CodeCoverage\\CodeCoverage' => $vendorDir . '/phpunit/php-code-coverage/src/CodeCoverage.php',
     'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/Driver.php',
