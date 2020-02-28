@@ -18,7 +18,7 @@ class Restaurants extends Seeder
             'address'=>'Testaddress',
             'bankaccount'=>'Testbankaccount',
             'phone'=>'123456789',
-            'adminRestaurant_id'=>1
+            'admin_restaurant_id'=>1
         ]);
     }
 }

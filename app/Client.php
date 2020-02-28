@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    use Notifiable;
+    // use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,8 +35,8 @@ class Client extends Model
         'email_verified_at' => 'datetime',
     ];
 
-    public function review(){
-        return $this->hasOne('App\Review');
+    public function reviews(){
+        return $this->hasMany('App\Review');
     }
 
 }
