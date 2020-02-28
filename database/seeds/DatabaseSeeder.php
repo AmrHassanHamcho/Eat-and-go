@@ -11,6 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(AdminApps::class);
+        $this->command->info('admin_apps table seeded!');
+        $this->call(AdminRestaurants::class);
+        $this->command->info('admin_restaurants table seeded!');
+        $this->call(Clients::class);
+        $this->command->info('clients table seeded!');
+        $this->call(Restaurants::class);
+        $this->command->info('restaurants table seeded!');
+        $this->call(Reviews::class);
+        $this->command->info('reviews table seeded!');
+
     }
 }
