@@ -14,15 +14,16 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('comment');
-            $table->float('score');
+            //$table->bigIncrements('id');
+            $table->primary(['client_id', 'restaurant_id']);
 
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-
-            $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')->references('id')->on('restaurant')->onDelete('cascade');
+            $table->unsignedBigInteger('restaurant_id');            
+            $table->string('comment');
+            $table->float('score');
+            
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');            
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
 
             $table->timestamps();
         });
