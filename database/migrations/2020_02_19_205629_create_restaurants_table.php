@@ -16,8 +16,9 @@ class CreateRestaurantsTable extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('adress');
+            $table->string('address');
             $table->string('bankAccount');
+            $table->string('phone');
             
             $table->unsignedBigInteger('adminRestaurant_id');
             $table->foreign('adminRestaurant_id')->references('id')->on('admin_restaurants');

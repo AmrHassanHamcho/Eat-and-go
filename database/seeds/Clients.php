@@ -12,7 +12,8 @@ class Clients extends Seeder
     public function run()
     {
         DB::table('clients')->delete();
-        DB::tabel('clients')->insert([
+        DB::table('clients')->insert([
+            'id'=>1,
             'name'=> 'Testname',
             'email'=>'Test@email.com',
             'password'=>'Testpassword',

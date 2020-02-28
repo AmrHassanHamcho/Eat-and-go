@@ -12,7 +12,8 @@ class AdminApps extends Seeder
     public function run()
     {
         DB::table('admin_apps')->delete();
-        DB::tabel('admin_apps')->insert([
+        DB::table('admin_apps')->insert([
+            'id'=>1,
             'name'=> 'Testname',
             'email'=>'Test@email.com',
             'password'=>'Testpassword',
