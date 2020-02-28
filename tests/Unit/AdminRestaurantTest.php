@@ -26,8 +26,8 @@ class AdminRestaurantTest extends TestCase
     public function admin_has_restaurant()
     {        
         $admin = AdminRestaurant::find(1);
-        $restaurant = Restaurant::find(1);  
+        $restaurants = Restaurant::where('admin_restaurant_id', '=', $admin->id)->get();  
 
-        $this->assertTrue($admin->restaurants->contains($restaurant));
+        $this->assertEqualsCanonicalizing($admin->restaurants, $restaurants);
     }
 }

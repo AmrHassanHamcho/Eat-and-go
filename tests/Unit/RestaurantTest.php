@@ -44,6 +44,7 @@ class RestaurantTest extends TestCase
         $admin = AdminRestaurant::find(1);
         $restaurant = Restaurant::find(1);
 
-        $this->assertInstanceOf(AdminRestaurant::class, $restaurant->admin);        
+        $this->assertInstanceOf(AdminRestaurant::class, $restaurant->admin);
+        $this->assertEquals($admin->id, $restaurant->admin->id);        
     }
 }
