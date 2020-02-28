@@ -12,7 +12,9 @@ class Reviews extends Seeder
     public function run()
     {
         DB::table('reviews')->delete();
-        DB::tabel('reviews')->insert([
+        DB::table('reviews')->insert([
+            'client_id'=>1,
+            'restaurant_id'=>1,
             'comment'=> 'Testcomment',
             'score'=>5.0
         ]);

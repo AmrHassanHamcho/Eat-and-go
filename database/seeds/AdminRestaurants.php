@@ -12,7 +12,8 @@ class AdminRestaurants extends Seeder
     public function run()
     {
         DB::table('admin_restaurants')->delete();
-        DB::tabel('admin_restaurants')->insert([
+        DB::table('admin_restaurants')->insert([
+            'id'=>1,
             'name'=> 'Testname',
             'email'=>'Test@email.com',
             'password'=>'Testpassword',

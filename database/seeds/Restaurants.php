@@ -12,11 +12,13 @@ class Restaurants extends Seeder
     public function run()
     {
         DB::table('restaurants')->delete();
-        DB::tabel('restaurants')->insert([
+        DB::table('restaurants')->insert([
+            'id'=>1,
             'name'=> 'Testname',
             'address'=>'Testaddress',
             'bankaccount'=>'Testbankaccount',
-            'phone'=>'123456789'
+            'phone'=>'123456789',
+            'adminRestaurant_id'=>1
         ]);
     }
 }
