@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Reviews extends Seeder
+class OrdersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,13 +11,12 @@ class Reviews extends Seeder
      */
     public function run()
     {
-        DB::table('reviews')->delete();
-        DB::table('reviews')->insert([
+        DB::table('orders')->delete();
+        DB::table('orders')->insert([
             'id'=>1,
-            'client_id'=>1,
+            'user_id'=> 3,
             'restaurant_id'=>1,
-            'comment'=> 'Testcomment',
-            'score'=>5.0
+            'total_price'=>9.5,
         ]);
     }
 }

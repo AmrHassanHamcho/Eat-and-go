@@ -7,38 +7,41 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
 use App\Restaurant;
-use App\Review;
+use App\Order;
+use App\OrderLine;
 
-class ReviewTest extends TestCase
+class OrderTest extends TestCase
 {
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    // public function testExample()
-    // {
-    //     $response = $this->get('/users');
-
-    //     $response->assertStatus(200);
-    // }
-
     /** @test */ 
-    public function review_has_user()
+    public function order_has_user()
     {
-        $review = Review::find(1);
-        $user = $review->user;
+        $order = Order::find(1);
+        $user = $order->user;
         
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals($user, User::find($user->id));        
     }
 
-    public function review_has_restaurant()
+    public function order_has_restaurant()
     {       
-        $review = Review::find(1);
-        $restaurant = $review->restaurant;
+        $order = Order::find(1);
+        $restaurant = $order->restaurant;
 
         $this->assertInstanceOf(Restaurant::class, $restaurant);
         $this->assertEquals($restaurant, User::find($restaurant->id));
+    } 
+
+    public function order_has_orderlines()
+    {
+        $order = Order::find(1);
+        $orderlines = $order->orderlines;
+
+        $this->assertInstanceOf(OrderLine::class, $orderlines[0]);
+        $this->assertEquals($orderlines, OrderLines::where('order_id', $order->id)->get());
     }
 }
