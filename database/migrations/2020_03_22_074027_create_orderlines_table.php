@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientsTable extends Migration
+class CreateOrderlinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('orderlines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->integer('age');
-            $table->string('phone');
-            $table->string('card');
-            $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger('food_id');
+            $table->integer('quantity');
+            $table->float('totalPrice');
             $table->timestamps();
+
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');            
         });
     }
 
@@ -33,6 +31,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('orderlines');
     }
 }

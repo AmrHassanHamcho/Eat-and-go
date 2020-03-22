@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminRestaurantsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateAdminRestaurantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_restaurants', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->integer('age');
-            $table->string('phone');
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateAdminRestaurantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_restaurants');
+        Schema::dropIfExists('roles');
     }
 }
