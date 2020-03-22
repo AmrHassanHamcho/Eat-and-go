@@ -19,6 +19,6 @@ class Restaurant extends Model
     }
 
     public function foods(){
-        return $this->hasMany('App\Order');
+        return $this->hasMany('App\Food');
     }
 }

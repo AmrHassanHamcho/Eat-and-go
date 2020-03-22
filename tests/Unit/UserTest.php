@@ -5,10 +5,13 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\AdminRestaurant;
+use App\User;
 use App\Restaurant;
+use App\Review;
+use App\Order;
+use App\Role;
 
-class AdminRestaurantTest extends TestCase
+class UserTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -25,9 +28,37 @@ class AdminRestaurantTest extends TestCase
     /** @test */ 
     public function user_has_restaurant()
     {        
-        $admin = User::find(2);
-        $restaurants = Restaurant::where('admin_id', '=', $admin->id)->get();  
+        $user = User::find(2);
+        $restaurant = $user->restaurant; 
 
-        $this->assertEqualsCanonicalizing($admin->restaurants, $restaurants);
+        $this->assertInstanceOf(Restaurant::class, $restaurant);
+        $this->assertEquals($restaurant, Restaurant::find($restaurant->id));
+    }
+
+    public function user_has_role()
+    {
+        $user = User::find(1);
+        $role = Role::where('role_id', $user->role->id);
+
+        $this->assertInstanceOf(Role::class, $role);
+        $this->assertEquals($role, $user->role);
+    }
+
+    public function user_has_orders()
+    {
+        $user = User::find(3);
+        $orders = $user->orders;
+
+        $this->assertInstanceOf(Order::class, $orders[0]);
+        $this->assertEquals($orders, Order::where('user_id', $user->id)->get());
+    }
+
+    public function user_has_reviews()
+    {
+        $user = User::find(3);
+        $reviews = Review::where('user_id', $user->id)->get();
+
+        $this->assertInstanceOf(Review::class, $reviews[0]);
+        $this->assertEquals($reviews, Review::where('user_id', $user->id)->get());
     }
 }

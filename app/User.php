@@ -42,7 +42,7 @@ class User extends Authenticatable
     }
 
     public function restaurant(){
-        return $this->hasOne('App\Restaurant');
+        return $this->hasOne('App\Restaurant', 'admin_id');
     }
 
     public function reviews(){

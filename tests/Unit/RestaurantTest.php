@@ -5,10 +5,11 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\AdminRestaurant;
+use App\Role;
 use App\Restaurant;
 use App\Review;
-use App\Client;
+use App\Order;
+use App\User;
 
 class RestaurantTest extends TestCase
 {
@@ -27,26 +28,33 @@ class RestaurantTest extends TestCase
     /** @test */ 
     public function restaurant_has_reviews()
     {
-        // $client = factory(Client::class)->create();
-        // $restaurant = factory(Restaurant::class)->create();
-        // $review = factory(Review::class)->create(['client_id' => $client->id, 'restaurant_id' => $restaurant->id]);
-
-        $client = User::find(1);
         $restaurant = Restaurant::find(1);
-        $review = Review::where(['user_id' => $client->id, 'restaurant_id' => $restaurant->id])->get()[0];
+        $reviews = $restaurant->reviews;
 
-        $this->assertTrue($restaurant->reviews->contains($review));
+        $this->assertInstanceOf(Review::class, $reviews[0]);
+        $this->assertEquals($reviews, Review::where('restaurant_id', '=', $restaurant->id)->get());
+    }
+
+    public function restaurant_has_orders()
+    {
+        $restaurant = Restaurant::find(1);
+        $orders = $restaurant->orders;
+
+        $this->assertInstanceOf(Order::class, $orders[0]);
+        $this->assertEquals($orders, Order::where('restaurant_id', $restaurant->id)->get());
     }
 
     /** @test */ 
     public function restaurant_has_admin()
-    {
-        $admin = User::find(2);
+    {        
         $restaurant = Restaurant::find(1);
+        $admin = $restaurant->admin;
         $role = Role::where('name', 'AdminRestaurant')->get()[0];
 
         $this->assertInstanceOf(User::class, $restaurant->admin);
+        $this->assertInstanceOf(Role::class, $admin->role);
+
         $this->assertEquals($admin->id, $restaurant->admin->id);
-        $this->assertEquals($admin->role(), $role->id);
+        $this->assertEquals($admin->role->id, $role->id);
     }
 }

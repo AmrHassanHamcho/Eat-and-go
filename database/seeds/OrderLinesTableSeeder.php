@@ -11,8 +11,8 @@ class OrderLinesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('orderlines')->delete();
-        DB::table('orderlines')->insert([
+        DB::table('order_lines')->delete();
+        DB::table('order_lines')->insert([
             'id'=>1,
             'order_id'=>1,
             'food_id'=>1,
@@ -20,7 +20,7 @@ class OrderLinesTableSeeder extends Seeder
             'total_price'=>20,
         ]);
         
-        DB::table('orderlines')->insert([
+        DB::table('order_lines')->insert([
             'id'=>2,
             'order_id'=>1,
             'food_id'=>2,
