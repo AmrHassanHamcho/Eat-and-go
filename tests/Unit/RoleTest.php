@@ -5,10 +5,13 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\AdminRestaurant;
+use App\User;
 use App\Restaurant;
+use App\Review;
+use App\Order;
+use App\Role;
 
-class AdminRestaurantTest extends TestCase
+class RoleTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -23,11 +26,12 @@ class AdminRestaurantTest extends TestCase
     // }
 
     /** @test */ 
-    public function admin_has_restaurant()
-    {        
-        $admin = AdminRestaurant::find(1);
-        $restaurants = Restaurant::where('admin_restaurant_id', '=', $admin->id)->get();  
+    public function role_has_user()
+    {
+        $role = Role::find(1);
+        $users = $role->users;
 
-        $this->assertEqualsCanonicalizing($admin->restaurants, $restaurants);
+        $this->assertInstanceOf(User::class, $users[0]);
+        $this->assertEquals($users, User::where('role_id', $role->id)->get());
     }
 }

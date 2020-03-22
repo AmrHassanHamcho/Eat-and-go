@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminAppsTable extends Migration
+class CreateFoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateAdminAppsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_apps', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->string('name');
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->integer('age');
-            $table->string('phone');
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('description');
+            $table->float('price');
             $table->timestamps();
+
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateAdminAppsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_apps');
+        Schema::dropIfExists('foods');
     }
 }
