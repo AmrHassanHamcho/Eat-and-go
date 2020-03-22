@@ -15,12 +15,14 @@ class CreateOrderlinesTable extends Migration
     {
         Schema::create('orderlines', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('food_id');
             $table->integer('quantity');
-            $table->float('totalPrice');
+            $table->float('total_price');
             $table->timestamps();
 
-            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');            
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

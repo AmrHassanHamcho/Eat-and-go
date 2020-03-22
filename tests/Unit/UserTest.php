@@ -23,10 +23,10 @@ class AdminRestaurantTest extends TestCase
     // }
 
     /** @test */ 
-    public function admin_has_restaurant()
+    public function user_has_restaurant()
     {        
-        $admin = AdminRestaurant::find(1);
-        $restaurants = Restaurant::where('admin_restaurant_id', '=', $admin->id)->get();  
+        $admin = User::find(2);
+        $restaurants = Restaurant::where('admin_id', '=', $admin->id)->get();  
 
         $this->assertEqualsCanonicalizing($admin->restaurants, $restaurants);
     }

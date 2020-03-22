@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('restaurant_id');
-            $table->float('totalPrice');
+            $table->float('total_price');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');            
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');

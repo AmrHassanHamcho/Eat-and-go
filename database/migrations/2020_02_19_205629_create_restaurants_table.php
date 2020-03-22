@@ -17,8 +17,10 @@ class CreateRestaurantsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('address');
-            $table->string('bankAccount');
+            $table->string('bank_account');
             $table->string('phone');
+            $table->integer('number_reviews');
+            $table->string('image_url');
             
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('users');

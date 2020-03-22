@@ -31,9 +31,9 @@ class RestaurantTest extends TestCase
         // $restaurant = factory(Restaurant::class)->create();
         // $review = factory(Review::class)->create(['client_id' => $client->id, 'restaurant_id' => $restaurant->id]);
 
-        $client = Client::find(1);
+        $client = User::find(1);
         $restaurant = Restaurant::find(1);
-        $review = Review::where(['client_id' => $client->id, 'restaurant_id' => $restaurant->id])->get()[0];
+        $review = Review::where(['user_id' => $client->id, 'restaurant_id' => $restaurant->id])->get()[0];
 
         $this->assertTrue($restaurant->reviews->contains($review));
     }
@@ -41,10 +41,12 @@ class RestaurantTest extends TestCase
     /** @test */ 
     public function restaurant_has_admin()
     {
-        $admin = AdminRestaurant::find(1);
+        $admin = User::find(2);
         $restaurant = Restaurant::find(1);
+        $role = Role::where('name', 'AdminRestaurant')->get()[0];
 
-        $this->assertInstanceOf(AdminRestaurant::class, $restaurant->admin);
-        $this->assertEquals($admin->id, $restaurant->admin->id);        
+        $this->assertInstanceOf(User::class, $restaurant->admin);
+        $this->assertEquals($admin->id, $restaurant->admin->id);
+        $this->assertEquals($admin->role(), $role->id);
     }
 }
