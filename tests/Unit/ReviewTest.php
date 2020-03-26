@@ -33,12 +33,24 @@ class ReviewTest extends TestCase
         $this->assertEquals($user, User::find($user->id));        
     }
 
+    /** @test */ 
     public function review_has_restaurant()
     {       
         $review = Review::find(1);
         $restaurant = $review->restaurant;
 
         $this->assertInstanceOf(Restaurant::class, $restaurant);
-        $this->assertEquals($restaurant, User::find($restaurant->id));
+        $this->assertEquals($restaurant, Restaurant::find($restaurant->id));
     }
+
+    // /** @test */ 
+    // public function reviewMethods_test()
+    // {
+    //     $review = Review::all()->last();
+    //     $review->id += 1;
+                
+    //     $realValue = $review->createReview($review);        
+    //     $this->assertTrue($realValue);
+    //     $realValue->deleteReview($review->id);
+    // }
 }

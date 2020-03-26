@@ -35,15 +35,17 @@ class UserTest extends TestCase
         $this->assertEquals($restaurant, Restaurant::find($restaurant->id));
     }
 
+    /** @test */ 
     public function user_has_role()
     {
         $user = User::find(1);
-        $role = Role::where('role_id', $user->role->id);
+        $role = $user->role;
 
         $this->assertInstanceOf(Role::class, $role);
         $this->assertEquals($role, $user->role);
     }
 
+    /** @test */ 
     public function user_has_orders()
     {
         $user = User::find(3);
@@ -53,10 +55,11 @@ class UserTest extends TestCase
         $this->assertEquals($orders, Order::where('user_id', $user->id)->get());
     }
 
+    /** @test */ 
     public function user_has_reviews()
     {
         $user = User::find(3);
-        $reviews = Review::where('user_id', $user->id)->get();
+        $reviews = $user->reviews;
 
         $this->assertInstanceOf(Review::class, $reviews[0]);
         $this->assertEquals($reviews, Review::where('user_id', $user->id)->get());
