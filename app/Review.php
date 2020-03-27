@@ -18,24 +18,6 @@ class Review extends Model
         'score', 'comment', 'user_id', 'restaurant_id',
     ];    
 
-    // public function __construct1()
-    // {
-    //     print("\n CONSTRUCTOR 1 \n");
-    //     $this->comment = null;
-    //     $this->score = 0;
-    //     $this->user = null;
-    //     $this->restaurant = null;
-    // }
-
-    // public function __construct($comment, $score, $user, $restaurant)
-    // {
-    //     print("\n CONSTRUCTOR 2 \n");
-    //     $this->comment = $comment;
-    //     $this->score = $score;
-    //     $this->user = $user;
-    //     $this->restaurant = $restaurant;
-    // }
-
     public function readReview($id)
     {        
         if(is_int($id))
@@ -101,7 +83,7 @@ class Review extends Model
         throw new Exception("The parameter must be an integer.");   
     }
 
-    public function createReview($review)
+    public static function createReview($review)
     {
         if($review instanceof Review)
         {
@@ -120,7 +102,7 @@ class Review extends Model
 
                 $restaurant->save();
                 $review->save();
-                
+
                 return true;
             }            
         }
@@ -128,24 +110,30 @@ class Review extends Model
         throw new Exception("The parameter must be of type Review.");   
     }
 
-    public function listReviewsByDate($restaurant)
+    public static function listReviewsByDate($restaurant, $ascending)
     {
-        if($restaurant instanceof Restaurant)
+        if($restaurant instanceof Restaurant && is_bool($ascending))
         {
-            return $restaurant->reviews()->getQuery()->orderBy('created_at', 'desc')->get();
+            if($ascending)
+                return $restaurant->reviews()->getQuery()->orderBy('created_at', 'asc')->get();
+            
+            return $restaurant->reviews()->getQuery()->orderBy('created_at', 'desc')->get();            
         }
 
-        throw new Exception("The parameter must be of type Review.");   
+        throw new Exception("The parameter must be of type Restaurant and bool.");   
     }
 
-    public function listReviewsByScore($restaurant)
+    public static function listReviewsByScore($restaurant, $ascending)
     {
-        if($restaurant instanceof Restaurant)
+        if($restaurant instanceof Restaurant && is_bool($ascending))
         {
+            if($ascending)
+                return $restaurant->reviews()->getQuery()->orderBy('score', 'asc')->get();
+            
             return $restaurant->reviews()->getQuery()->orderBy('score', 'desc')->get();
         }
 
-        throw new Exception("The parameter must be of type Review.");   
+        throw new Exception("The parameter must be of type Restaurant and bool.");   
     }
 
     public function user(){

@@ -75,7 +75,7 @@ class ReviewTest extends TestCase
     {
         $expected = factory(Review::class)->create();                
 
-        $expected->score = 0.0;
+        $expected->score = 0;
         $expected->comment = "new comment";
         $expected->updateReview();
 
@@ -140,7 +140,7 @@ class ReviewTest extends TestCase
         $review->user_id = 1;
         $review->restaurant_id = 1;
 
-        $result = $review->createReview($review);
+        $result = Review::createReview($review);
         $result2 = $review->readReview($review->id);
 
         $this->assertTrue($result);        
@@ -159,11 +159,11 @@ class ReviewTest extends TestCase
         $review1 = new Review;        
         $review1->comment = "Comment by user1";
         $review1->score = 1;
-        $review1->user_id = 1;
+        $review1->user_id = $user1->id;
         $review1->restaurant_id = $restaurant->id;
 
         $this->assertEquals(0, $restaurant->number_reviews);
-        $result = $review1->createReview($review1);
+        $result = Review::createReview($review1);
         $restaurant = Restaurant::find($restaurant->id);
         $this->assertEquals(1, $restaurant->number_reviews);
 
@@ -173,7 +173,7 @@ class ReviewTest extends TestCase
         $review2->user_id = $user2->id;
         $review2->restaurant_id = $restaurant->id;
         
-        $result2 = $review2->createReview($review2);        
+        $result2 = Review::createReview($review2);        
         $restaurant = Restaurant::find($restaurant->id);        
         $this->assertEquals(2, $restaurant->number_reviews);
 
@@ -190,5 +190,87 @@ class ReviewTest extends TestCase
 
         $this->assertTrue($result);        
         $this->assertTrue($result2);
+    }
+
+    /** @test */ 
+    public function listReviewsByDate_test1()
+    {
+        $restaurant = $this->aux_listReviews();
+        $reviews = Review::listReviewsByDate($restaurant, true);
+
+        $review_last = $reviews[0];
+        foreach($reviews as $review)
+        {
+            $this->assertTrue($review_last->created_at <= $review->created_at);
+            $review_last = clone $review;
+        }
+    }
+
+    /** @test */ 
+    public function listReviewsByDate_test2()
+    {
+        $restaurant = $this->aux_listReviews();
+        $reviews = Review::listReviewsByDate($restaurant, false);
+
+        $review_last = $reviews[0];
+        foreach($reviews as $review)
+        {
+            $this->assertTrue($review_last->created_at >= $review->created_at);
+            $review_last = clone $review;
+        }
+    }
+
+    /** @test */ 
+    public function listReviewsByScore_test1()
+    {
+        $restaurant = $this->aux_listReviews();
+        $reviews = Review::listReviewsByScore($restaurant, true);
+
+        $review_last = $reviews[0];
+        foreach($reviews as $review)
+        {                     
+            $this->assertTrue($review_last->score <= $review->score);
+            $review_last = clone $review;
+        }
+    }
+
+    /** @test */ 
+    public function listReviewsByScore_test2()
+    {
+        $restaurant = $this->aux_listReviews();
+        $reviews = Review::listReviewsByScore($restaurant, false);
+
+        $review_last = $reviews[0];
+        foreach($reviews as $review)
+        {
+            $this->assertTrue($review_last->score >= $review->score);
+            $review_last = clone $review;
+        }
+    }
+
+    private function aux_listReviews()
+    {
+        $restaurant = factory(Restaurant::class)->create();        
+        $user1 = factory(User::class, 'Client')->create();
+        $user2 = factory(User::class, 'AdminApp')->create();                
+
+        $user1->role_id = $user2->role_id = 3; // client role
+
+        $review1 = new Review;        
+        $review1->comment = "Comment by user1";
+        $review1->score = 1;
+        $review1->user_id = $user1->id;
+        $review1->restaurant_id = $restaurant->id;
+
+        $review2 = new Review;        
+        $review2->comment = "Comment by user2";
+        $review2->score = 2;
+        $review2->user_id = $user2->id;
+        $review2->restaurant_id = $restaurant->id;
+        
+        Review::createReview($review1);        
+        Review::createReview($review2);                
+
+        return $restaurant;
     }
 }
