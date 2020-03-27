@@ -109,7 +109,7 @@ class ReviewTest extends TestCase
     {
         $review = factory(Review::class)->create();
 
-        $result = $review->deleteReview($review->id);
+        $result = Review::deleteReview($review->id);
 
         $this->assertTrue($result);
     }
@@ -124,7 +124,7 @@ class ReviewTest extends TestCase
         $review->user_id = 1;
         $review->restaurant_id = 1;
 
-        $result = $review->deleteReview($review->id);
+        $result = Review::deleteReview($review->id);
         $result2 = $review->readReview($review->id);
 
         $this->assertFalse($result);        
@@ -180,11 +180,11 @@ class ReviewTest extends TestCase
         $this->assertTrue($result);        
         $this->assertTrue($result2);
 
-        $result = $review1->deleteReview($review1->id);
+        $result = Review::deleteReview($review1->id);
         $restaurant = Restaurant::find($restaurant->id);        
         $this->assertEquals(1, $restaurant->number_reviews);
 
-        $result2 = $review2->deleteReview($review2->id);
+        $result2 = Review::deleteReview($review2->id);
         $restaurant = Restaurant::find($restaurant->id);        
         $this->assertEquals(0, $restaurant->number_reviews);
 

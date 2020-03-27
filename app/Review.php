@@ -59,7 +59,7 @@ class Review extends Model
         }
     }
 
-    public function deleteReview($id)
+    public static function deleteReview($id)
     {
         if(is_int($id))
         {
