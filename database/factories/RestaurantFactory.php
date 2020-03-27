@@ -25,6 +25,6 @@ $factory->define(Restaurant::class, function (Faker $faker) {
         'phone' => 'FactoryRestaurantPhone',
         'admin_id' => factory(User::class, 'AdminRestaurant')->create()->id,
         'image_url' => 'FactoryRestaurant image url test',
-        'number_reviews' => 1,
+        'number_reviews' => 0,
     ];
 });

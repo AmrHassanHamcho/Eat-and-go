@@ -41,14 +41,15 @@ class Review extends Model
         if(is_int($id))
         {
             try
-            {
+            {                
                 $review = Review::findOrFail($id);
                 $this->id = $review->id;
                 $this->comment = $review->comment;
-                $this->description = $review->description;
                 $this->score = $review->score;
-                $this->restaurant = $review->restaurant;
-                $this->user = $review->user;
+                $this->user_id = $review->user_id;
+                $this->restaurant_id = $review->restaurant_id;
+                $this->created_at = $review->created_at;
+                $this->updated_at = $review->updated_at;
 
                 return true;
             }
@@ -66,6 +67,7 @@ class Review extends Model
         try
         {
             $review = Review::findOrFail($this->id);
+            $review->updated_at = now();
             $this->save();
             return true;
         }
@@ -82,6 +84,10 @@ class Review extends Model
             try
             {
                 $review = Review::findOrFail($id);
+                $restaurant = $review->restaurant;
+                $restaurant->number_reviews -= 1;
+                $restaurant->save();
+
                 Review::destroy($id);
 
                 return true;
@@ -106,8 +112,15 @@ class Review extends Model
             }       
             catch(ModelNotFoundException $e)     
             {
-                //$review->created_at = date("Y-m-d H:i:s");
+                $review->created_at = now();
+                $review->updated_at = now();
+
+                $restaurant = $review->restaurant;
+                $restaurant->number_reviews += 1;
+
+                $restaurant->save();
                 $review->save();
+                
                 return true;
             }            
         }
