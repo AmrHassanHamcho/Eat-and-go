@@ -26,10 +26,11 @@ class OrderLineTest extends TestCase
         $this->assertTrue($order->orderlines->contains($orderline));
     }
 
+    /** @test */ 
     public function orderLines_has_food()
     {             
-        $orderlines = OrderLine::find(1);
-        $food = $oderlines->food;
+        $orderline = OrderLine::find(1);
+        $food = $orderline->food;
 
         $this->assertInstanceOf(Food::class, $food);   
         $this->assertTrue($food->orderlines->contains($orderline));

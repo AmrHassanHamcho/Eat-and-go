@@ -26,12 +26,13 @@ class FoodTest extends TestCase
         $this->assertTrue($restaurant->foods->contains($food));        
     }
 
+    /** @test */ 
     public function food_has_orderlines()
     {        
         $food = Food::find(1);                
         $orderlines = $food->orderlines;
         
         $this->assertInstanceOf(OrderLine::class, $orderlines[0]);   
-        $this->assertTrue($food->orderlines->contains($orderline));
+        $this->assertEquals($orderlines, OrderLine::where('food_id', $food->id)->get());        
     }  
 }

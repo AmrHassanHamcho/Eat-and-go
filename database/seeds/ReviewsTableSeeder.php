@@ -17,7 +17,7 @@ class ReviewsTableSeeder extends Seeder
             'user_id'=>3,
             'restaurant_id'=>1,
             'comment'=> 'Testcomment',
-            'score'=>5.0
+            'score'=>5
         ]);
     }
 }

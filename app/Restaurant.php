@@ -6,6 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'address', 'bank_account', 'phone', 'number_reviews', 'image_url', 'admin_id',
+    ];    
+
+     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'bank_account', 'admin_id',
+    ];
+
     public function admin(){
         return $this->belongsTo('App\User', 'admin_id');
     }
