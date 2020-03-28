@@ -35,6 +35,7 @@ class RestaurantTest extends TestCase
         $this->assertEquals($reviews, Review::where('restaurant_id', '=', $restaurant->id)->get());
     }
 
+    /** @test */ 
     public function restaurant_has_orders()
     {
         $restaurant = Restaurant::find(1);
