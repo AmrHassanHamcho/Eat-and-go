@@ -78,9 +78,8 @@ class Restaurant extends Model
         try
         {
             $restaurant = Restaurant::findOrFail($this->id);
-            
             #$restaurant->admin()->associate($restaurant->admin);
-            
+            $restaurant-> updated_at = now();
             $this->save();
             return true;
         }
@@ -90,7 +89,7 @@ class Restaurant extends Model
         }
     }
 
-    public function deleteRestaurant($id)
+    public static function deleteRestaurant($id)
     {
         if(is_int($id))
         {
@@ -98,7 +97,6 @@ class Restaurant extends Model
             {
                 $restaurant = Restaurant::findOrFail($id);
                 Restaurant::destroy($id);
-
                 return true;
             }
             catch(Exception $e)
@@ -110,7 +108,7 @@ class Restaurant extends Model
         throw new Exception("The parameter must be an integer.");   
     }
 
-    public function createRestaurant($restaurant)
+    public static function createRestaurant($restaurant)
     {
         if($restaurant instanceof Restaurant)
         {
@@ -121,13 +119,27 @@ class Restaurant extends Model
             }       
             catch(Exception $e)     
             {
-                $restaurant->created_at = DateTime::getTimestamp();
+                $restaurant->created_at = now();
+                $restaurant->updated_at = now();
                 $restaurant->save();
                 return true;
             }            
         }
 
         throw new Exception("The parameter must be of type Restaurant.");   
+    }
+
+    public static function listRestaurants($ascending)
+    {
+        if(!is_bool($ascending))
+        {
+            throw new Exception("The parameter must be of type bool.");   
+        }
+
+        if($ascending)
+            return Restaurant::orderBy('name', 'asc')->get();
+            
+        return Restaurant::orderBy('name', 'desc')->get();
     }
 
 }

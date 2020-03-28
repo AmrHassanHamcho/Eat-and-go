@@ -18,4 +18,5 @@ Route::get('/', function () {
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
-Route::get('/restaurants', 'RestaurantController@index');
+Route::get('/restaurants', 'RestaurantController@restaurants');
+Route::get('/restaurant', 'RestaurantController@restaurant');
