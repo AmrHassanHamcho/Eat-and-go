@@ -1,20 +1,21 @@
-body {
-    margin: 0;
-    padding: 0;
+html, body {    
+    margin: 0px;
+    padding: 0px;
+    width: 100%;    
 }
 
 #content {
     position: absolute;
+    width: 100%;
     margin-top: 110px;
 }
 
 .about {
-    font-size: 1em;
+    display: block;    
+    font-size: 2em;
     color: #000;
-    text-align: justify;
-    margin: 0;
-    padding-left: 150px;
-    padding-right: 150px;
-    background-color: red;
-    width: 100%;
-}
+    text-align: center;
+    padding-top: 10%;
+    padding-left: 200px;
+    padding-right: 200px;       
+} 
