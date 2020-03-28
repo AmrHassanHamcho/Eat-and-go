@@ -1,0 +1,45 @@
+._navbar {        
+    width: 100%;
+    position: fixed;    
+    background-color: #eee;    
+    border-bottom: 1px solid #bbb;    
+    overflow: auto;
+}
+
+._navbar ul {
+    display: flex;    
+    list-style-type: none;
+    margin: 0;
+    margin-left: 200px;
+    padding: 0;
+    overflow: hidden;
+}
+
+._navbar li {
+    float: left;
+    margin: 0;
+}
+
+._navbar a{
+    color: #000;
+    padding: 25px 16px;
+    height: 100%;
+    display: block;    
+    text-decoration: none;
+    text-align: center;
+}
+
+._navbar li a:hover:not(.active)
+{
+    background-color: #ccc;
+}
+
+.logo {
+    position: absolute;
+    margin: -10px 50px;    
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+}

@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
+
+Route::get('/restaurants', 'RestaurantController@index');
