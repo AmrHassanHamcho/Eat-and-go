@@ -9,6 +9,7 @@
         @forelse($listRestaurants as $restaurant)
             <li>{{ $restaurant->name }}</li>
         @empty
-            <li>No restaurant found!</li>
+            <li>No restaurants available!</li>
         @endforelse
     </ul>
+@endsection
