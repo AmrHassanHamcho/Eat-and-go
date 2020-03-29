@@ -15,15 +15,26 @@
         </div>
         
         <div class="_main_restaurants_container">
-            <p>{{ $listRestaurants->count() }} restaurants available.</p>
-            <ul>
+            
+            <div class="test">
+                <div class="_restaurants_count">
+                    <span>{{ $listRestaurants->count() }} restaurants available.</span>
+                </div>
+                <div class="_restaurants_filter">
+                    filter
+                </div>
+            </div>
+      
+            <div class="_restaurants">
                 @forelse($listRestaurants as $restaurant)
-                    <li>{{ $restaurant->name }}</li>
+                    <div class="_restaurant_container">
+                        <p>{{ $restaurant->name }}</p>
+                    </div>
                 @empty
-                    <li>No restaurants available!</li>
+                    <p>No restaurants available!</p>
                 @endforelse
-            </ul>
+            </div>
         </div>
-      </div>
+    </div>
     
 @endsection
