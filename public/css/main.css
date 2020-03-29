@@ -19,3 +19,19 @@ html, body {
     padding-left: 200px;
     padding-right: 200px;       
 } 
+
+@media only screen and (max-width: 600px) {
+    .about {
+        font-size: 1.4em;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 850px) {
+    .about {
+        font-size: 1.6em;
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+}
