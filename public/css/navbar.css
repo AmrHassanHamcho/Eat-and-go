@@ -1,8 +1,9 @@
 ._navbar {        
+    font-weight: bold;
     width: 100%;
     position: fixed;    
-    background-color: #eee;    
-    border-bottom: 1px solid #bbb;    
+    background-color: #fff;    
+    border-bottom: 1.5px solid #ccc;    
     overflow: auto;
 }
 
@@ -29,7 +30,7 @@
     text-align: center;
 }
 
-._navbar li a:hover:not(.active)
+._navbar li a:hover
 {
     background-color: #ccc;
 }

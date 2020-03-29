@@ -71,7 +71,7 @@ class Restaurant extends Model
         }
         
         throw new Exception("The parameter must be an integer.");
-    }
+    }    
 
     public function updateRestaurant()
     {                   
