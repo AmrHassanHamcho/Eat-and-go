@@ -1,9 +1,51 @@
-#_address{
-    width: 300px; 
+._main_container {
+    width:800px;
+    margin: auto;
+    padding: 10px"
+}
+
+._main_address_container {
     float: left;
     border-radius: 15px;
-    background: #73AD21;
-    padding: 20px;
-    width: 200px;
-    height: 150px;
+    background: #bfbfbf;
+    padding: 25px;
+    position: absolute;
+    margin: 0px -200px; 
 }
+
+._main_restaurants_container {
+    float:right;
+    border-radius: 15px;
+    background: #f2f2f2;
+    padding: 30px;
+    margin: 0px 200px;
+}
+
+
+._address_container {
+    padding: 0px;
+    vertical-align: bottom;
+    margin-bottom: 5%;
+}
+
+._address_container img {
+    vertical-align: top;
+    width: 25px;
+    height: 25px;
+}
+
+._address_container span {
+    font-size: 1.2em;
+    /*font-weight: bold;
+    vertical-align: bottom;*/
+}
+
+._main_address_container a {
+    font-weight: bold;
+    margin-left: 1.8em;
+}
+
+
+
+
+

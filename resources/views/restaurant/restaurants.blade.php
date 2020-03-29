@@ -1,19 +1,21 @@
 @extends('app')
 
 @section('title', 'Restaurants')
-@section('stylesheet', 'css/restaurants.css')
+@section('css-stylesheet', 'css/restaurants.css')
 
 @section('content')
-    <h1>X restaurants</h1>
+   
 
-    <div style="width:800px;
-                margin: auto;
-                padding: 10px">
-        <div id="_address">
-            Calle de San Lorenzo
+    <div class="_main_container">
+        <div class="_main_address_container">
+            <div class="_address_container">
+                <img src="/img/position_icon.png" alt=""> <span>Calle de San Lorenzo</span>  
+            </div>
+            <a href="/index">Change address</a>
         </div>
         
-        <div style="width:300px; float:right;">
+        <div class="_main_restaurants_container">
+            <p>{{ $listRestaurants->count() }} restaurants available.</p>
             <ul>
                 @forelse($listRestaurants as $restaurant)
                     <li>{{ $restaurant->name }}</li>
