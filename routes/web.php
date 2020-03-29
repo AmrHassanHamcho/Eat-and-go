@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/error/404', function() {
+    return view('error.404');
+});
+
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 

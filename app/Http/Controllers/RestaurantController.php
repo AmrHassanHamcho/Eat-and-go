@@ -10,20 +10,21 @@ class RestaurantController extends Controller
 {
     public function restaurant($restaurantId)
     {        
-        // $restaurant = new Restaurant;
+        $restaurant = new Restaurant;
 
-        // try
-        // {
-        //     $success = $restaurant->readRestaurant((int)$restaurantId);
-        //     if(!$success)
-        //         return abort(404);
-        // }
-        // catch (Exception $e)
-        // {
+        try
+        {
+            $restaurant = Restaurant::findOrFail($restaurantId);
+            // $success = $restaurant->readRestaurant((int)$restaurantId);
+            // if(!$success)
+            //     return view('error.404');
             
-        // }
-        
-        return view('restaurant.restaurant', compact('restaurant'));
+            return view('restaurant.restaurant', compact('restaurant'));
+        }
+        catch (Exception $e)
+        {
+            return view('error.404');
+        }                
     }       
 
     public function restaurants()

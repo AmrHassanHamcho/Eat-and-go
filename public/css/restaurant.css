@@ -1,0 +1,112 @@
+/* @media only screen and (max-width: 600px) { */
+    
+    ul {
+        list-style: none;                   
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .restaurant {     
+        display: block;           
+        width: 100%;
+        margin-left: 320px; 
+        margin-right: 320px;               
+    }
+
+    .restaurant img {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        float: left;
+        border-radius: 10px;
+    }
+
+    .restaurant-info {
+        display: block;        
+        width: 100%;                
+    }        
+
+    .restaurant-info ul{      
+        font-size: 0.8em;              
+        margin-left: 75px;        
+        padding-top: 10px;
+    }   
+
+    .restaurant-info li{      
+        margin: 0px 0px;
+        /* padding-top:; */
+    }   
+
+    .restaurant-info .restaurant-name {
+        font-size: 1.9em;
+        margin-bottom: 2px;
+    }
+
+    .restaurant-buttons ul{
+        display: flex;
+        width: 100%;
+        margin-top: 50px;
+        padding: 0;
+        font-size: 1.15em;        
+    }
+
+    .restaurant-buttons li{        
+        padding: 0px 15px;                
+    }
+
+    .restaurant-buttons a{        
+        color: #555;
+        text-decoration: none;
+    }
+
+    .restaurant-buttons li:hover{        
+        border-bottom: solid 1px #444;
+    }
+
+    .food-list {
+        margin: 0;
+        padding: 0;
+        /* border: solid 1px red; */
+        width: 40%;
+        height: 100%;
+    }
+
+    .food {
+        display: flex;        
+        margin: 0px 5px 0px 0px;
+        padding: 10px 15px;
+        background-color: #fff;
+        border: solid 1px #ccc;
+        border-radius: 5px;
+    }
+    
+    .food li {
+        width: 80%;
+        /* border: solid 1px blue; */
+    }
+
+    .food li .food-description {
+        font-size: 0.8em;
+    }
+
+    .food button {
+        margin: auto 0px auto 90px;
+        padding: auto;
+        width: 25px;
+        height: 25px;        
+    }
+
+    .food-info {
+
+    }
+
+    .food-info button {
+
+    }
+
+    /* .restaurant-order {
+
+    } */
+/* } */
