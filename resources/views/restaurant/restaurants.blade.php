@@ -16,19 +16,31 @@
         
         <div class="_main_restaurants_container">
             
-            <div class="test">
+            <div>
                 <div class="_restaurants_count">
                     <span>{{ $listRestaurants->count() }} restaurants available.</span>
                 </div>
                 <div class="_restaurants_filter">
-                    filter
+                    Sort By
+                    <select id="filter">
+                        <option value="name_asc">Name asc</option>
+                        <option value="name_des">Name des</option>
+                        <option value="reviews">Reviews</option>
+                    </select>
                 </div>
             </div>
       
             <div class="_restaurants">
                 @forelse($listRestaurants as $restaurant)
                     <div class="_restaurant_container">
-                        <p>{{ $restaurant->name }}</p>
+                        <img src="{{ $restaurant->image_url }}" alt="">
+                        <div class="restaurant-info">
+                            <ul>
+                                <li class="restaurant-name">{{ $restaurant->name }}</li>
+                                <li>{{ $restaurant->number_reviews }} reviews</li>
+                                <li>{{ $restaurant->address }}</li>
+                            </ul>
+                        </div> 
                     </div>
                 @empty
                     <p>No restaurants available!</p>
