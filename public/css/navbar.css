@@ -1,4 +1,5 @@
-._navbar {        
+._navbar {    
+    z-index: 999999;    
     font-weight: bold;
     width: 100%;
     position: fixed;    
@@ -43,4 +44,12 @@
 .logo img {
     width: 45px;
     height: 45px;
+}
+
+@media only screen and (max-width: 720px) {
+    ._navbar a{
+        font-size: 0.85em;
+        padding: 20px 6px;
+        height: 100%;
+    }
 }
