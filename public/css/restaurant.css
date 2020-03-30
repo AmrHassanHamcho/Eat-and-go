@@ -1,112 +1,225 @@
-/* @media only screen and (max-width: 600px) { */
-    
-    ul {
-        list-style: none;                   
-    }
+ul {
+    list-style: none;                   
+}
 
-    a {
-        text-decoration: none;
-    }
+a {
+    text-decoration: none;
+}
 
-    .restaurant {     
-        display: block;           
+.restaurant {             
+    display: block;           
+    width: 65%;
+    margin: auto;
+    padding: 0;
+    background-color: #ddd;
+}
+
+.restaurant img {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    float: left;
+    border-radius: 10px;
+}
+
+.restaurant-info {
+    display: block;                
+    width: 100%;         
+    margin-left: 15px;      
+}        
+
+.restaurant-info ul{      
+    font-size: 0.8em;              
+    margin-left: 75px;        
+    padding-top: 10px;
+}   
+
+.restaurant-info li{      
+    margin: 0px 0px;
+    /* padding-top:; */
+}   
+
+.restaurant-info .restaurant-name {
+    font-size: 1.9em;
+    margin-bottom: 2px;
+}
+
+.restaurant-buttons ul{
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+    padding: 0;
+    font-size: 1.15em;        
+}
+
+.restaurant-buttons li{        
+    padding: 0px 15px;    
+    border: solid 1px #ddd;            
+}
+
+.restaurant-buttons a{        
+    color: #333;
+    text-decoration: none;
+}
+
+.restaurant-buttons li:hover{        
+    border-bottom: solid 1px #444;
+}
+
+.food-list {
+    float: left;
+    margin: 0;
+    padding: 0;    
+    width: 68%;
+    height: 100%;
+}
+
+.food {
+    display: flex;        
+    margin: 0px 5px 0px 0px;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+}
+
+.food li {
+    width: 80%;
+    max-width: 80%;
+    /* border: solid 1px blue; */
+}
+
+.food li .food-description {
+    font-size: 0.8em;
+}
+
+.food button {
+    margin: auto 0px auto 90px;
+    padding: 0;
+    width: 40px;
+    height: 40px;        
+    background-color: #226abd;
+    border: none;
+    border-radius: 5px;
+    color:#fff;
+    font-size: 1.5em;
+}
+
+.food button:hover {
+    background-color: #00489b;
+}
+
+.restaurant-order {
+    float: left;
+    background-color: #fff;
+    width: 32%;
+    height: 100%;     
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 200px;
+}
+
+.buy-button {
+    display: block;
+    width: 100%;
+    height: 55px;     
+    background-color: #226abd;   
+    color: #fff;
+    font-size: 1.4em;
+    border: none;
+    border-radius: 0px 0px 5px 5px;        
+}
+
+.buy-button:hover {
+    background-color: #00489b;
+}
+
+.restaurant-order .order {
+    display: block;
+    align-self: center;
+    width: 88%;        
+    font-size: 0.90em;       
+    margin: auto;
+    padding: 5px 0px;         
+}
+
+.restaurant-order .order ul {                
+    list-style: none;                                
+    margin: auto;
+    padding: 0px;         
+    font-size: 0.95em;  
+}    
+
+.restaurant-order .remove-button{       
+    margin: auto 5px auto 0px;        
+    padding: 0;
+    width: 23px;
+    height: 23px;        
+    background-color: #ddd;
+    border: none;        
+    color:#226abd;           
+    font-size: 1.5em;             
+    line-height: 0px;
+    text-align: center;
+}
+
+.restaurant-order .remove-button:hover{           
+    background-color: #aaa;
+}
+
+.restaurant-order .order li {
+    margin: 0;
+    padding: 5px 0px;        
+}
+
+.restaurant-order .no-food-selected {
+    font-size: 0.9em;
+    width: 100%;        
+    text-align: center;                
+}
+
+.restaurant-order .order .total-price {        
+    display: flex;
+    width: 100%;        
+    padding: 5px 0px;      
+    margin: 5px 0;
+    border-bottom: solid 1px #ddd;
+}
+
+.restaurant-order .order .total-price .orderline{                
+    width: 75%;
+}
+
+.restaurant-order .order .total-price li {   
+    width: 75%;     
+    padding-left: 2px;        
+    padding-right: 2px;        
+}
+
+.restaurant-order .order .total-price .price-number {                        
+    text-align: right;   
+    width: 25%;           
+}
+
+.restaurant-order .order .total-price.final { 
+    font-size: 1.02em;
+}
+
+@media only screen and (max-width: 1080px) {
+    .restaurant-order {
+        margin: 190px 0;
+        float: none;
         width: 100%;
-        margin-left: 320px; 
-        margin-right: 320px;               
-    }
-
-    .restaurant img {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        float: left;
-        border-radius: 10px;
-    }
-
-    .restaurant-info {
-        display: block;        
-        width: 100%;                
-    }        
-
-    .restaurant-info ul{      
-        font-size: 0.8em;              
-        margin-left: 75px;        
-        padding-top: 10px;
-    }   
-
-    .restaurant-info li{      
-        margin: 0px 0px;
-        /* padding-top:; */
-    }   
-
-    .restaurant-info .restaurant-name {
-        font-size: 1.9em;
-        margin-bottom: 2px;
-    }
-
-    .restaurant-buttons ul{
-        display: flex;
-        width: 100%;
-        margin-top: 50px;
-        padding: 0;
-        font-size: 1.15em;        
-    }
-
-    .restaurant-buttons li{        
-        padding: 0px 15px;                
-    }
-
-    .restaurant-buttons a{        
-        color: #555;
-        text-decoration: none;
-    }
-
-    .restaurant-buttons li:hover{        
-        border-bottom: solid 1px #444;
     }
 
     .food-list {
-        margin: 0;
-        padding: 0;
-        /* border: solid 1px red; */
-        width: 40%;
-        height: 100%;
+        width: 100%;
+        background-color: #ddd;
     }
 
     .food {
-        display: flex;        
-        margin: 0px 5px 0px 0px;
-        padding: 10px 15px;
-        background-color: #fff;
-        border: solid 1px #ccc;
-        border-radius: 5px;
+        width: 100%;
+        margin: 1px 0;
+        font-size: 0.9em;
     }
-    
-    .food li {
-        width: 80%;
-        /* border: solid 1px blue; */
-    }
-
-    .food li .food-description {
-        font-size: 0.8em;
-    }
-
-    .food button {
-        margin: auto 0px auto 90px;
-        padding: auto;
-        width: 25px;
-        height: 25px;        
-    }
-
-    .food-info {
-
-    }
-
-    .food-info button {
-
-    }
-
-    /* .restaurant-order {
-
-    } */
-/* } */
+}

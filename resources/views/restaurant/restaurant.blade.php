@@ -1,12 +1,12 @@
 @extends('app')
 
-@section('title', '{{ $restaurant->name }}')
+@section('title', 'Eat & Go - '.$restaurant->name)
 @section('css-stylesheet', asset('css/restaurant.css'))
 
 @section('content')
-    <div class="restaurant">        
-        <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}">
+    <div class="restaurant">                
         <div class="restaurant-info">
+            <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}">
             <ul>
                 <li class="restaurant-name">{{ $restaurant->name }}</li>
                 <li>{{ $restaurant->number_reviews }} reviews</li>
@@ -30,21 +30,33 @@
                         {{ $food->name }} <br>
                         <span class="food-description">{{ $food->description }}</span>
                     </li>                    
-                    <button type="button" name={{ "Food" . $food->id }}>+</button>  
+                    <button type="button" name={{ "food" . $food->id }}>+</button>  
                 </div>             
             @empty            
                 <p> The restaurant {{ $restaurant->name }} does not have foods available right now. </p>
             @endforelse
         </ul>
 
-        <div class="restaurant-order">
-            {{-- @forelse($orderlines as $orderline)
-                <button class="buy-button">BUY</button>
-                <div class="orderline">                
-                </div>
-            @empty            
-                <p>No food selected.</p>
-            @endforelse --}}
+        <div class="restaurant-order">            
+            <div class="order">
+                <ul>
+                    @forelse($order->orderlines as $orderline)                
+                        <ul class="total-price">
+                            <button class="remove-button" type="button" name={{ "line" . $orderline->id}}>-</button>
+                            <li class="orderline">{{ $orderline->food->name }}</li>
+                            <li class="price-number">{{ $orderline->total_price }} €</li>
+                        </ul>                        
+                    @empty            
+                        <li class="no-food-selected">No food selected.</li>
+                    @endforelse                
+                </ul>
+                {{-- <p class="total-price">Total: {{$order->total_price}}</p> --}}
+                <ul class="total-price final">
+                    <li>Total</li>
+                    <li class="price-number">50,65 €</li>
+                </ul>
+            </div>
+            <button class="buy-button">BUY</button>
         </div>
     </div>
 @endsection
