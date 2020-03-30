@@ -83,7 +83,15 @@ class RestaurantController extends Controller
         
         //$listRestaurants->push($restaurants);
         
-        return view('restaurant.restaurants', compact('listRestaurants'));
+        $address = request('address');
+                
+        if(is_null($address))
+            return view('home.index');
+
+        return view('restaurant.restaurants', [
+            'listRestaurants' => $listRestaurants,
+            'address' => $address
+        ]);
     }
 
     public function editRestaurant()
