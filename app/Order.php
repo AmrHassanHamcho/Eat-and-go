@@ -76,6 +76,7 @@ class Order extends Model
             catch(ModelNotFoundException $e){
                 $order->created_at = now();
                 $order->updated_at = now();
+
                 $order->save();
                 return true;
             }

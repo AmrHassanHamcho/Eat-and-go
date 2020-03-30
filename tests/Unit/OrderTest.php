@@ -163,14 +163,22 @@ class OrderTest extends TestCase
 
     private function aux_restaurant(){
         $restaurant = factory(Restaurant::class)->create();
-        $order1 = factory(Order::class)->create();
-        $order2 = factory(Order::class)->create();
 
-        $user1 = factory(User::class, 'Client')->create();
+        $user = factory(User::class, 'Client')->create();
+        $user->role_id = 3;
 
+        $order1 = new Order;
+        $order1->created_at = now();
+        $order1->user_id = $user->id;
         $order1->restaurant_id = $restaurant->id;
+        $order1->total_price = 22;
+        
 
-        $order2->restaurant_id = $restaurant->id;
+        $order1 = new Order;
+        $order1->created_at = now();
+        $order1->user_id = $user->id;
+        $order1->restaurant_id = $restaurant->id;
+        $order1->total_price = 22;
 
         Order::createOrder($order1);
         Order::createOrder($order2);
@@ -179,19 +187,26 @@ class OrderTest extends TestCase
     }
 
     private function aux_user(){
-        $order1 = factory(Order::class)->create();
-        $order2 = factory(Order::class)->create();
+        $restaurant = factory(Restaurant::class)->create();
 
-        $user1 = factory(User::class, 'Client')->create();
+        $user = factory(User::class, 'Client')->create();
+        $user->role_id = 3;
 
+        $order1 = new Order;
+        $order1->created_at = now();
+        $order1->user_id = $user->id;
+        $order1->restaurant_id = $restaurant->id;
+        $order1->total_price = 22;
 
-        $order1->user_id = $user1->id;
-
-        $order2->user_id = $user1->id;
+        $order2 = new Order;
+        $order2->created_at = now();
+        $order2->user_id = $user->id;
+        $order1->restaurant_id = $restaurant->id;
+        $order1->total_price = 22;
 
         Order::createOrder($order1);
         Order::createOrder($order2);
 
-        return $user1;
+        return $user;
     }
 }
