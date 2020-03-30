@@ -129,17 +129,12 @@ class Restaurant extends Model
         throw new Exception("The parameter must be of type Restaurant.");   
     }
 
-    public static function listRestaurants($ascending)
+    public static function listRestaurants($filter, $order)
     {
-        if(!is_bool($ascending))
-        {
-            throw new Exception("The parameter must be of type bool.");   
-        }
-
-        if($ascending)
-            return Restaurant::orderBy('name', 'asc')->get();
+        //if($ascending)
+        return Restaurant::orderBy($filter, $order)->get();
             
-        return Restaurant::orderBy('name', 'desc')->get();
+        //return Restaurant::orderBy('name', 'desc')->get();
     }
 
 }

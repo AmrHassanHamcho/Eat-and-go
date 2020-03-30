@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/error/404', function() {
@@ -24,4 +24,6 @@ Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
 Route::get('/restaurants', 'RestaurantController@restaurants');
+Route::post('/restaurants', 'RestaurantController@restaurants');
+
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
