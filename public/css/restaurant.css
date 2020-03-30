@@ -36,7 +36,6 @@ a {
 
 .restaurant-info li{      
     margin: 0px 0px;
-    /* padding-top:; */
 }   
 
 .restaurant-info .restaurant-name {
@@ -86,7 +85,6 @@ a {
 .food li {
     width: 80%;
     max-width: 80%;
-    /* border: solid 1px blue; */
 }
 
 .food li .food-description {

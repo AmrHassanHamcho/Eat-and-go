@@ -19,6 +19,8 @@ Route::get('/error/404', function() {
     return view('error.404');
 });
 
+Route::get('/index', 'HomeController@index');
+Route::post('/index', 'RestaurantController@restaurants');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
