@@ -91,8 +91,8 @@ class RestaurantController extends Controller
         return view('restaurant.editRestaurant');
     }
 
-    public function addRestaurant()
+    public function addRestaurants()
     {
-        return view('restaurant.addRestaurant');
+        return view('restaurant.addRestaurants');
     }
 }
