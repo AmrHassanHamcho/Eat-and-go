@@ -27,9 +27,41 @@ class RestaurantController extends Controller
         }                
     }       
 
-    public function restaurants()
-    {
-        $listRestaurants = Restaurant::listRestaurants(true);
+    public function restaurants(){
+
+        $filter = request('filter');
+        $order = 'asc';
+
+        switch ($filter) {
+            case "name_asc":
+                $filter = 'name';
+                $order = 'asc';
+                break;
+            case "name_desc":
+                $filter = 'name';
+                $order = 'desc';
+                break;
+            case "num_reviews_asc":
+                $filter = 'number_reviews';
+                $order = 'asc';
+                break;
+            case "num_reviews_desc":
+                $filter = 'number_reviews';
+                $order = 'desc';
+                break;
+            default: 
+                $filter = 'name';
+                $order = 'asc';
+        }
+
+        $listRestaurants = Restaurant::listRestaurants($filter, $order);
+        
+        //$restaurants = factory(Restaurant::class, 3)->make();
+        //$restaurant2 = factory(Restaurant::class)->make();
+        //$restaurant3 = factory(Restaurant::class)->make();
+        
+        //$listRestaurants->push($restaurants);
+        
         return view('restaurant.restaurants', compact('listRestaurants'));
     }
 

@@ -8,7 +8,7 @@
 
     <div class="_main_container">
         <div class="_main_address_container">
-            <div class="_address_container">
+            <div class="_address_container"> 
                 <img src="/img/position_icon.png" alt=""> <span>Calle de San Lorenzo</span>  
             </div>
             <a href="/index">Change address</a>
@@ -21,12 +21,18 @@
                     <span>{{ $listRestaurants->count() }} restaurants available.</span>
                 </div>
                 <div class="_restaurants_filter">
-                    Sort By
-                    <select id="filter">
-                        <option value="name_asc">Name asc</option>
-                        <option value="name_des">Name des</option>
-                        <option value="reviews">Reviews</option>
-                    </select>
+                    <span> Sort By </span>
+                   
+                    <form name="form" id="form" method="post" action="/restaurants" id="FORM_ID" >
+                        @csrf
+                        <select class="_filter" name="filter" onchange="this.form.submit()">
+                            <option disabled selected>Select an option</option>
+                            <option value="name_asc">Name ascend</option>
+                            <option value="name_desc">Name descend</option>
+                            <option value="num_reviews_asc">Reviews ascend</option>
+                            <option value="num_reviews_desc">Reviews descend</option>
+                        </select>      
+                    </form>
                 </div>
             </div>
       
@@ -36,7 +42,11 @@
                         <img src="{{ $restaurant->image_url }}" alt="">
                         <div class="restaurant-info">
                             <ul>
-                                <li class="restaurant-name">{{ $restaurant->name }}</li>
+                                <li>
+                                    <a class="restaurant-name" href="restaurants/{{ $restaurant->id }}">
+                                        {{ $restaurant->name }}
+                                    </a>
+                                </li>
                                 <li>{{ $restaurant->number_reviews }} reviews</li>
                                 <li>{{ $restaurant->address }}</li>
                             </ul>

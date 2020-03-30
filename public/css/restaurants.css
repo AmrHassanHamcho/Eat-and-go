@@ -2,6 +2,10 @@ ul {
     list-style: none;                   
 }
 
+a {
+    text-decoration: none;
+}
+
 ._main_container {
     width: 60%;
     margin: auto;
@@ -31,24 +35,25 @@ ul {
     width: 900px;
     height: 150px;
     vertical-align: middle;
-    border-radius: 15px;
+    border-radius: 10px;
     background: #f2f2f2;
-    padding: 22px;
+    padding: 15px;
+    margin-bottom: 20px;
 }
 
 ._restaurant_container img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     display: flex;
     float: left;
     border-radius: 10px;
-    padding: 0;
+    padding: 10;
     margin: 0;
 }
 
 .restaurant-info {
     display: block;        
-    width: 100%;                
+    padding-left: 30px;                
 }        
 
 .restaurant-info ul{      
@@ -65,6 +70,8 @@ ul {
 .restaurant-info .restaurant-name {
     font-size: 1.9em;
     margin-bottom: 2px;
+    color: #000;
+    text-decoration: none;
 }
 
 ._restaurants_count {
@@ -75,6 +82,27 @@ ul {
 ._restaurants_filter {
     float:right;
     margin-right: 0px;
+    vertical-align: middle;
+}
+
+._restaurants_filter form{
+    float:right;
+    margin-left: 10px;
+}
+
+._restaurants_filter form select{
+    padding-top: 3px;
+    height: 30px;
+}
+
+._restaurants_filter form input{
+    margin-left: 10px;
+    width: 20px; 
+    height: 20px; 
+}
+
+._filter option{
+    font-size: 1em;
 }
 
 ._address_container {
@@ -89,8 +117,8 @@ ul {
     height: 25px;
 }
 
- span {
-    font-size: 1.3em;
+span {
+    font-size: 1.4em;
     /*font-weight: bold;
     vertical-align: bottom;*/
 }

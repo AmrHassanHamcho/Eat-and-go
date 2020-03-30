@@ -23,4 +23,6 @@ Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
 Route::get('/restaurants', 'RestaurantController@restaurants');
+Route::post('/restaurants', 'RestaurantController@restaurants');
+
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
