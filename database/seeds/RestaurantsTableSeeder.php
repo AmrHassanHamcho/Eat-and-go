@@ -20,7 +20,7 @@ class RestaurantsTableSeeder extends Seeder
             'phone'=>'123456789',
             'admin_id'=>2,
             'number_reviews'=>1,
-            'image_url'=>'noImage',
+            'image_url'=>'/img/justeat.png',
         ]);
     }
 }
