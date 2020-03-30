@@ -64,7 +64,6 @@ class OrderTest extends TestCase
 
     /** @test */
     public function readOrder_test2(){
-        $orderTest = factory(Order::class)->create();
         $orderTest = new Order;
         $result = $orderTest->readOrder(99);
 
@@ -115,7 +114,7 @@ class OrderTest extends TestCase
 
     /** @test */
     public function listOrdersByRestaurant_test1(){
-        $restaurant = aux_restaurant();
+        $restaurant = $this->aux_restaurant();
         $orders = Order::listOrdersByRestaurant($restaurant, true);
 
         $order_last = $orders[0];
@@ -140,7 +139,7 @@ class OrderTest extends TestCase
 
     /** @test */
     public function listOrdersByUser_test1(){
-        $user = aux_user();
+        $user = $this->aux_user();
         $orders = Order::listOrdersByUser($user, true);
 
         $order_last = $orders[0];
@@ -168,18 +167,10 @@ class OrderTest extends TestCase
         $order2 = factory(Order::class)->create();
 
         $user1 = factory(User::class, 'Client')->create();
-        $user1->role_id = 3; // client role
 
-
-        $order1 = new Order;
-        $order1->user_id = $user1->id;
         $order1->restaurant_id = $restaurant->id;
-        $order1->total_price = 20;
 
-        $order2 = new Order;
-        $order2->user_id = $user1->id;
         $order2->restaurant_id = $restaurant->id;
-        $order2->total_price = 20;
 
         Order::createOrder($order1);
         Order::createOrder($order2);
@@ -188,23 +179,15 @@ class OrderTest extends TestCase
     }
 
     private function aux_user(){
-        $restaurant = factory(Restaurant::class)->create();
         $order1 = factory(Order::class)->create();
         $order2 = factory(Order::class)->create();
 
         $user1 = factory(User::class, 'Client')->create();
-        $user1->role_id = 3; // client role
 
 
-        $order1 = new Order;
         $order1->user_id = $user1->id;
-        $order1->restaurant_id = $restaurant->id;
-        $order1->total_price = 20;
 
-        $order2 = new Order;
         $order2->user_id = $user1->id;
-        $order2->restaurant_id = $restaurant->id;
-        $order2->total_price = 20;
 
         Order::createOrder($order1);
         Order::createOrder($order2);

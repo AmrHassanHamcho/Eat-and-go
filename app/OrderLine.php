@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class OrderLine extends Model
 {
@@ -29,14 +31,14 @@ class OrderLine extends Model
             try{
                 $orderLine = OrderLine::findOrFail($id);
                 $this->id = $order->id;
-                $this->food = $order->food;
-                $this->order = $order->order;
+                $this->food_id = $order->food_id;
+                $this->order_id = $order->order_id;
                 $this->quantity = $order->quantity;
                 $this->total_price = $order->total_price;
 
                 return true;
             }
-            catch(Exception $e){
+            catch(ModelNotFoundException $e){
                 return false;
             }
         }
@@ -44,7 +46,7 @@ class OrderLine extends Model
         throw new Exception("The parameter must be an integer");
     }
 
-    public function deleteOrderLine($id){
+    public static function deleteOrderLine($id){
         if(is_int($id)){
             try{
                 $orderLine = OrderLine::findOrFind($id);
@@ -52,7 +54,7 @@ class OrderLine extends Model
 
                 return true;
             }
-            catch(Exception $e){
+            catch(ModelNotFoundException $e){
                 return false;
             }
         }
@@ -60,19 +62,21 @@ class OrderLine extends Model
         throw new Exception("The parameter must be an integer");
     }
 
-    public function createOrderLine($orderLine){
+    public static function createOrderLine($orderLine){
         if($orderLine instanceof OrderLine){
             try{
                 OrderLine::findOrFail($orderLine->id);
                 return false;
             }
-            catch(Exception $e){
-                $orderLine->created_at = DateTime::getTimestamp();
+            catch(ModelNotFoundException $e){
+                $orderLine->created_at = now();
+                $orderLine->updated_at = now();
                 $orderLine->save();
                 return true;
             }
-
         }
+
+        throw new Exception("The parameter must be of type OrderLine");
     }
 
 

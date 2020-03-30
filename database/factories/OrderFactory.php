@@ -21,8 +21,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Order::class, function (Faker $faker) {
     return [        
-        'comment' => 'factory test comment for review',
-        'score' => 5,
+        'total_price' => 50,
         'created_at' => now(),
         'updated_at' => now(),
         'user_id' => factory(User::class, 'Client')->create()->id,        

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class Order extends Model
 {
@@ -52,7 +54,7 @@ class Order extends Model
     public static function deleteOrder($id){
         if(is_int($id)){
             try{
-                $order = Order::findOrFind($id);
+                $order = Order::findOrFail($id);
                 Order::destroy($id);
 
                 return true;
