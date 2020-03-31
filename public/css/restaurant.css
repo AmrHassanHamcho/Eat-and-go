@@ -10,6 +10,7 @@ a {
     display: block;           
     width: 65%;
     margin: auto;
+    margin-bottom: 50px;
     padding: 0;
     background-color: #ddd;
 }
@@ -67,7 +68,7 @@ a {
 
 .food-list {
     float: left;
-    margin: 0;
+    margin: 0;    
     padding: 0;    
     width: 68%;
     height: 100%;
@@ -201,6 +202,30 @@ a {
 
 .restaurant-order .order .total-price.final { 
     font-size: 1.02em;
+}
+
+.review-list {
+    margin: 0;
+    padding: 0;    
+    width: 100%;
+    height: 100%;   
+}
+
+.review {
+    width: 100%;
+    margin: 0px 5px 0px 0px;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+}
+
+.review-title {
+    font-weight: bold;    
+}
+
+.review-score, .review-comment {
+    font-size: 0.9em;
 }
 
 @media only screen and (max-width: 1080px) {

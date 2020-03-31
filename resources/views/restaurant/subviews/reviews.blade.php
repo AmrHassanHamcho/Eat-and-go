@@ -2,10 +2,10 @@
     @forelse($restaurant->reviews as $review)                
         <div class="review">
             <li>
-                {{ $review->title }} <br>
+                <span class="review-title">{{ $review->title }}, by {{$review->user->name }}</span> <br>
+                <span class="review-score">score: {{ $review->score }}</span><br>
                 <span class="review-comment">{{ $review->comment }}</span>
-            </li>                    
-            <span class="score">{{ $review->score }}</button>  
+            </li>                                
         </div>             
     @empty                    
         <p class="food">The restaurant {{ $restaurant->name }} does not have reviews yet.</p>
