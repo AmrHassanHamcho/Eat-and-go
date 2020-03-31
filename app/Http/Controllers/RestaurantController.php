@@ -96,11 +96,29 @@ class RestaurantController extends Controller
 
     public function editRestaurant()
     {
+       
         return view('restaurant.editRestaurant');
     }
 
-    public function addRestaurants()
+    public function addRestaurants(Request $request)
     {
+        /*$this->validate($request, [
+            'p_name' => 'required|min:6|max:50',
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+    
+        $project = new Project;
+        $project->p_name = $request->input('p_name');
+        $project->start_date = $request->input('start_date');
+        $project->end_date = $request->input('end_date');
+        $project->colab = $request->input('colab');*/
+    
+        $input = $request->input('create-btn');
+        if (isset($input)){
+    
+            return view('restaurant.restaurants');
+        }
         return view('restaurant.addRestaurants');
     }
 }
