@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Auth;
 use App\Restaurant;
 use App\Order;
 use App\OrderLine;
@@ -11,6 +12,11 @@ use App\Food;
 
 class RestaurantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');       
+    }
+
     public function restaurant($restaurantId)
     {        
         $restaurant = new Restaurant;
