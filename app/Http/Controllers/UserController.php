@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Auth;
-use app\User;
+use App\User;
+
 class UserController extends Controller
 {
-    function index(){
-        return view('login');
+    function login(){
+        return view('user.login');
     }
 
     function checklogin(Request $request){
@@ -25,7 +26,7 @@ class UserController extends Controller
         );
 
         if(Auth::attempt($user_data)){
-            return redirect('main/successlogin');
+            return redirect('/address');
         }
         else{
             return back()->with('error', 'wrong Login data');
@@ -34,19 +35,19 @@ class UserController extends Controller
     }
 
     function successlogin(){
-        return view('successlogin');
+        return redirect('/address');
     }
 
    
 
     function logout(){
         Auth::logout();
-        return redirect('main');
+        return redirect('/login');
     }
 
     public function registerCreate()
     {
-        return view('registration.create');
+        return view('user.create');
     }
 
     public function registerStore()
@@ -56,11 +57,11 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+                
         $user = User::create(request(['name', 'email', 'password']));
         
         auth()->login($user);
         
-        return redirect()->to('main');
+        return redirect()->to('/login');
     }
 }

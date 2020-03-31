@@ -17,10 +17,7 @@ class RestaurantController extends Controller
 
         try
         {
-            $restaurant = Restaurant::findOrFail($restaurantId);
-            // $success = $restaurant->readRestaurant((int)$restaurantId);
-            // if(!$success)
-            //     return view('error.404');
+            $restaurant = Restaurant::findOrFail($restaurantId);            
             $order = new Order;
 
             $orderline = new OrderLine;
@@ -85,8 +82,8 @@ class RestaurantController extends Controller
         
         $address = request('address');
                 
-        if(is_null($address))
-            return view('home.index');
+        // if(is_null($address))
+        //     return redirect('/address');
 
         return view('restaurant.restaurants', [
             'listRestaurants' => $listRestaurants,
