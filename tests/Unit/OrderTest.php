@@ -174,11 +174,11 @@ class OrderTest extends TestCase
         $order1->total_price = 22;
         
 
-        $order1 = new Order;
-        $order1->created_at = now();
-        $order1->user_id = $user->id;
-        $order1->restaurant_id = $restaurant->id;
-        $order1->total_price = 22;
+        $order2 = new Order;
+        $order2->created_at = now();
+        $order2->user_id = $user->id;
+        $order2->restaurant_id = $restaurant->id;
+        $order2->total_price = 22;
 
         Order::createOrder($order1);
         Order::createOrder($order2);
@@ -201,8 +201,8 @@ class OrderTest extends TestCase
         $order2 = new Order;
         $order2->created_at = now();
         $order2->user_id = $user->id;
-        $order1->restaurant_id = $restaurant->id;
-        $order1->total_price = 22;
+        $order2->restaurant_id = $restaurant->id;
+        $order2->total_price = 22;
 
         Order::createOrder($order1);
         Order::createOrder($order2);

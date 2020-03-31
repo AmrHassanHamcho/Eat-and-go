@@ -35,7 +35,7 @@ class Order extends Model
                 $order = Order::findOrFail($id);
                 $this->id = $order->id;
                 $this->user_id = $order->user;
-                $this->restaurant_id = $order->restaurant;
+                $this->restaurant_id = $order->restaurant_id;
                 $this->orderLines = $order->orderLines;
                 $this->total_price = $order->total_price;
                 $this->created_at = $order->created_at;
@@ -85,7 +85,7 @@ class Order extends Model
         throw new Exception("The parameter must be of type Order");
     }
 
-    public function listOrdersByRestaurant($restaurant, $ascending){
+    public static function listOrdersByRestaurant($restaurant, $ascending){
         if($restaurant instanceof Restaurant && is_bool($ascending)){
             if($ascending == true){
                 return $restaurant->orders()->getQuery()->orderBy('created_at', 'asc')->get();
@@ -96,7 +96,7 @@ class Order extends Model
         throw new Exception("The parameter must be of type Restaurant");
     }
 
-    public function listOrdersByUser($user, $ascending){
+    public static function listOrdersByUser($user, $ascending){
         if($user instanceof User && is_bool($ascending)){
             if($ascending == true){
                 return $user->orders()->getQuery()->orderBy('created_at', 'asc')->get();
