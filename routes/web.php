@@ -13,10 +13,6 @@
 Route::get('/', 'UserController@login');
 Route::get('/login', 'UserController@login');
 
-Route::get('/error/404', function() {
-    return view('error.404');
-});
-
 Route::get('/address', 'HomeController@address');
 Route::post('/address', 'RestaurantController@restaurants');
 Route::get('/about', 'HomeController@about');
@@ -31,3 +27,8 @@ Route::get('/successlogin', 'UserController@successlogin');
 Route::get('/logout','UserController@logout');
 Route::get('/register', 'UserController@registerCreate');
 Route::post('/register', 'UserController@registerStore');
+
+
+Route::get('/error/404', function() {
+    return view('error.404');
+});

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Auth;
 use App\User;
+use Hash;
 
 class UserController extends Controller
 {
@@ -20,10 +21,7 @@ class UserController extends Controller
             'password' => 'required|alphaNum|min:3' 
         ]);
 
-        $user_data = array(
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
-        );
+        $user_data = $request->only('email', 'password');
 
         if(Auth::attempt($user_data)){
             return redirect('/address');
@@ -36,9 +34,7 @@ class UserController extends Controller
 
     function successlogin(){
         return redirect('/address');
-    }
-
-   
+    }   
 
     function logout(){
         Auth::logout();
