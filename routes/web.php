@@ -10,25 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'UserController@login');
+Route::get('/login', 'UserController@login');
+Route::post('/checklogin', 'UserController@checklogin');
+Route::get('/logout','UserController@logout');
+Route::get('/register', 'UserController@create');
+Route::post('/register', 'UserController@store');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/error/404', function() {
-    return view('error.404');
-});
-
+Route::get('/address', 'HomeController@address');
+Route::post('/address', 'RestaurantController@restaurants');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
 Route::get('/restaurants', 'RestaurantController@restaurants');
+Route::post('/restaurants', 'RestaurantController@restaurants');
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
 
-Route::get('/main', 'UserController@index');
-Route::post('/main/checklogin', 'UserController@checklogin');
-Route::get('main/successlogin', 'UserController@successlogin');
-Route::get('main/logout','UserController@logout');
-
-Route::get('/main/register', 'UserController@registerCreate');
-Route::post('main/register', 'UserController@registerStore');
+Route::get('/error/404', function() {
+    return view('error.404');
+});

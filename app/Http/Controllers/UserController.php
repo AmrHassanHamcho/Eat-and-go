@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Auth;
-use app\User;
+use App\User;
+use Hash;
+
 class UserController extends Controller
 {
-    function index(){
-        return view('login');
+    function login(){
+        if(Auth::check())
+        {
+            return redirect('/address');
+        }
+
+        return view('user.login');
     }
 
     function checklogin(Request $request){
@@ -19,13 +26,10 @@ class UserController extends Controller
             'password' => 'required|alphaNum|min:3' 
         ]);
 
-        $user_data = array(
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
-        );
+        $user_data = $request->only('email', 'password');
 
         if(Auth::attempt($user_data)){
-            return redirect('main/successlogin');
+            return redirect('/address');
         }
         else{
             return back()->with('error', 'wrong Login data');
@@ -33,34 +37,28 @@ class UserController extends Controller
 
     }
 
-    function successlogin(){
-        return view('successlogin');
-    }
-
-   
-
     function logout(){
         Auth::logout();
-        return redirect('main');
+        return redirect('/login');
     }
 
-    public function registerCreate()
+    public function create()
     {
-        return view('registration.create');
+        return view('user.create');
     }
 
-    public function registerStore()
+    public function store()
     {
         $this->validate(request(), [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required|alphaNum|min:3' 
         ]);
-        
+                
         $user = User::create(request(['name', 'email', 'password']));
         
         auth()->login($user);
         
-        return redirect()->to('main');
+        return redirect()->to('/login');
     }
 }

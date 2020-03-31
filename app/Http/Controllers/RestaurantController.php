@@ -17,10 +17,7 @@ class RestaurantController extends Controller
 
         try
         {
-            $restaurant = Restaurant::findOrFail($restaurantId);
-            // $success = $restaurant->readRestaurant((int)$restaurantId);
-            // if(!$success)
-            //     return view('error.404');
+            $restaurant = Restaurant::findOrFail($restaurantId);            
             $order = new Order;
 
             $orderline = new OrderLine;
@@ -48,10 +45,50 @@ class RestaurantController extends Controller
         }                
     }       
 
-    public function restaurants()
-    {
-        $listRestaurants = Restaurant::listRestaurants(true);
-        return view('restaurant.restaurants', compact('listRestaurants'));
+    public function restaurants(){
+
+        $filter = request('filter');
+        $order = 'asc';
+
+        switch ($filter) {
+            case "name_asc":
+                $filter = 'name';
+                $order = 'asc';
+                break;
+            case "name_desc":
+                $filter = 'name';
+                $order = 'desc';
+                break;
+            case "num_reviews_asc":
+                $filter = 'number_reviews';
+                $order = 'asc';
+                break;
+            case "num_reviews_desc":
+                $filter = 'number_reviews';
+                $order = 'desc';
+                break;
+            default: 
+                $filter = 'name';
+                $order = 'asc';
+        }
+
+        $listRestaurants = Restaurant::listRestaurants($filter, $order);
+        
+        //$restaurants = factory(Restaurant::class, 3)->make();
+        //$restaurant2 = factory(Restaurant::class)->make();
+        //$restaurant3 = factory(Restaurant::class)->make();
+        
+        //$listRestaurants->push($restaurants);
+        
+        $address = request('address');
+                
+        // if(is_null($address))
+        //     return redirect('/address');
+
+        return view('restaurant.restaurants', [
+            'listRestaurants' => $listRestaurants,
+            'address' => $address
+        ]);
     }
 
     public function editRestaurant()
