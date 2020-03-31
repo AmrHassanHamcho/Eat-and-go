@@ -12,6 +12,11 @@ use Hash;
 class UserController extends Controller
 {
     function login(){
+        if(Auth::check())
+        {
+            return redirect('/address');
+        }
+
         return view('user.login');
     }
 
@@ -31,10 +36,6 @@ class UserController extends Controller
         }
 
     }
-
-    function successlogin(){
-        return redirect('/address');
-    }   
 
     function logout(){
         Auth::logout();
