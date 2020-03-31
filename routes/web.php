@@ -14,8 +14,8 @@ Route::get('/', 'UserController@login');
 Route::get('/login', 'UserController@login');
 Route::post('/checklogin', 'UserController@checklogin');
 Route::get('/logout','UserController@logout');
-Route::get('/register', 'UserController@registerCreate');
-Route::post('/register', 'UserController@registerStore');
+Route::get('/register', 'UserController@create');
+Route::post('/register', 'UserController@store');
 
 Route::get('/address', 'HomeController@address');
 Route::post('/address', 'RestaurantController@restaurants');

@@ -57,5 +57,11 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = \bcrypt($password);
     }
+
+    public static function findByEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+        return $user;
+    }
 }
 

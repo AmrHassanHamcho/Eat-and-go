@@ -42,17 +42,17 @@ class UserController extends Controller
         return redirect('/login');
     }
 
-    public function registerCreate()
+    public function create()
     {
         return view('user.create');
     }
 
-    public function registerStore()
+    public function store()
     {
         $this->validate(request(), [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required|alphaNum|min:3' 
         ]);
                 
         $user = User::create(request(['name', 'email', 'password']));
