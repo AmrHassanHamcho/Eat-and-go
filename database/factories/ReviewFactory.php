@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Review::class, function (Faker $faker) {
     return [        
+        'title' => 'Factory title test',
         'comment' => 'factory test comment for review',
         'score' => 5,
         'created_at' => now(),

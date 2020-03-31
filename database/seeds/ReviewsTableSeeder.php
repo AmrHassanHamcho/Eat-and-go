@@ -16,7 +16,8 @@ class ReviewsTableSeeder extends Seeder
             'id'=>1,
             'user_id'=>3,
             'restaurant_id'=>1,
-            'comment'=> 'Testcomment',
+            'title'=> 'TestTitle',
+            'comment'=> 'This is just a test reviews created for testing purposes. No sense, just filling spaces. I am hungry, are you?',
             'score'=>5
         ]);
     }

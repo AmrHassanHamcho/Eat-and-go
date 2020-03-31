@@ -20,6 +20,7 @@ class RestaurantController extends Controller
     public function restaurant($restaurantId)
     {        
         $restaurant = new Restaurant;
+        $show_foods = true;
 
         try
         {
@@ -43,6 +44,7 @@ class RestaurantController extends Controller
             return view('restaurant.restaurant', [
                 'restaurant' => $restaurant,
                 'order' => $order,
+                'show_foods' => $show_foods
             ]);
         }
         catch (Exception $e)
@@ -50,6 +52,42 @@ class RestaurantController extends Controller
             return view('error.404');
         }                
     }       
+
+    public function reviews($restaurantId)
+    {        
+        $restaurant = new Restaurant;
+        $show_foods = false;
+
+        try
+        {
+            $restaurant = Restaurant::findOrFail($restaurantId);            
+            $order = new Order;
+
+            $orderline = new OrderLine;
+            $orderline->food_id = 1;
+            $orderline->total_price = $orderline->food->price;
+            $orderline->quantity = 1;
+
+            $orderline2 = clone $orderline;
+            $orderline2->food = new Food;
+            $orderline2->food->name = "Bocata de lomo fresco con queso";
+
+            $orderline3 = clone $orderline;
+            $orderline3->food = new Food;
+            $orderline3->food->name = "Pastel de carne de la EPS";
+
+            $order->orderlines = [$orderline, $orderline2, $orderline3];
+            return view('restaurant.restaurant', [
+                'restaurant' => $restaurant,
+                'order' => $order,
+                'show_foods' => $show_foods
+            ]);
+        }
+        catch (Exception $e)
+        {
+            return view('error.404');
+        }                
+    } 
 
     public function restaurants(){
 

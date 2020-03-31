@@ -26,6 +26,7 @@ Route::get('/contact', 'HomeController@contact');
 Route::get('/restaurants', 'RestaurantController@restaurants');
 Route::post('/restaurants', 'RestaurantController@restaurants');
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
+Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
 
 Route::get('/error/404', function() {
     return view('error.404');
