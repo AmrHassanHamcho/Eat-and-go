@@ -60,8 +60,20 @@ class User extends Authenticatable
 
     public static function findByEmail($email)
     {
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', $email)->get()->first();
         return $user;
     }
+
+    public function isAdminApp()
+    {
+        $admin_role = Role::where('name', 'AdminApp')->get()->first();
+        return $this->role_id == $admin_role->id;
+    }
+
+    public function isAdminRestaurant()
+    {
+        $admin_role = Role::where('name', 'AdminRestaurant')->get()->first();
+        return $this->role_id == $admin_role->id;
+    }    
 }
 

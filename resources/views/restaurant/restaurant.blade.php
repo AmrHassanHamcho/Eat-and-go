@@ -16,12 +16,13 @@
         
         <div class="restaurant-buttons">
             <ul>
-                <li><a href="">Foods</a></li>
-                <li><a href="">Reviews</a></li>
-                <li><a href="">Edit</a></li>
+                <li><a href="/restaurants/{{ $restaurant->id }}">Foods</a></li>
+                <li><a href="/reviews/{{ $restaurant->id }}">Reviews</a></li>
+                @if((Auth::user()->id == $restaurant->admin_id && Auth::user()->isAdminRestaurant()) || Auth::user()->isAdminApp())
+                    <li><a href="/editRestaurant">Edit</a></li>
+                @endif
             </ul>
         </div>
-
         
         <ul class="food-list">
             @forelse($restaurant->foods as $food)                
@@ -50,7 +51,7 @@
                         <li class="no-food-selected">No food selected.</li>
                     @endforelse                
                 </ul>
-                {{-- <p class="total-price">Total: {{$order->total_price}}</p> --}}
+                                
                 <ul class="total-price final">
                     <li>Total</li>
                     <li class="price-number">50,65 €</li>
