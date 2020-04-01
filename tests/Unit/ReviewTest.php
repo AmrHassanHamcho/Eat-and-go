@@ -54,11 +54,7 @@ class ReviewTest extends TestCase
         $result = $actual->readReview($expected->id);
 
         $this->assertTrue($result);
-        $this->assertEquals($expected->comment, $actual->comment);
-        $this->assertEquals($expected->user, $actual->user);
-        $this->assertEquals($expected->restaurant, $actual->restaurant);
-        $this->assertEquals($expected->score, $actual->score);
-        $this->assertEquals($expected->id, $actual->id);              
+        $this->assertEquals($expected->attributes, $actual->attributes);
     }
 
     /** @test */ 
@@ -92,6 +88,7 @@ class ReviewTest extends TestCase
     {
         $review = new Review;
         $review->id = 99;
+        $review->title = "title not exists";
         $review->comment = "This review does not exist in the database.";
         $review->score = 1;
         $review->user_id = 1;
@@ -119,6 +116,7 @@ class ReviewTest extends TestCase
     {
         $review = new Review;
         $review->id = 99;
+        $review->title = "title not exists";
         $review->comment = "This review does not exist in the database.";
         $review->score = 1;
         $review->user_id = 1;
@@ -135,6 +133,7 @@ class ReviewTest extends TestCase
     public function createReview_test1()
     {
         $review = new Review;        
+        $review->title = "title test";
         $review->comment = "This review does not exist in the database.";
         $review->score = 1;
         $review->user_id = 1;
@@ -157,6 +156,7 @@ class ReviewTest extends TestCase
         $user1->role_id = $user2->role_id = 3; // client role
 
         $review1 = new Review;        
+        $review1->title = "title by user1";
         $review1->comment = "Comment by user1";
         $review1->score = 1;
         $review1->user_id = $user1->id;
@@ -167,7 +167,8 @@ class ReviewTest extends TestCase
         $restaurant = Restaurant::find($restaurant->id);
         $this->assertEquals(1, $restaurant->number_reviews);
 
-        $review2 = new Review;        
+        $review2 = new Review;       
+        $review2->title = "title by user2"; 
         $review2->comment = "Comment by user2";
         $review2->score = 2;
         $review2->user_id = $user2->id;
@@ -257,12 +258,14 @@ class ReviewTest extends TestCase
         $user1->role_id = $user2->role_id = 3; // client role
 
         $review1 = new Review;        
+        $review1->title = "title by user1";
         $review1->comment = "Comment by user1";
         $review1->score = 1;
         $review1->user_id = $user1->id;
         $review1->restaurant_id = $restaurant->id;
 
         $review2 = new Review;        
+        $review2->title = "title by user2";
         $review2->comment = "Comment by user2";
         $review2->score = 2;
         $review2->user_id = $user2->id;

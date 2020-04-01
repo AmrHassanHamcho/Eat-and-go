@@ -51,6 +51,29 @@ class User extends Authenticatable
 
     public function orders(){
         return $this->hasMany('App\Order');
+    }    
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \bcrypt($password);
     }
+
+    public static function findByEmail($email)
+    {
+        $user = User::where('email', $email)->get()->first();
+        return $user;
+    }
+
+    public function isAdminApp()
+    {
+        $admin_role = Role::where('name', 'AdminApp')->get()->first();
+        return $this->role_id == $admin_role->id;
+    }
+
+    public function isAdminRestaurant()
+    {
+        $admin_role = Role::where('name', 'AdminRestaurant')->get()->first();
+        return $this->role_id == $admin_role->id;
+    }    
 }
 
