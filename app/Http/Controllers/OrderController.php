@@ -12,6 +12,11 @@ use App\User;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');       
+    }
+
     public function summary(/**$orderId */){
         $order = new Order;
         /** 
