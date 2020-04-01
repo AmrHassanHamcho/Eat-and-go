@@ -148,7 +148,7 @@ class RestaurantController extends Controller
             $orderline = new OrderLine;
             $orderline->food_id = $food->id;
             $orderline->total_price = $food->price;
-            $orderline->quantity = 1;
+            $orderline->quantity = 1;            
             
             $order->addOrderLine($orderline);
         } 

@@ -68,26 +68,26 @@ class Order extends Model
     }
 
     public static function createOrder($order){
-        // if($order instanceof Order){
-        //     try{
-        //         Order::findOrFail($order->id);
-        //         return false;
-        //     }
-        //     catch(ModelNotFoundException $e){
-        //         $order->created_at = now();
-        //         $order->updated_at = now();
-        //         $order_in_db = Order::create();
-        //         $order_in_db->
-                
-        //         foreach($order->orderlines as $orderline)
-        //         {
-        //             OrderLine::createOrderLine($orderline);
-        //         }
+        if($order instanceof Order){
+            try{
+                Order::findOrFail($order->id);
+                return false;
+            }
+            catch(ModelNotFoundException $e){
+                $order->created_at = now();
+                $order->updated_at = now();
+                $order_in_db = Order::create(['user_id' => $order->user_id, 'restaurant_id' => $order->restaurant_id, 'total_price' => $order->total_price]);
+                                
+                foreach($order->orderlines as $orderline)
+                {
+                    $orderline->order_id = $order_in_db->id;
+                    OrderLine::createOrderLine($orderline);
+                }
 
-        //         $order->save();
-        //         return true;
-        //     }
-        // }
+                $order_in_db->save();
+                return true;
+            }
+        }
 
         throw new Exception("The parameter must be of type Order");
     }
@@ -132,7 +132,7 @@ class Order extends Model
                 }
 
                 if(!$exists)
-                {   
+                {                       
                     $this->attributes['orderlines']->push($orderline);
                 }
 
