@@ -12,40 +12,37 @@
                 @csrf
                 <br>
                 <b>Name</b><br> 
-                <input type="text" placeholder="Enter Restaurant Name" name="name" required><br>
+                <input type="text" placeholder="Enter Restaurant Name" name="name" required value="{{old('name')}}"><br>
                 
                 <b>Address</b><br>
-                <input type="text" placeholder="Enter Restaurant Address" name="address" ><br>
+                <input type="text" placeholder="Enter Restaurant Address" name="address" value="{{old('address')}}"><br>
                 
                 <b>Bank Account</b><br> 
-                <input type="text" placeholder="Enter Restaurant Bank Account" name="bank_account" > <br>
+                <input type="text" placeholder="Enter Restaurant Bank Account" name="bank_account" value="{{old('bank_account')}}"> <br>
 
                 <b>Phone number</b><br> 
-                <input type="text" placeholder="Enter Restaurant Phone number" name="phone" > <br>
+                <input type="text" placeholder="Enter Restaurant Phone number" name="phone" value="{{old('phone')}}"> <br>
 
                 <b>Admin Email</b><br> 
-                <input type="text" placeholder="Enter Restaurant Admin email" name="admin" > <br>
+                <input type="text" placeholder="Enter Restaurant Admin email" name="admin" value="{{old('admin')}}"> <br>
 
                 <b>Restaurant icon</b><br> 
-                <input type="file" name="image" > <br>
+                <input type="file" name="image" value="{{old('image')}}"> <br>
     
                 <br><br> 
      
-                <input type=hidden name="is-create" value="false" id="hidden_id">
                 <button type="submit" 
                     method="POST" 
                     class="btn btn-success" 
-                    name="create-btn"
-                    onclick="event.preventDefault(); document.getElementById('hidden_id').value="true"; document.getElementById('submit-form 
-                    personal').submit();">Create
+                    name="form_btn"
+                    value="create">Create
                 </button>
 
                 <button type="submit" 
                     method="POST" 
                     class="btn btn-info" 
-                    name="read-btn" 
-                    onclick="event.preventDefault(); document.getElementById('hidden_id').value="false"; document.getElementById('submit-form- 
-                    personal').submit();">Read
+                    name="form_btn"
+                    value="read">Read
                 </button>
 
                 

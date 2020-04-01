@@ -17,10 +17,7 @@ class RestaurantController extends Controller
 
         try
         {
-            $restaurant = Restaurant::findOrFail($restaurantId);
-            // $success = $restaurant->readRestaurant((int)$restaurantId);
-            // if(!$success)
-            //     return view('error.404');
+            $restaurant = Restaurant::findOrFail($restaurantId);            
             $order = new Order;
 
             $orderline = new OrderLine;
@@ -85,8 +82,8 @@ class RestaurantController extends Controller
         
         $address = request('address');
                 
-        if(is_null($address))
-            return view('home.index');
+        // if(is_null($address))
+        //     return redirect('/address');
 
         return view('restaurant.restaurants', [
             'listRestaurants' => $listRestaurants,
@@ -114,11 +111,58 @@ class RestaurantController extends Controller
         $project->end_date = $request->input('end_date');
         $project->colab = $request->input('colab');*/
     
-        $input = $request->input('create-btn');
-        if (isset($input)){
-    
-            return view('restaurant.restaurants');
+        $action = request('form_btn');
+        if (!is_null($action)){
+            
+            switch ($action) {
+                case 'create':
+                    $this->validate(request(), [
+                        'name' => 'required',
+                        'bank_account' => 'min:10|max:12' ,
+                        'phone' => 'min:9|max:11',
+                        'admin' => 'numeric',
+                    ]);
+                            
+                    $restaurant = new Restaurant;
+
+                    $restaurant->name = request('name');
+                    $restaurant->address = request('address');
+                    $restaurant->bank_account = request('bank_account');
+                    $restaurant->phone = request('phone');
+                    $restaurant->number_reviews = 0;
+                    $restaurant->image_url = '/img/justeat.png';
+                    $restaurant->admin_id = request('admin');
+
+                    Restaurant::createRestaurant($restaurant);
+                    return redirect()->to('/addRestaurants');
+                    break;
+
+                case 'read':
+                    $this->validate(request(), [
+                        'name' => 'required',
+                    ]);
+                            
+                    $restaurant = new Restaurant;
+
+                    $name = request('name');
+                    // $restaurant->address = request('address');
+                    // $restaurant->bank_account = request('bank_account');
+                    // $restaurant->phone = request('phone');
+                    // $restaurant->number_reviews = 0;
+                    // $restaurant->image_url = '/img/justeat.png';
+                    // $restaurant->admin_id = request('admin');
+
+                    $listRestaurants = $restaurant->readRestaurantByName($name);
+                    dd($restaurant);
+                    return redirect()->to('/addRestaurants');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            return view('home.about');
         }
         return view('restaurant.addRestaurants');
     }
+
 }

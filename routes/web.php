@@ -10,17 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'UserController@login');
+Route::get('/login', 'UserController@login');
+Route::post('/checklogin', 'UserController@checklogin');
+Route::get('/logout','UserController@logout');
+Route::get('/register', 'UserController@create');
+Route::post('/register', 'UserController@store');
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/error/404', function() {
-    return view('error.404');
-});
-
-Route::get('/index', 'HomeController@index');
-Route::post('/index', 'RestaurantController@restaurants');
+Route::get('/address', 'HomeController@address');
+Route::post('/address', 'RestaurantController@restaurants');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
@@ -30,5 +28,8 @@ Route::post('/restaurants', 'RestaurantController@restaurants');
 Route::get('/addRestaurants', 'RestaurantController@addRestaurants');
 Route::post('/addRestaurants', 'RestaurantController@addRestaurants');
 
-
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
+
+Route::get('/error/404', function() {
+    return view('error.404');
+});
