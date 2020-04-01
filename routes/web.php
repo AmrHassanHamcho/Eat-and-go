@@ -18,7 +18,7 @@ Route::get('/logout','UserController@logout');
 Route::get('/register', 'UserController@create');
 Route::post('/register', 'UserController@store');
 
-Route::get('/address', 'HomeController@address');
+Route::get('/address', 'HomeController@address')->middleware('auth');
 Route::post('/address', 'RestaurantController@restaurants');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');

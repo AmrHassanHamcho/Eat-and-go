@@ -4,7 +4,7 @@
 @section('css-stylesheet', asset('css/restaurant.css'))
 
 @section('content')
-
-<h4> Thanks for trusting in us </h4>
-
+    <div class="about">
+        <p class="about-text">Thanks for trusting us. Your order will be with you in a few minutes.</p>
+    </div>
 @endsection
