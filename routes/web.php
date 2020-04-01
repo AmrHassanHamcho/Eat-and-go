@@ -28,6 +28,11 @@ Route::post('/restaurants', 'RestaurantController@restaurants');
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
 Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
 
+Route::get('/summary', 'OrderController@summary');
+Route::get('/thanks', function (){
+    return view('order.thanks');
+});
+
 Route::get('/error/404', function() {
     return view('error.404');
 });
