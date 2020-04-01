@@ -27,4 +27,12 @@ class OrderController extends Controller
 
         return view('order.summary', compact('order'));        
     }
+
+    public function store()
+    {
+        $order = Session::get('order');
+        Order::createOrder($order);
+        
+        return view('order.thanks');
+    }
 }

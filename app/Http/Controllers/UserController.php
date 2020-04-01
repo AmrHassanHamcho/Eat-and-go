@@ -14,9 +14,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserController extends Controller
 {
-    function login(){
+    function login(){        
         if(Auth::check())
         {
+            $this->assignOrderToUser();
             return redirect('/address');
         }
 
@@ -32,11 +33,8 @@ class UserController extends Controller
         $user_data = $request->only('email', 'password');
 
         if(Auth::attempt($user_data)){
-            $order = new Order;
-            $order->total_price = 0.0;  
-            $order->user_id = Auth::user()->id;
-            $order->orderlines = new Collection;
-            Session::put('order', $order);
+            
+            $this->assignOrderToUser();
             return redirect('/address');
         }
         else{
@@ -69,5 +67,14 @@ class UserController extends Controller
         auth()->login($user);
         
         return redirect()->to('/login');
+    }
+
+    private function assignOrderToUser()
+    {
+        $order = new Order;
+        $order->total_price = 0.0;  
+        $order->user_id = Auth::user()->id;
+        $order->orderlines = new Collection;
+        Session::put('order', $order);
     }
 }

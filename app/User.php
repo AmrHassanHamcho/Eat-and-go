@@ -73,6 +73,9 @@ class User extends Authenticatable
     public function isAdminRestaurant()
     {
         $admin_role = Role::where('name', 'AdminRestaurant')->get()->first();
+        if(is_null($admin_role))
+            return false;
+            
         return $this->role_id == $admin_role->id;
     }    
 }
