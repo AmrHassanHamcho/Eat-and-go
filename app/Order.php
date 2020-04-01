@@ -107,11 +107,29 @@ class Order extends Model
         throw new Exception("The parameter must be of type User");
     }
 
-    public function addOrderLine($orderLine){
-        if($orderLine instanceof OrderLine){
-            try{
-                OrderLine::findOrFail($orderLine->id);
-                $orderLine->order = $this->id;
+    public function addOrderLine($orderline){
+        if($orderline instanceof OrderLine){
+            try{                                   
+                $orderlines = $this->attributes['orderlines'];
+
+                $exists = false;
+                foreach($this->attributes['orderlines'] as $key => $value)               
+                {
+                    if($value->food->id == $orderline->food->id)
+                    {                                                
+                        $value->total_price += $value->food->price;
+                        $value->quantity += 1;
+                        $exists = true;
+                        break;
+                    }
+                }
+
+                if(!$exists)
+                {   
+                    $this->attributes['orderlines']->push($orderline);
+                }
+
+                $this->total_price += $orderline->total_price;
                 return true;
             }
             catch(ModelNotFoundException $e){
@@ -121,11 +139,30 @@ class Order extends Model
         throw new Exception("The parameter must be of type OrderLine");
     }
 
-    public function removeOrderLine($id){
-        if(is_int($lineId)){
+    public function removeOrderLine($orderline){
+        if($orderline instanceof OrderLine){
             try{
-                $orderLine = OrderLine::findOrFail($id);
-                $orderLine->order = null;
+                $orderlines = $this->attributes['orderlines'];
+                foreach($this->attributes['orderlines'] as $key => $value)               
+                {
+                    if($value->food->id == $orderline->food->id)
+                    {                        
+                        $this->total_price -= $value->food->price;
+                        $value->total_price -= $value->food->price;
+                        
+                        if($value->quantity == 1) 
+                        {
+                            $orderlines->forget($key);                        
+                        }
+                        else
+                        {
+                            $value->quantity -= 1;
+                        }
+
+                        break;
+                    }
+                }
+
                 return true;
             }
             catch(ModelNotFoundException $e){

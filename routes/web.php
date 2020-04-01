@@ -26,9 +26,11 @@ Route::get('/contact', 'HomeController@contact');
 Route::get('/restaurants', 'RestaurantController@restaurants');
 Route::post('/restaurants', 'RestaurantController@restaurants');
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
+Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
+Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
 Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
 
-Route::get('/summary', 'OrderController@summary');
+Route::post('/summary/{restaurantId}', 'OrderController@summary');
 Route::get('/thanks', function (){
     return view('order.thanks');
 });

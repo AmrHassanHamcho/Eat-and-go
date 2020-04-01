@@ -8,6 +8,9 @@ use Validator;
 use Auth;
 use App\User;
 use Hash;
+use Session;
+use App\Order;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserController extends Controller
 {
@@ -29,6 +32,11 @@ class UserController extends Controller
         $user_data = $request->only('email', 'password');
 
         if(Auth::attempt($user_data)){
+            $order = new Order;
+            $order->total_price = 0.0;  
+            $order->user_id = Auth::user()->id;
+            $order->orderlines = new Collection;
+            Session::put('order', $order);
             return redirect('/address');
         }
         else{
@@ -39,6 +47,7 @@ class UserController extends Controller
 
     function logout(){
         Auth::logout();
+        Session::flush();
         return redirect('/login');
     }
 

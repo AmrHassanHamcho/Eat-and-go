@@ -9,11 +9,13 @@ use App\Restaurant;
 use App\Order;
 use App\OrderLine;
 use App\Food;
+use Session;
+use Illuminate\Database\Eloquent\Collection;
 
 class RestaurantController extends Controller
 {
     public function __construct()
-    {
+    {            
         $this->middleware('auth');       
     }
 
@@ -22,25 +24,17 @@ class RestaurantController extends Controller
         $restaurant = new Restaurant;
         $show_foods = true;
 
-        try
-        {
+        try        
+        {                          
             $restaurant = Restaurant::findOrFail($restaurantId);            
-            $order = new Order;
+            $order = Session::get('order');                         
+                
+            if($restaurant->id != $order->restaurant_id || is_null($order->restaurant_id))
+            {                                
+                $order->orderlines = new Collection;
+                $order->restaurant_id = $restaurant->id;                        
+            }
 
-            $orderline = new OrderLine;
-            $orderline->food_id = 1;
-            $orderline->total_price = $orderline->food->price;
-            $orderline->quantity = 1;
-
-            $orderline2 = clone $orderline;
-            $orderline2->food = new Food;
-            $orderline2->food->name = "Bocata de lomo fresco con queso";
-
-            $orderline3 = clone $orderline;
-            $orderline3->food = new Food;
-            $orderline3->food->name = "Pastel de carne de la EPS";
-
-            $order->orderlines = [$orderline, $orderline2, $orderline3];
             return view('restaurant.restaurant', [
                 'restaurant' => $restaurant,
                 'order' => $order,
@@ -49,6 +43,7 @@ class RestaurantController extends Controller
         }
         catch (Exception $e)
         {
+            dd($e);
             return view('error.404');
         }                
     }       
@@ -61,25 +56,10 @@ class RestaurantController extends Controller
         try
         {
             $restaurant = Restaurant::findOrFail($restaurantId);            
-            $order = new Order;
 
-            $orderline = new OrderLine;
-            $orderline->food_id = 1;
-            $orderline->total_price = $orderline->food->price;
-            $orderline->quantity = 1;
-
-            $orderline2 = clone $orderline;
-            $orderline2->food = new Food;
-            $orderline2->food->name = "Bocata de lomo fresco con queso";
-
-            $orderline3 = clone $orderline;
-            $orderline3->food = new Food;
-            $orderline3->food->name = "Pastel de carne de la EPS";
-
-            $order->orderlines = [$orderline, $orderline2, $orderline3];
             return view('restaurant.restaurant', [
                 'restaurant' => $restaurant,
-                'order' => $order,
+                'order' => Session::get('order'),
                 'show_foods' => $show_foods
             ]);
         }
@@ -89,8 +69,9 @@ class RestaurantController extends Controller
         }                
     } 
 
-    public function restaurants(){
-
+    public function restaurants()
+    {
+        $this->emptyOrder();
         $filter = request('filter');
         $order = 'asc';
 
@@ -137,11 +118,57 @@ class RestaurantController extends Controller
 
     public function editRestaurant()
     {
+        $this->emptyOrder();
         return view('restaurant.editRestaurant');
     }
 
     public function addRestaurant()
     {
+        $this->emptyOrder();
         return view('restaurant.addRestaurant');
+    }
+
+    private function emptyOrder() 
+    {
+        $order = Session::get('order');             
+        if(!is_null($order))
+        {
+            $order->total_price = 0.0;
+            $order->orderlines = new Collection;
+        }
+    }
+
+    public function addfood($restaurantId)
+    {
+        $food = Food::find(request('food_id'));         
+        $order = Session::get('order');                  
+
+        if(!is_null($food))
+        {
+            $orderline = new OrderLine;
+            $orderline->food_id = $food->id;
+            $orderline->total_price = $food->price;
+            $orderline->quantity = 1;
+            
+            $order->addOrderLine($orderline);
+        } 
+
+        return redirect('/restaurants/'.$restaurantId);
+    }
+
+    public function removefood($restaurantId)
+    {        
+        $food = Food::find(request('food_id'));       
+        $order = Session::get('order');                  
+
+        if(!is_null($food))
+        {
+            $orderline = new OrderLine;
+            $orderline->food_id = $food->id;
+
+            $order->removeOrderLine($orderline);
+        } 
+
+        return redirect('/restaurants/'.$restaurantId);
     }
 }
