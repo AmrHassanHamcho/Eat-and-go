@@ -19,7 +19,7 @@ Route::get('/register', 'UserController@create');
 Route::post('/register', 'UserController@store');
 
 Route::get('/address', 'HomeController@address')->middleware('auth');
-Route::post('/address', 'RestaurantController@restaurants');
+Route::post('/address', 'HomeController@addressValidation')->middleware('auth');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 

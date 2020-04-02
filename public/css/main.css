@@ -31,12 +31,19 @@ html, body {
 .address-form {
     background-color: #fff;    
     width: 700px;    
-    height: 170px;
+    height: 100%;
+    min-height: 170px;
     margin: 8% auto;
     padding: 0px;
     font-size: 1.2em;
     padding: 20px 30px;    
     border-radius: 5px;
+}
+
+.address-form .alert-danger {
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin-top: 10px;
 }
 
 #address-text {

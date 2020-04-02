@@ -105,10 +105,10 @@ class RestaurantController extends Controller
         
         //$listRestaurants->push($restaurants);
         
-        $address = request('address');
+        $address = Session::get('address');
                 
-        // if(is_null($address))
-        //     return redirect('/address');
+        if(is_null($address))
+            return redirect('/address');
 
         return view('restaurant.restaurants', [
             'listRestaurants' => $listRestaurants,

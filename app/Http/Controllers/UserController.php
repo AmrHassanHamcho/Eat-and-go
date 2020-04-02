@@ -38,7 +38,7 @@ class UserController extends Controller
             return redirect('/address');
         }
         else{
-            return back()->with('error', 'wrong Login data');
+            return back()->with('error', 'Wrong login data');
         }
 
     }
