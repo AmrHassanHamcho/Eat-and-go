@@ -33,7 +33,7 @@
 
             <ul class="total-price final">
                 <li>Total</li>
-                <li class="price-number">{{ $order->total_price }}</li>
+                <li class="price-number">{{ $order->total_price }} €</li>
             </ul>
         </div>
     <button class="buy-button" formaction="/summary/{{ $restaurant->id }}">BUY</button>

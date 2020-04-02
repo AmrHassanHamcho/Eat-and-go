@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 class HomeController extends Controller
 {
     public function address()
+    {               
+        return view('home.address');            
+    }
+
+    public function addressValidation(Request $request)
     {
-        return view('home.address');
+        $this->validate($request, [
+            'address' => 'required',            
+        ]);
+        
+        Session::put('address', $request->address);
+        return redirect('/restaurants');
     }
 
     public function about()

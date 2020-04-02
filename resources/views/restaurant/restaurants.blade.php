@@ -11,7 +11,7 @@
             <div class="_address_container"> 
                 <img src="/img/position_icon.png" alt=""> <span>{{ $address ?? 'Default Address' }}</span>  
             </div>
-            <a href="/index">Change address</a>
+            <a href="/address">Change address</a>
         </div>
         
         <div class="_main_restaurants_container">
