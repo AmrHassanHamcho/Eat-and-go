@@ -11,16 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'UserController@login');
+Route::get('/login', 'UserController@login')->name('login');
+Route::post('/checklogin', 'UserController@checklogin');
+Route::get('/logout','UserController@logout');
+Route::get('/register', 'UserController@create');
+Route::post('/register', 'UserController@store');
+
+Route::get('/address', 'HomeController@address');
+Route::post('/address', 'RestaurantController@restaurants');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
+
+Route::get('/restaurants', 'RestaurantController@restaurants');
+Route::post('/restaurants', 'RestaurantController@restaurants');
+Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
+Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
+Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
+Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
+
+Route::post('/summary/{restaurantId}', 'OrderController@summary');
+Route::get('/thanks', function (){
+    return view('order.thanks');
 });
 
 Route::get('/error/404', function() {
     return view('error.404');
 });
-
-Route::get('/about', 'HomeController@about');
-Route::get('/contact', 'HomeController@contact');
-
-Route::get('/restaurants', 'RestaurantController@restaurants');
-Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');

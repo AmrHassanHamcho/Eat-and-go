@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function address()
+    {
+        return view('home.address');
+    }
+
     public function about()
     {
         return view('home.about');
@@ -14,5 +19,5 @@ class HomeController extends Controller
     public function contact()
     {
         return view('home.contact');
-    }
+    }    
 }

@@ -15,7 +15,7 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-        'score', 'comment', 'user_id', 'restaurant_id',
+        'score', 'title', 'comment', 'user_id', 'restaurant_id',
     ];    
 
     public function readReview($id)
@@ -26,6 +26,7 @@ class Review extends Model
             {                
                 $review = Review::findOrFail($id);
                 $this->id = $review->id;
+                $this->title = $review->title;
                 $this->comment = $review->comment;
                 $this->score = $review->score;
                 $this->user_id = $review->user_id;

@@ -4,63 +4,171 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Auth;
 use App\Restaurant;
 use App\Order;
 use App\OrderLine;
 use App\Food;
+use Session;
+use Illuminate\Database\Eloquent\Collection;
 
 class RestaurantController extends Controller
 {
+    public function __construct()
+    {            
+        $this->middleware('auth');       
+    }
+
     public function restaurant($restaurantId)
     {        
         $restaurant = new Restaurant;
+        $show_foods = true;
 
-        try
-        {
-            $restaurant = Restaurant::findOrFail($restaurantId);
-            // $success = $restaurant->readRestaurant((int)$restaurantId);
-            // if(!$success)
-            //     return view('error.404');
-            $order = new Order;
+        try        
+        {                          
+            $restaurant = Restaurant::findOrFail($restaurantId);            
+            $order = Session::get('order');                         
+                
+            if($restaurant->id != $order->restaurant_id || is_null($order->restaurant_id))
+            {                                
+                $order->orderlines = new Collection;
+                $order->restaurant_id = $restaurant->id;                        
+            }
 
-            $orderline = new OrderLine;
-            $orderline->food_id = 1;
-            $orderline->total_price = $orderline->food->price;
-            $orderline->quantity = 1;
-
-            $orderline2 = clone $orderline;
-            $orderline2->food = new Food;
-            $orderline2->food->name = "Bocata de lomo fresco con queso";
-
-            $orderline3 = clone $orderline;
-            $orderline3->food = new Food;
-            $orderline3->food->name = "Pastel de carne de la EPS";
-
-            $order->orderlines = [$orderline, $orderline2, $orderline3];
             return view('restaurant.restaurant', [
                 'restaurant' => $restaurant,
                 'order' => $order,
+                'show_foods' => $show_foods
+            ]);
+        }
+        catch (Exception $e)
+        {
+            dd($e);
+            return view('error.404');
+        }                
+    }       
+
+    public function reviews($restaurantId)
+    {        
+        $restaurant = new Restaurant;
+        $show_foods = false;
+
+        try
+        {
+            $restaurant = Restaurant::findOrFail($restaurantId);            
+
+            return view('restaurant.restaurant', [
+                'restaurant' => $restaurant,
+                'order' => Session::get('order'),
+                'show_foods' => $show_foods
             ]);
         }
         catch (Exception $e)
         {
             return view('error.404');
         }                
-    }       
+    } 
 
     public function restaurants()
     {
-        $listRestaurants = Restaurant::listRestaurants(true);
-        return view('restaurant.restaurants', compact('listRestaurants'));
+        $this->emptyOrder();
+        $filter = request('filter');
+        $order = 'asc';
+
+        switch ($filter) {
+            case "name_asc":
+                $filter = 'name';
+                $order = 'asc';
+                break;
+            case "name_desc":
+                $filter = 'name';
+                $order = 'desc';
+                break;
+            case "num_reviews_asc":
+                $filter = 'number_reviews';
+                $order = 'asc';
+                break;
+            case "num_reviews_desc":
+                $filter = 'number_reviews';
+                $order = 'desc';
+                break;
+            default: 
+                $filter = 'name';
+                $order = 'asc';
+        }
+
+        $listRestaurants = Restaurant::listRestaurants($filter, $order);
+        
+        //$restaurants = factory(Restaurant::class, 3)->make();
+        //$restaurant2 = factory(Restaurant::class)->make();
+        //$restaurant3 = factory(Restaurant::class)->make();
+        
+        //$listRestaurants->push($restaurants);
+        
+        $address = request('address');
+                
+        // if(is_null($address))
+        //     return redirect('/address');
+
+        return view('restaurant.restaurants', [
+            'listRestaurants' => $listRestaurants,
+            'address' => $address
+        ]);
     }
 
     public function editRestaurant()
     {
+        $this->emptyOrder();
         return view('restaurant.editRestaurant');
     }
 
     public function addRestaurant()
     {
+        $this->emptyOrder();
         return view('restaurant.addRestaurant');
+    }
+
+    private function emptyOrder() 
+    {
+        $order = Session::get('order');             
+        if(!is_null($order))
+        {
+            $order->total_price = 0.0;
+            $order->orderlines = new Collection;
+        }
+    }
+
+    public function addfood($restaurantId)
+    {
+        $food = Food::find(request('food_id'));         
+        $order = Session::get('order');                  
+
+        if(!is_null($food))
+        {
+            $orderline = new OrderLine;
+            $orderline->food_id = $food->id;
+            $orderline->total_price = $food->price;
+            $orderline->quantity = 1;
+            
+            $order->addOrderLine($orderline);
+        } 
+
+        return redirect('/restaurants/'.$restaurantId);
+    }
+
+    public function removefood($restaurantId)
+    {        
+        $food = Food::find(request('food_id'));       
+        $order = Session::get('order');                  
+
+        if(!is_null($food))
+        {
+            $orderline = new OrderLine;
+            $orderline->food_id = $food->id;
+
+            $order->removeOrderLine($orderline);
+        } 
+
+        return redirect('/restaurants/'.$restaurantId);
     }
 }
