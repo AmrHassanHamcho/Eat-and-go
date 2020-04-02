@@ -64,6 +64,103 @@ class User extends Authenticatable
         return $user;
     }
 
+  public function readUser($id){
+        if(is_int($id))
+        {
+            try
+            {
+                $user=User::findOrFail($id);
+                $this->id = $user->id;
+                $this->name = $user->name;
+                $this->email = $user->email;
+                $this->password = $user->password;
+                $this->role_id = $user->role_id;
+               
+                return true;
+            }
+            catch(Exception $e)
+            {
+                return false;
+            
+            }
+        }
+        throw new Exception("The parameter must be an integer.");   
+    
+    }
+
+    public function updateUser(){
+        try
+        {
+            $user = User::findOrFail($this->id);
+            $user-> updated_at = now();
+            $this->save();
+            return true;
+        }
+        catch(Excepcion $e)
+        {
+            return false;
+        }
+
+    }
+
+    public function deleteUser($id){
+        if(is_int($id))
+        {
+            try
+            {
+                $user = User::findOrFail($id);
+                User::destroy($id);
+                return true;
+            }
+            catch(Exception $e)
+            {
+                return false;
+            }
+        }
+        throw new Exception("The parameter must be an integer.");   
+    
+    }
+
+    public function createUser($user){
+        if($user instanceof User)
+        {
+            try
+            {
+                User::findOrFail($user->id);                
+                return false;
+            }       
+            catch(Exception $e)     
+            {
+                $user->created_at = now();
+                $user->updated_at = now();
+                $user->save();
+                return true;
+            }            
+        }
+        throw new Exception("The parameter must be a user.");   
+    
+    }
+
+    public function setRole($role){
+        if($role instanceof Role)
+        {
+            try{
+                Role::findOrFail($role->id);
+                $role->id=$user->role_id;
+                $this->updated_at=now();
+                $this->save();
+                return true;
+            }
+            catch(Exception $e){
+	            //$this-> save();
+                return false;
+
+            }
+        }
+        throw new Exception("The parameter must be a role.");   
+    
+    }
+  
     public function isAdminApp()
     {
         $admin_role = Role::where('name', 'AdminApp')->get()->first();
@@ -76,4 +173,5 @@ class User extends Authenticatable
         return $this->role_id == $admin_role->id;
     }    
 }
+
 
