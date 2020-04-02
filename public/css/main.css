@@ -52,10 +52,11 @@ html, body {
     font-weight: bold;
 }
 
-.error-list ul {
-    /* padding: 5px; */
+.error-list ul {    
+    margin-top: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
+    list-style: disc;
 }
 
 #address-text {

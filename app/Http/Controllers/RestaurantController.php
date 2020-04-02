@@ -224,4 +224,54 @@ class RestaurantController extends Controller
 
         return redirect('/restaurants/'.$restaurantId);
     }   
+
+    public function editFood($restaurantId, $foodId, Request $request)
+    {                
+        $button_action = request('food-btn');
+        $food = Food::find($foodId);       
+        if(is_null($food) && strcmp($button_action,'create') != 0)                   
+            return redirect('/restaurants/'.$restaurantId);        
+
+        switch($button_action)
+        {
+            case 'delete':
+                Food::deleteFood($food->id);                
+                return redirect('/restaurants/'.$restaurantId);       
+                break;
+
+            case 'edit':
+                if(!is_null(request('name')))                
+                    $food->name = request('name');
+                
+                if(!is_null(request('description')))                                    
+                    $food->description = request('description');
+                
+                if(!is_null(request('price')))                                    
+                    $food->price = request('price');
+
+                $food->updateFood();                
+                break;            
+            
+            case 'create':
+                $this->validate($request, [
+                    'name' => 'required',
+                    'description' => 'required' ,
+                    'price' => 'required|numeric'
+                ]);
+                $food_new = new Food;
+                $food_new->name = request('name');
+                $food_new->description = request('description');
+                $food_new->price = request('price');
+                $food_new->restaurant_id = $restaurantId;
+
+                Food::createFood($food_new);  
+                $food = $food_new;                              
+                break;   
+            
+            default:;
+        }
+
+        $restaurant = Restaurant::findOrFail($restaurantId);            
+        return view('restaurant.editFood', compact(['food','restaurant']));
+    }
 }

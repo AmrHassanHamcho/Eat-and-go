@@ -1,8 +1,8 @@
 @extends('app')
 
 @section('title', 'Simple Login System in Laravel')
+@section('css-stylesheet', 'css/restaurant.css')
 @section('css-stylesheet', 'css/user.css')
-@section('css-stylesheet', asset('css/restaurant.css'))
 
 @section('content')
     <br />
