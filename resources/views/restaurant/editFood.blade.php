@@ -30,17 +30,17 @@
 
             <div class="form-group">
                 <label>Name</label>        
-                <input type="text" name="food_name" placeholder="{{ $food->name }}" class="form-control">
+                <input type="text" name="name" placeholder="{{ $food->name }}" class="form-control">
             <div>
 
             <div class="form-group">
                 <label>Description</label>
-                <input type="text" name="food_description" placeholder="{{ $food->description }}" class="form-control">
+                <input type="text" name="description" placeholder="{{ $food->description }}" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>Price (€)</label>
-                <input type="text" name="food_price" placeholder="{{ $food->price }}" class="form-control">
+                <input type="text" name="price" placeholder="{{ $food->price }}" class="form-control">
             </div>
             <div class="form-group btn">
                 <button type="submit" class="edit-food-btn create" name="food-btn" value="create">Create</button>

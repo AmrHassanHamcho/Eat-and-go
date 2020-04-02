@@ -15,6 +15,8 @@ class CreateFoodsTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unique(['name', 'restaurant_id']);
+
             $table->unsignedBigInteger('restaurant_id');
             $table->string('name');
             $table->string('description');

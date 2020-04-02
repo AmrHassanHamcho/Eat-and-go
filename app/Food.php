@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class Food extends Model
 {
@@ -91,8 +93,8 @@ class Food extends Model
             {
                 $food->created_at = now();
                 $food->updated_at = now();
-                $food->save();
-
+                Food::create($food->attributes);                
+                
                 return true;
             }            
         }
