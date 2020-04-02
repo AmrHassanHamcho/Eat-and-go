@@ -8,7 +8,8 @@ html, body {
 #content {
     position: absolute;
     width: 100%;
-    margin-top: 110px;
+    margin-top: 90px;
+    margin-bottom: 110px;
 }
 
 .about {
@@ -40,10 +41,21 @@ html, body {
     border-radius: 5px;
 }
 
-.address-form .alert-danger {
+.error-list {
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     font-size: 0.9em;
-    margin-top: 10px;
+    /* margin: 10px;*/
+    padding: 0px;   
+    background-color: #FA8072;
+    font-weight: bold;
+}
+
+.error-list ul {
+    /* padding: 5px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #address-text {
@@ -71,7 +83,9 @@ html, body {
     border-radius: 0 5px 5px 0;    
 }
 
-
+#address-submit:hover {
+    background-color: #00489b;
+}
 
 @media only screen and (max-width: 600px) {
     .about {

@@ -1,21 +1,23 @@
 @extends('app')
 
 @section('title', 'Simple Login System in Laravel')
+@section('css-stylesheet', 'css/user.css')
+@section('css-stylesheet', asset('css/restaurant.css'))
 
 @section('content')
     <br />
     <div class="container box">
         <h3 align="center">Register</h3><br />
 
-        @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-block">
+        {{-- @if ($message = Session::get('error'))
+            <div class="error-list">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
-        @endif
+        @endif --}}
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
+        @if ($errors->any())
+            <div class="error-list">
                 <ul>
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>

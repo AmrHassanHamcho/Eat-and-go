@@ -11,6 +11,8 @@ use Hash;
 use Session;
 use App\Order;
 use Illuminate\Database\Eloquent\Collection;
+use Exception;
+use Redirect;
 
 class UserController extends Controller
 {
@@ -38,7 +40,7 @@ class UserController extends Controller
             return redirect('/address');
         }
         else{
-            return back()->with('error', 'Wrong login data');
+            return Redirect::back()->withErrors('Wrong login data');
         }
 
     }
@@ -61,12 +63,18 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|alphaNum|min:3' 
         ]);
-                
-        $user = User::create(request(['name', 'email', 'password']));
-        
-        auth()->login($user);
-        
-        return redirect()->to('/login');
+
+        try                
+        {
+            $user = User::create(request(['name', 'email', 'password']));
+            auth()->login($user);
+            return redirect()->to('/login');
+        }
+        catch(Exception $e)
+        {
+            $registration_error = 'The email is already taken.';            
+            return Redirect::back()->withErrors($registration_error);
+        }                                
     }
 
     private function assignOrderToUser()

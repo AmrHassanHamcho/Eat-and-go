@@ -19,7 +19,7 @@
             <input type="text" id="address-box" name="address" placeholder="03690 San Vicente del Raspeig Alicante">
             <input type="submit" id="address-submit" value="Find restaurants">
             @if($errors->any())
-                <div class="alert-danger">
+                <div class="error-list">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
