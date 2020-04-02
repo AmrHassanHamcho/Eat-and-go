@@ -24,7 +24,7 @@
             </ul>
         </div>
         
-        <form method="post" action="/editFood/{{ $restaurant->id }}" class="food-form">
+        <form method="post" action="/editFood/{{ $restaurant->id }}&{{ $food->id }}" class="food-form">
             @csrf            
             <input type="hidden" name="food_id" value={{ $food->id }}>
 

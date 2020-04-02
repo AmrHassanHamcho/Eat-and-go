@@ -175,18 +175,18 @@ class RestaurantController extends Controller
         return redirect('/restaurants/'.$restaurantId);
     }   
 
-    public function editFood($restaurantId, Request $request)
-    {
-        $food = Food::find(request('food_id'));       
+    public function editFood($restaurantId, $foodId, Request $request)
+    {                
         $button_action = request('food-btn');
-
-        if(is_null($food))                    
+        $food = Food::find($foodId);       
+        if(is_null($food) && strcmp($button_action,'create') != 0)                   
             return redirect('/restaurants/'.$restaurantId);        
 
         switch($button_action)
         {
             case 'delete':
                 Food::deleteFood($food->id);                
+                return redirect('/restaurants/'.$restaurantId);       
                 break;
 
             case 'edit':
@@ -215,9 +215,10 @@ class RestaurantController extends Controller
                 $food_new->restaurant_id = $restaurantId;
 
                 Food::createFood($food_new);  
-                $food = $food_new;              
-                
+                $food = $food_new;                              
                 break;   
+            
+            default:;
         }
 
         $restaurant = Restaurant::findOrFail($restaurantId);            

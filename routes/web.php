@@ -29,8 +29,8 @@ Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
 Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
 Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
 Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
-Route::get('/editFood/{restaurantId}', 'RestaurantController@editFood');
-Route::post('/editFood/{restaurantId}', 'RestaurantController@editFood');
+Route::get('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
+Route::post('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
 
 Route::post('/summary/{restaurantId}', 'OrderController@summary');
 Route::post('/thanks', 'OrderController@store');
