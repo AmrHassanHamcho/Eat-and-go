@@ -7,7 +7,8 @@
                     {{ $food->name }}: {{ $food->price }} € <br>
                     <span class="food-description">{{ $food->description }}</span>
                 </li>                    
-                <button type="submit" name="food_id" value={{ $food->id }}>+</button>                  
+                <button type="submit" name="food_id" value={{ $food->id }} formaction="/editFood/{{ $restaurant->id }}">Edit</button>
+                <button type="submit" name="food_id" value={{ $food->id }}>+</button>
             </div>                  
         @empty            
             <li class="food"> The restaurant {{ $restaurant->name }} does not have foods available right now. </li>
@@ -22,8 +23,8 @@
             <ul>
                 @forelse($order->orderlines as $orderline)                
                     <ul class="total-price">
-                    <button class="remove-button" type="submit" name="food_id" value={{ $orderline->food->id }}>-</button>
-                    <li class="orderline">{{ $orderline->quantity }}x {{ $orderline->food->name }}</li>
+                        <button class="remove-button" type="submit" name="food_id" value={{ $orderline->food->id }}>-</button>
+                        <li class="orderline">{{ $orderline->quantity }}x {{ $orderline->food->name }}</li>
                         <li class="price-number">{{ $orderline->total_price }} €</li>
                     </ul>                        
                 @empty            

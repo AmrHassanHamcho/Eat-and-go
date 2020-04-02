@@ -2,6 +2,7 @@
 
 @section('title', 'Login')
 @section('css-stylesheet', 'css/user.css')
+@section('css-stylesheet', 'css/restaurant.css')
 
 @section('content')    
     <br />

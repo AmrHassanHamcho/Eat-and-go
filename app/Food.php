@@ -22,4 +22,82 @@ class Food extends Model
     public function orderLines(){
         return $this->hasMany('App\OrderLine');
     }
+
+    public function readFood($id)
+    {        
+        if(is_int($id))
+        {
+            try
+            {                
+                $food = Food::findOrFail($id);
+                $this->attributes = $food->attrbutes;                
+
+                return true;
+            }
+            catch(ModelNotFoundException $e)
+            {
+                return false;
+            }
+        }
+        
+        throw new Exception("The parameter must be an integer.");        
+    }
+
+    public function updateFood()
+    {                   
+        try
+        {
+            $food = Food::findOrFail($this->id);
+            $food->updated_at = now();
+            $this->save();
+            return true;
+        }
+        catch(ModelNotFoundException $e)
+        {
+            return false;
+        }
+    }
+
+    public static function deleteFood($id)
+    {
+        if(is_int($id))
+        {
+            try
+            {
+                $food = Food::findOrFail($id);
+                Food::destroy($id);
+
+                return true;
+            }
+            catch(ModelNotFoundException $e)
+            {
+                return false;
+            }
+        }
+        
+        throw new Exception("The parameter must be an integer.");   
+    }
+
+    public static function createFood($food)
+    {
+        if($food instanceof Food)
+        {
+            try
+            {
+                Food::findOrFail($food->id);                
+                return false;
+            }       
+            catch(ModelNotFoundException $e)     
+            {
+                $food->created_at = now();
+                $food->updated_at = now();
+                $food->save();
+
+                return true;
+            }            
+        }
+
+        throw new Exception("The parameter must be of type Food.");   
+    }
+
 }

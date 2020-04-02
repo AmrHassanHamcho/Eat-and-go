@@ -174,4 +174,32 @@ class RestaurantController extends Controller
 
         return redirect('/restaurants/'.$restaurantId);
     }   
+
+    public function editFood($restaurantId)
+    {
+        $food = Food::find(request('food_id'));       
+        $button_action = request('button-action');
+
+        if(is_null($food))
+        {
+            return redirect('/restaurants/'.$restaurantId);
+        }
+
+        switch($button_action)
+        {
+            case 'delete':
+                Food::deleteFood($food);
+                break;
+
+            case 'edit':
+                $food->name = request('name');
+                $food->description = request('description');
+                $food->price = request('price');
+                $food->updateFood();
+                break;            
+        }
+
+        $restaurant = Restaurant::findOrFail($restaurantId);            
+        return view('restaurant.editFood', compact(['food','restaurant']));
+    }
 }
