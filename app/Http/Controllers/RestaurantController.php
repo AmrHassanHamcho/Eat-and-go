@@ -4,49 +4,74 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Auth;
 use App\Restaurant;
 use App\Order;
 use App\OrderLine;
 use App\Food;
+use Session;
+use Illuminate\Database\Eloquent\Collection;
 
 class RestaurantController extends Controller
 {
+    public function __construct()
+    {            
+        //$this->middleware('auth');       
+    }
+
     public function restaurant($restaurantId)
     {        
         $restaurant = new Restaurant;
+        $show_foods = true;
+
+        try        
+        {                          
+            $restaurant = Restaurant::findOrFail($restaurantId);            
+            $order = Session::get('order');                         
+                
+            if($restaurant->id != $order->restaurant_id || is_null($order->restaurant_id))
+            {                                
+                $order->orderlines = new Collection;
+                $order->restaurant_id = $restaurant->id;                        
+            }
+
+            return view('restaurant.restaurant', [
+                'restaurant' => $restaurant,
+                'order' => $order,
+                'show_foods' => $show_foods
+            ]);
+        }
+        catch (Exception $e)
+        {
+            dd($e);
+            return view('error.404');
+        }                
+    }       
+
+    public function reviews($restaurantId)
+    {        
+        $restaurant = new Restaurant;
+        $show_foods = false;
 
         try
         {
             $restaurant = Restaurant::findOrFail($restaurantId);            
-            $order = new Order;
 
-            $orderline = new OrderLine;
-            $orderline->food_id = 1;
-            $orderline->total_price = $orderline->food->price;
-            $orderline->quantity = 1;
-
-            $orderline2 = clone $orderline;
-            $orderline2->food = new Food;
-            $orderline2->food->name = "Bocata de lomo fresco con queso";
-
-            $orderline3 = clone $orderline;
-            $orderline3->food = new Food;
-            $orderline3->food->name = "Pastel de carne de la EPS";
-
-            $order->orderlines = [$orderline, $orderline2, $orderline3];
             return view('restaurant.restaurant', [
                 'restaurant' => $restaurant,
-                'order' => $order,
+                'order' => Session::get('order'),
+                'show_foods' => $show_foods
             ]);
         }
         catch (Exception $e)
         {
             return view('error.404');
         }                
-    }       
+    } 
 
-    public function restaurants(){
-
+    public function restaurants()
+    {
+        $this->emptyOrder();
         $filter = request('filter');
         $order = 'asc';
 
@@ -93,24 +118,12 @@ class RestaurantController extends Controller
 
     public function editRestaurant()
     {
-       
+        $this->emptyOrder();
         return view('restaurant.editRestaurant');
     }
 
     public function addRestaurants(Request $request)
     {
-        /*$this->validate($request, [
-            'p_name' => 'required|min:6|max:50',
-            'start_date' => 'required',
-            'end_date' => 'required',
-        ]);
-    
-        $project = new Project;
-        $project->p_name = $request->input('p_name');
-        $project->start_date = $request->input('start_date');
-        $project->end_date = $request->input('end_date');
-        $project->colab = $request->input('colab');*/
-    
         $action = request('form_btn');
         if (!is_null($action)){
             
@@ -141,19 +154,11 @@ class RestaurantController extends Controller
                     $this->validate(request(), [
                         'name' => 'required',
                     ]);
-                            
-                    $restaurant = new Restaurant;
 
                     $name = request('name');
-                    // $restaurant->address = request('address');
-                    // $restaurant->bank_account = request('bank_account');
-                    // $restaurant->phone = request('phone');
-                    // $restaurant->number_reviews = 0;
-                    // $restaurant->image_url = '/img/justeat.png';
-                    // $restaurant->admin_id = request('admin');
 
-                    $listRestaurants = $restaurant->readRestaurantByName($name);
-                    dd($restaurant);
+                    $listRestaurants = Restaurant::readRestaurantByName($name);
+                    
                     return redirect()->to('/addRestaurants');
                     break;
                 default:
@@ -165,4 +170,47 @@ class RestaurantController extends Controller
         return view('restaurant.addRestaurants');
     }
 
+    private function emptyOrder() 
+    {
+        $order = Session::get('order');             
+        if(!is_null($order))
+        {
+            $order->total_price = 0.0;
+            $order->orderlines = new Collection;
+        }
+    }
+
+    public function addfood($restaurantId)
+    {
+        $food = Food::find(request('food_id'));         
+        $order = Session::get('order');                  
+
+        if(!is_null($food))
+        {
+            $orderline = new OrderLine;
+            $orderline->food_id = $food->id;
+            $orderline->total_price = $food->price;
+            $orderline->quantity = 1;
+            
+            $order->addOrderLine($orderline);
+        } 
+
+        return redirect('/restaurants/'.$restaurantId);
+    }
+
+    public function removefood($restaurantId)
+    {        
+        $food = Food::find(request('food_id'));       
+        $order = Session::get('order');                  
+
+        if(!is_null($food))
+        {
+            $orderline = new OrderLine;
+            $orderline->food_id = $food->id;
+
+            $order->removeOrderLine($orderline);
+        } 
+
+        return redirect('/restaurants/'.$restaurantId);
+    }
 }

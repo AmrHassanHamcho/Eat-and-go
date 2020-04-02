@@ -10,8 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', 'UserController@login');
-Route::get('/login', 'UserController@login');
+Route::get('/login', 'UserController@login')->name('login');
 Route::post('/checklogin', 'UserController@checklogin');
 Route::get('/logout','UserController@logout');
 Route::get('/register', 'UserController@create');
@@ -29,6 +30,14 @@ Route::get('/addRestaurants', 'RestaurantController@addRestaurants');
 Route::post('/addRestaurants', 'RestaurantController@addRestaurants');
 
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
+Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
+Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
+Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
+
+Route::post('/summary/{restaurantId}', 'OrderController@summary');
+Route::get('/thanks', function (){
+    return view('order.thanks');
+});
 
 Route::get('/error/404', function() {
     return view('error.404');
