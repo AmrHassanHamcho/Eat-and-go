@@ -24,29 +24,33 @@
             </ul>
         </div>
         
-        <form method="post" action="/editFood/{{ $restaurant->id }}&{{ $food->id }}" class="food-form">
-            @csrf            
-            <input type="hidden" name="food_id" value={{ $food->id }}>
+        <div class="food-form">
+            <h4>Manage foods</h4>
+            @include('error-list')
+            <form method="post" action="/editFood/{{ $restaurant->id }}&{{ $food->id }}">
+                @csrf            
+                <input type="hidden" name="food_id" value={{ $food->id }}>
 
-            <div class="form-group">
-                <label>Name</label>        
-                <input type="text" name="name" placeholder="{{ $food->name }}" class="form-control">
-            <div>
+                <div class="form-group">
+                    <label>Name</label>        
+                    <input type="text" name="name" placeholder="{{ $food->name }}" class="form-control">
+                <div>
 
-            <div class="form-group">
-                <label>Description</label>
-                <input type="text" name="description" placeholder="{{ $food->description }}" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" name="description" placeholder="{{ $food->description }}" class="form-control">
+                </div>
 
-            <div class="form-group">
-                <label>Price (€)</label>
-                <input type="text" name="price" placeholder="{{ $food->price }}" class="form-control">
-            </div>
-            <div class="form-group btn">
-                <button type="submit" class="edit-food-btn create" name="food-btn" value="create">Create</button>
-                <button type="submit" class="edit-food-btn edit" name="food-btn" value="edit">Update</button>
-                <button type="submit" class="edit-food-btn delete" name="food-btn" value="delete">Delete</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label>Price (€)</label>
+                    <input type="text" name="price" placeholder="{{ $food->price }}" class="form-control">
+                </div>
+                <div class="form-group btn">
+                    <button type="submit" class="edit-food-btn create" name="food-btn" value="create">Create</button>
+                    <button type="submit" class="edit-food-btn edit" name="food-btn" value="edit">Update</button>
+                    <button type="submit" class="edit-food-btn delete" name="food-btn" value="delete">Delete</button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection

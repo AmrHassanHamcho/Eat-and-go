@@ -33,6 +33,7 @@ Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
 Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
 Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
 Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
+Route::post('/restaurants/{restaurantId}/reviews', 'RestaurantController@addReview');
 Route::get('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
 Route::post('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
 
