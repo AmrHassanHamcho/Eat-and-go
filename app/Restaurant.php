@@ -79,7 +79,9 @@ class Restaurant extends Model
         {
             $name = "";
         }
-        return Restaurant::where('name','%'.$name.'%')->get(); 
+        $listRestaurants = Restaurant::where('name', 'like', "%{$name}%")->get(); 
+        //dd($listRestaurants);  
+        return $listRestaurants;
     }
 
     public function updateRestaurant()

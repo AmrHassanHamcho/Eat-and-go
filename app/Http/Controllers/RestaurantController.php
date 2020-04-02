@@ -128,6 +128,7 @@ class RestaurantController extends Controller
 
     public function addRestaurants(Request $request)
     {
+        $listRestaurants = [];
         try
         {   
             $action = request('form_btn');
@@ -164,21 +165,26 @@ class RestaurantController extends Controller
                         $name = request('name');
 
                         $listRestaurants = Restaurant::readRestaurantByName($name);
-                        
-                        return redirect()->to('/addRestaurants');
+                        //dd($listRestaurants);
+                        return view('restaurant.addRestaurants', [
+                            'listRestaurants' => $listRestaurants,
+                        ]);
+
+                        //return redirect()->to('/addRestaurants');
                         break;
                     default:
                         # code...
                         break;
                 }
-                return view('home.about');
             }
         }
         catch(Exception $e)
         {
             Redirect::back()->withErrors("Error to chungo.");
         }
-        return view('restaurant.addRestaurants');
+        return view('restaurant.addRestaurants', [
+            'listRestaurants' => $listRestaurants,
+        ]);
     }
 
     private function emptyOrder() 
