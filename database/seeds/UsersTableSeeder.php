@@ -15,9 +15,9 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('users')->insert([
             'id'=>1,
-            'name'=> 'Testname1',
-            'email'=>'test1@email.com',
-            'password'=>\bcrypt('Testpassword1'),            
+            'name'=> 'admin',
+            'email'=>'admin@gmail.com',
+            'password'=>\bcrypt('admin'),            
             'role_id'=>1 // AdminApp
         ]);
 

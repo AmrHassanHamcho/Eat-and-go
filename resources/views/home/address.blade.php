@@ -13,11 +13,20 @@
         }
     </style>
     <div class="address-container">
-        <form class="address-form" method="post" name="address-form" action="/restaurants">
+        <form class="address-form" method="post" name="address-form" action="/address">
             @csrf
             <p id="address-text">Address</p>
             <input type="text" id="address-box" name="address" placeholder="03690 San Vicente del Raspeig Alicante">
             <input type="submit" id="address-submit" value="Find restaurants">
-        </form>
+            @if($errors->any())
+                <div class="error-list">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </form>        
     </div>
 @endsection

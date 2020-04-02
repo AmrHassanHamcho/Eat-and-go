@@ -76,8 +76,15 @@ class Order extends Model
             catch(ModelNotFoundException $e){
                 $order->created_at = now();
                 $order->updated_at = now();
+                $order_in_db = Order::create(['user_id' => $order->user_id, 'restaurant_id' => $order->restaurant_id, 'total_price' => $order->total_price]);
+                                
+                foreach($order->orderlines as $orderline)
+                {
+                    $orderline->order_id = $order_in_db->id;
+                    OrderLine::createOrderLine($orderline);
+                }
 
-                $order->save();
+                $order_in_db->save();
                 return true;
             }
         }
@@ -125,7 +132,7 @@ class Order extends Model
                 }
 
                 if(!$exists)
-                {   
+                {                       
                     $this->attributes['orderlines']->push($orderline);
                 }
 

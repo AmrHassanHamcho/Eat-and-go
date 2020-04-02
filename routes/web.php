@@ -18,8 +18,8 @@ Route::get('/logout','UserController@logout');
 Route::get('/register', 'UserController@create');
 Route::post('/register', 'UserController@store');
 
-Route::get('/address', 'HomeController@address');
-Route::post('/address', 'RestaurantController@restaurants');
+Route::get('/address', 'HomeController@address')->middleware('auth');
+Route::post('/address', 'HomeController@addressValidation')->middleware('auth');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
@@ -31,9 +31,9 @@ Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
 Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
 
 Route::post('/summary/{restaurantId}', 'OrderController@summary');
-Route::get('/thanks', function (){
-    return view('order.thanks');
-});
+Route::post('/thanks', 'OrderController@store');
+Route::get('/summary/{restaurantId}', 'OrderController@summary');
+Route::get('/thanks', 'OrderController@store');
 
 Route::get('/error/404', function() {
     return view('error.404');

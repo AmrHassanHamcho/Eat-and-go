@@ -1,24 +1,25 @@
 @extends('app')
 
 @section('title', 'Login')
+@section('css-stylesheet', 'css/user.css')
 
 @section('content')    
     <br />
     <div class="container box">
         <h3 align="center">Login</h3><br />
 
-        @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-block">
+        {{-- @if ($message = Session::get('error'))
+            <div class="error-list">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
-         @endif
+         @endif --}}
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
+        @if ($errors->any() > 0)
+            <div class="error-list">
                 <ul>
                     @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                        <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -27,12 +28,12 @@
         <form method="post" action="/checklogin">
             @csrf
             <div class="form-group">
-                <label>Enter Email</label>
+                <label>Email</label>
                 <input type="email" name="email" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label>Enter Password</label>
+                <label>Password</label>
                 <input type="password" name="password" class="form-control" />
             </div>
 
@@ -40,15 +41,14 @@
                 <input type="submit" name="login" class="btn btn-primary" value="Login" />
             </div>
         </form>
-    </div>
-
-    <div class="container">
-        <div class = "row">
-            <div class = "col-sem">
-                Don't have an accout? <a href="{{url('/register')}}">sign up here</a>  <br>
-                By creating an account, you agree to our <a href="">terms and conditions</a> .<br>
-                Please read our <a href="">private policy</a> and <a href="">cookies policy</a>.
+        <div class="container">
+            <div class = "row">
+                <div class = "col-sem">
+                    Don't have an accout? <a href="{{url('/register')}}">sign up here</a>  <br>
+                    By creating an account, you agree to our <a href="">terms and conditions</a> .<br>
+                    Please read our <a href="">private policy</a> and <a href="">cookies policy</a>.
+                </div>
             </div>
         </div>
-    </div>
+    </div>  
 @endsection
