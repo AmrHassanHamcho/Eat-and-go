@@ -9,9 +9,11 @@ use App\Restaurant;
 use App\Order;
 use App\OrderLine;
 use App\Food;
+use App\Review;
 use Session;
 use Illuminate\Database\Eloquent\Collection;
 use Redirect;
+use Illuminate\Database\QueryException;
 
 class RestaurantController extends Controller
 {
@@ -55,17 +57,12 @@ class RestaurantController extends Controller
 
     public function reviews($restaurantId)
     {        
-        $address = Session::get('address');
-                
-        if(is_null($address))
-            return redirect('/address');
-
         $restaurant = new Restaurant;
         $show_foods = false;
 
         try
         {
-            $restaurant = Restaurant::findOrFail($restaurantId);            
+            $restaurant = Restaurant::findOrFail($restaurantId);                        
 
             return view('restaurant.restaurant', [
                 'restaurant' => $restaurant,
@@ -78,6 +75,39 @@ class RestaurantController extends Controller
             abort('404');
         }                
     } 
+
+    public function addReview($restaurantId, Request $request)
+    {
+        $show_foods = false;
+        $restaurant = Restaurant::findOrFail($restaurantId);                
+        $this->validate(request(), [
+            'title' => 'required',
+            'comment' => 'required' ,
+            'score' => 'required|numeric',                
+        ]);
+
+        $review = new Review;
+        $review->title = request('title');
+        $review->comment = request('comment');
+        $review->score = request('score');
+        $review->restaurant_id = $restaurantId;
+        $review->user_id = Auth::user()->id;
+
+        try{
+            Review::createReview($review);
+        }catch(QueryException $qe)
+        {            
+            return Redirect::back()->with([
+                'restaurantId'                
+            ])->withErrors('You have already created a review for this restaurant.');
+        }
+
+        return view('restaurant.restaurant', [
+            'restaurant' => $restaurant,
+            'order' => Session::get('order'),
+            'show_foods' => $show_foods
+        ]);
+    }
 
     public function restaurants()
     {                
@@ -228,7 +258,7 @@ class RestaurantController extends Controller
     public function editFood($restaurantId, $foodId, Request $request)
     {                
         $button_action = request('food-btn');
-        $food = Food::find($foodId);       
+        $food = Food::find($foodId);               
         if(is_null($food) && strcmp($button_action,'create') != 0)                   
             return redirect('/restaurants/'.$restaurantId);        
 
@@ -258,13 +288,25 @@ class RestaurantController extends Controller
                     'description' => 'required' ,
                     'price' => 'required|numeric'
                 ]);
+
                 $food_new = new Food;
                 $food_new->name = request('name');
                 $food_new->description = request('description');
                 $food_new->price = request('price');
                 $food_new->restaurant_id = $restaurantId;
 
-                Food::createFood($food_new);  
+                try
+                {
+                    Food::createFood($food_new);  
+                }catch(QueryException $qe)
+                {                                 
+                    return redirect()->back()->with([
+                        'restaurantId',
+                        'foodId',
+                        'request',
+                    ])->withErrors('There is a food with that name taken.');    
+                }
+
                 $food = $food_new;                              
                 break;   
             

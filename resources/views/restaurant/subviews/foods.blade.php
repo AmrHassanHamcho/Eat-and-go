@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<div class="food-form">
+<div class="food-form form">
     <h4>Create new foods.</h4>
     @include('error-list')
     <form method="post" action="/editFood/{{ $restaurant->id }}&{{ 0 }}">
