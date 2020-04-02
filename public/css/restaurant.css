@@ -300,6 +300,10 @@ select {
 .food-form {        
     display: inline-block;    
     width: 100%;                            
+    margin: auto;
+}
+
+.food-form.form {
     margin: 70px auto 0 auto;
 }
 
