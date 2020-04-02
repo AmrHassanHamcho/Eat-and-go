@@ -16,11 +16,16 @@ class RestaurantController extends Controller
 {
     public function __construct()
     {            
-        $this->middleware('auth');       
+        $this->middleware('auth');            
     }
 
     public function restaurant($restaurantId)
     {        
+        $address = Session::get('address');
+                
+        if(is_null($address))
+            return redirect('/address');
+
         $restaurant = new Restaurant;
         $show_foods = true;
 
@@ -42,14 +47,18 @@ class RestaurantController extends Controller
             ]);
         }
         catch (Exception $e)
-        {
-            dd($e);
-            return view('error.404');
+        {            
+            abort('404');
         }                
     }       
 
     public function reviews($restaurantId)
     {        
+        $address = Session::get('address');
+                
+        if(is_null($address))
+            return redirect('/address');
+
         $restaurant = new Restaurant;
         $show_foods = false;
 
@@ -65,12 +74,17 @@ class RestaurantController extends Controller
         }
         catch (Exception $e)
         {
-            return view('error.404');
+            abort('404');
         }                
     } 
 
     public function restaurants()
-    {
+    {                
+        $address = Session::get('address');
+                
+        if(is_null($address))
+            return redirect('/address');
+
         $this->emptyOrder();
         $filter = request('filter');
         $order = 'asc';
@@ -97,18 +111,7 @@ class RestaurantController extends Controller
                 $order = 'asc';
         }
 
-        $listRestaurants = Restaurant::listRestaurants($filter, $order);
-        
-        //$restaurants = factory(Restaurant::class, 3)->make();
-        //$restaurant2 = factory(Restaurant::class)->make();
-        //$restaurant3 = factory(Restaurant::class)->make();
-        
-        //$listRestaurants->push($restaurants);
-        
-        $address = Session::get('address');
-                
-        if(is_null($address))
-            return redirect('/address');
+        $listRestaurants = Restaurant::listRestaurants($filter, $order);          
 
         return view('restaurant.restaurants', [
             'listRestaurants' => $listRestaurants,
@@ -170,5 +173,5 @@ class RestaurantController extends Controller
         } 
 
         return redirect('/restaurants/'.$restaurantId);
-    }
+    }   
 }
