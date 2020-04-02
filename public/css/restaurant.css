@@ -282,6 +282,7 @@ select {
     margin-top: 15px;
     border: solid 2px #bbb;
     border-radius: 5px;
+    resize: none;
 }
 
 #review-submit {
@@ -307,12 +308,13 @@ select {
     margin: 70px auto 0 auto;
 }
 
-.food-form h4 {
+.food-form h4, .review-container h4 {
     width: 100%;
     margin: auto;
     text-align: center;
     font-size: 1.3em;   
     color: #333;     
+    padding-bottom: 5px;    
 }
 
 .food-form label{
