@@ -32,6 +32,8 @@ Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews'
 
 Route::post('/summary/{restaurantId}', 'OrderController@summary');
 Route::post('/thanks', 'OrderController@store');
+Route::get('/summary/{restaurantId}', 'OrderController@summary');
+Route::get('/thanks', 'OrderController@store');
 
 Route::get('/error/404', function() {
     return view('error.404');

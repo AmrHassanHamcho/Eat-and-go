@@ -31,6 +31,9 @@ class OrderController extends Controller
     public function store()
     {
         $order = Session::get('order');
+        if($order->orderlines->count() <= 0)
+            return redirect('/restaurants/');
+
         Order::createOrder($order);
         
         return view('order.thanks');
