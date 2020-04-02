@@ -11,6 +11,7 @@ use App\OrderLine;
 use App\Food;
 use Session;
 use Illuminate\Database\Eloquent\Collection;
+use Redirect;
 
 class RestaurantController extends Controller
 {
@@ -125,10 +126,59 @@ class RestaurantController extends Controller
         return view('restaurant.editRestaurant');
     }
 
-    public function addRestaurant()
+    public function addRestaurants(Request $request)
     {
-        $this->emptyOrder();
-        return view('restaurant.addRestaurant');
+        try
+        {   
+            $action = request('form_btn');
+            if (!is_null($action)){
+                
+                switch ($action) {
+                    case 'create':
+                        $this->validate(request(), [
+                            'name' => 'required',
+                            'bank_account' => 'min:10|max:12' ,
+                            'phone' => 'min:9|max:11',
+                            'admin' => 'numeric',
+                        ]);
+                                
+                        $restaurant = new Restaurant;
+
+                        $restaurant->name = request('name');
+                        $restaurant->address = request('address');
+                        $restaurant->bank_account = request('bank_account');
+                        $restaurant->phone = request('phone');
+                        $restaurant->number_reviews = 0;
+                        $restaurant->image_url = '/img/justeat.png';
+                        $restaurant->admin_id = request('admin');
+
+                        Restaurant::createRestaurant($restaurant);
+                        return redirect()->to('/addRestaurants');
+                        break;
+
+                    case 'read':
+                        $this->validate(request(), [
+                            'name' => 'required',
+                        ]);
+
+                        $name = request('name');
+
+                        $listRestaurants = Restaurant::readRestaurantByName($name);
+                        
+                        return redirect()->to('/addRestaurants');
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+                return view('home.about');
+            }
+        }
+        catch(Exception $e)
+        {
+            Redirect::back()->withErrors("Error to chungo.");
+        }
+        return view('restaurant.addRestaurants');
     }
 
     private function emptyOrder() 

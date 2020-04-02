@@ -25,6 +25,10 @@ Route::get('/contact', 'HomeController@contact');
 
 Route::get('/restaurants', 'RestaurantController@restaurants');
 Route::post('/restaurants', 'RestaurantController@restaurants');
+
+Route::get('/addRestaurants', 'RestaurantController@addRestaurants');
+Route::post('/addRestaurants', 'RestaurantController@addRestaurants');
+
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
 Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
 Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');

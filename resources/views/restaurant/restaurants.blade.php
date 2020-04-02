@@ -9,7 +9,7 @@
     <div class="_main_container">
         <div class="_main_address_container">
             <div class="_address_container"> 
-                <img src="/img/position_icon.png" alt=""> <span>{{ $address }}</span>  
+                <img src="/img/position_icon.png" alt=""> <span>{{ $address ?? 'Default Address' }}</span>  
             </div>
             <a href="/address">Change address</a>
         </div>

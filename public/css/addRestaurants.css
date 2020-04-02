@@ -1,0 +1,12 @@
+input {
+    width: 40%;
+}
+
+._main_container {
+    width: 60%;
+    margin: auto;
+}
+
+button{ 
+    margin-right: 5px;
+}

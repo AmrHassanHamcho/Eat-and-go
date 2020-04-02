@@ -73,6 +73,15 @@ class Restaurant extends Model
         throw new Exception("The parameter must be an integer.");
     }    
 
+    public static function readRestaurantByName($name)
+    {
+        if(is_null($name))
+        {
+            $name = "";
+        }
+        return Restaurant::where('name','%'.$name.'%')->get(); 
+    }
+
     public function updateRestaurant()
     {                   
         try
