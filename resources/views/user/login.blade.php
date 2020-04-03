@@ -38,8 +38,8 @@
             <div class = "row">
                 <div class = "col-sem">
                     Don't have an accout? <a href="{{url('/register')}}">sign up here</a>  <br>
-                    By creating an account, you agree to our <a href="">terms and conditions</a> .<br>
-                    Please read our <a href="">private policy</a> and <a href="">cookies policy</a>.
+                    {{-- By creating an account, you agree to our <a href="">terms and conditions</a> .<br>
+                    Please read our <a href="">private policy</a> and <a href="">cookies policy</a>. --}}
                 </div>
             </div>
         </div>
