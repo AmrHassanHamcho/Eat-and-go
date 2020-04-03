@@ -28,6 +28,8 @@ Route::post('/restaurants', 'RestaurantController@restaurants');
 
 Route::get('/addRestaurants', 'RestaurantController@addRestaurants');
 Route::post('/addRestaurants', 'RestaurantController@addRestaurants');
+Route::get('/editRestaurant/{restaurantId}', 'RestaurantController@editRestaurant');
+Route::post('/editRestaurant/{restaurantId}', 'RestaurantController@editRestaurant');
 
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
 Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
