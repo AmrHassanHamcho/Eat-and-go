@@ -396,6 +396,7 @@ select {
     float: none;    
     margin-top: 25px;
     font-size: 1.4em;
+    text-align: center;
 }
 
 .summary h2 {    
@@ -404,11 +405,11 @@ select {
     padding-bottom: 5px;
 }
 
-.summary .restaurant-order {
-    float: none;    
-    width: 50%;    
+.summary .restaurant-order {    
+    width: 60%;    
     margin: auto;    
     padding: auto;
+    text-align: justify;
 }
 
 @media only screen and (max-width: 1080px) {
@@ -450,5 +451,13 @@ select {
     
     #score-list {
         font-size: 0.85em;
+    }
+
+    .summary {
+        font-size: 1.2em;
+    }
+
+    .summary .restaurant-order {    
+        width: 90%;    
     }
 }
