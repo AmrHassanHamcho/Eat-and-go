@@ -34,6 +34,11 @@ class OrderController extends Controller
         if($order->orderlines->count() <= 0)
             return redirect('/restaurants/');
 
+        $address = Session::get('address');
+        if(is_null($address))
+            return redirect('/address');
+
+        $order->address = $address;
         Order::createOrder($order);
         
         return view('order.thanks');

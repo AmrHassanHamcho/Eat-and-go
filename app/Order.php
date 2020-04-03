@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Exception;
 
 class Order extends Model
@@ -14,7 +15,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'total_price', 'user_id', 'restaurant_id',
+        'total_price', 'user_id', 'restaurant_id', 'address',
     ];   
 
     public function user(){
@@ -33,13 +34,7 @@ class Order extends Model
         if(is_int($id)){
             try{
                 $order = Order::findOrFail($id);
-                $this->id = $order->id;
-                $this->user_id = $order->user;
-                $this->restaurant_id = $order->restaurant_id;
-                $this->orderLines = $order->orderLines;
-                $this->total_price = $order->total_price;
-                $this->created_at = $order->created_at;
-                $this->updated_at = $order->updated_at;
+                $this->attributes = $order->attributes;
 
                 return true;
             }
@@ -71,12 +66,15 @@ class Order extends Model
         if($order instanceof Order){
             try{
                 Order::findOrFail($order->id);
-                return false;
+                throw new QueryException('Contraint violation key. There is already a order with the given id');
             }
-            catch(ModelNotFoundException $e){
-                $order->created_at = now();
-                $order->updated_at = now();
-                $order_in_db = Order::create(['user_id' => $order->user_id, 'restaurant_id' => $order->restaurant_id, 'total_price' => $order->total_price]);
+            catch(ModelNotFoundException $e){                
+                $order_in_db = Order::create([
+                    'user_id' => $order->user_id,
+                    'restaurant_id' => $order->restaurant_id,
+                    'total_price' => $order->total_price,
+                    'address' => $order->address
+                ]);
                                 
                 foreach($order->orderlines as $orderline)
                 {
@@ -85,7 +83,7 @@ class Order extends Model
                 }
 
                 $order_in_db->save();
-                return true;
+                return $order_in_db;
             }
         }
 

@@ -57,9 +57,7 @@ class OrderTest extends TestCase
         $result = $actual->readOrder($expected->id);
 
         $this->assertTrue($result);
-        $this->assertEquals($expected->user_id, $actual->user_id);
-        $this->assertEquals($expected->restaurant_id, $actual->restaurant_id);
-        $this->assertEquals($expected->total_price, $actual->total_price); 
+        $this->assertEquals($expected->attributes, $actual->attributes);        
     }
 
     /** @test */
@@ -99,16 +97,15 @@ class OrderTest extends TestCase
     /** @test */ 
     public function createOrder_test1()
     {
-        $order = new Order;
-        $order->id = 99;
-        $order->user_id = 1;
-        $order->restaurant_id = 1;
+        $order = new Order;        
+        $order->user_id = 3;
+        $order->restaurant_id = 3;
         $order->total_price = 1;
+        $order->address = 'fake address';
 
-        $result = Order::createOrder($order);
-        $result2 = $order->readOrder($order->id);
-
-        $this->assertTrue($result);        
+        $order_result = Order::createOrder($order);
+        $result2 = $order->readOrder($order_result->id);
+        
         $this->assertTrue($result2);
     }
 
@@ -172,6 +169,7 @@ class OrderTest extends TestCase
         $order1->user_id = $user->id;
         $order1->restaurant_id = $restaurant->id;
         $order1->total_price = 22;
+        $order1->address = 'fake address1';
         
 
         $order2 = new Order;
@@ -179,6 +177,7 @@ class OrderTest extends TestCase
         $order2->user_id = $user->id;
         $order2->restaurant_id = $restaurant->id;
         $order2->total_price = 22;
+        $order2->address = 'fake address2';
 
         Order::createOrder($order1);
         Order::createOrder($order2);
@@ -197,12 +196,14 @@ class OrderTest extends TestCase
         $order1->user_id = $user->id;
         $order1->restaurant_id = $restaurant->id;
         $order1->total_price = 22;
+        $order1->address = 'fake address1';
 
         $order2 = new Order;
         $order2->created_at = now();
         $order2->user_id = $user->id;
         $order2->restaurant_id = $restaurant->id;
         $order2->total_price = 22;
+        $order2->address = 'fake address2';
 
         Order::createOrder($order1);
         Order::createOrder($order2);

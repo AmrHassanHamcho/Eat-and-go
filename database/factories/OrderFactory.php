@@ -25,6 +25,7 @@ $factory->define(Order::class, function (Faker $faker) {
         'created_at' => now(),
         'updated_at' => now(),
         'user_id' => factory(User::class, 'Client')->create()->id,        
-        'restaurant_id' => factory(Restaurant::class)->create()->id,        
+        'restaurant_id' => factory(Restaurant::class)->create()->id,       
+        'address'  => 'factory address',
     ];
 });
