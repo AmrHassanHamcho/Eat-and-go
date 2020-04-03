@@ -17,6 +17,7 @@ class OrdersTableSeeder extends Seeder
             'user_id'=> 3,
             'restaurant_id'=>1,
             'total_price'=>9.5,
+            'address'=> 'Fake Address 09181 Alicante',
         ]);
     }
 }

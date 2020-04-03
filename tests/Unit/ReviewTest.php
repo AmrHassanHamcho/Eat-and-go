@@ -136,8 +136,8 @@ class ReviewTest extends TestCase
         $review->title = "title test";
         $review->comment = "This review does not exist in the database.";
         $review->score = 1;
-        $review->user_id = 1;
-        $review->restaurant_id = 1;
+        $review->user_id = 2;
+        $review->restaurant_id = 2;
 
         $result = Review::createReview($review);
         $result2 = $review->readReview($review->id);
