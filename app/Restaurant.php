@@ -79,7 +79,9 @@ class Restaurant extends Model
         {
             $name = "";
         }
-        return Restaurant::where('name','%'.$name.'%')->get(); 
+        $listRestaurants = Restaurant::where('name', 'like', "%{$name}%")->get(); 
+        //dd($listRestaurants);  
+        return $listRestaurants;
     }
 
     public function updateRestaurant()
@@ -88,7 +90,7 @@ class Restaurant extends Model
         {
             $restaurant = Restaurant::findOrFail($this->id);
             #$restaurant->admin()->associate($restaurant->admin);
-            $restaurant-> updated_at = now();
+            $restaurant->updated_at = now();
             $this->save();
             return true;
         }

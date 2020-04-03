@@ -47,7 +47,10 @@
                 </div>
                 <div class="form-group btn">
                     <button type="submit" class="edit-food-btn create" name="food-btn" value="create">Create</button>
-                    <button type="submit" class="edit-food-btn edit" name="food-btn" value="edit">Update</button>
+                    
+                    @if((Auth::user()->id == $restaurant->admin_id && Auth::user()->isAdminRestaurant()) || Auth::user()->isAdminApp())
+                        <button type="submit" class="edit-food-btn edit" name="food-btn" value="edit">Update</button>
+                    @endif
                     <button type="submit" class="edit-food-btn delete" name="food-btn" value="delete">Delete</button>
                 </div>
             </form>
