@@ -79,7 +79,7 @@ class RestaurantController extends Controller
     public function addReview($restaurantId, Request $request)
     {
         $show_foods = false;
-        $restaurant = Restaurant::findOrFail($restaurantId);                
+                       
         $this->validate(request(), [
             'title' => 'required',
             'comment' => 'required' ,
@@ -102,6 +102,7 @@ class RestaurantController extends Controller
             ])->withErrors('You have already created a review for this restaurant.');
         }
 
+        $restaurant = Restaurant::findOrFail($restaurantId); 
         return view('restaurant.restaurant', [
             'restaurant' => $restaurant,
             'order' => Session::get('order'),
