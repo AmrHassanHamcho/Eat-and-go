@@ -14,6 +14,7 @@ a {
 
 ._main_address_container {
     float: left;
+    width: 20%;
     border-radius: 15px;
     background: #bfbfbf;
     padding: 25px;

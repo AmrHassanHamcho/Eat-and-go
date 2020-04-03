@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('users')->insert([
             'id'=>1,
-            'name'=> 'Testname1',
-            'email'=>'test1@email.com',
-            'password'=>'Testpassword1',            
+            'name'=> 'admin',
+            'email'=>'admin@gmail.com',
+            'password'=>\bcrypt('admin'),            
             'role_id'=>1 // AdminApp
         ]);
 
@@ -24,7 +25,7 @@ class UsersTableSeeder extends Seeder
             'id'=>2,
             'name'=> 'Testname2',
             'email'=>'test2@email.com',
-            'password'=>'Testpassword2',            
+            'password'=>\bcrypt('Testpassword2'),            
             'role_id'=>2 // AdminRestaurant
         ]);
 
@@ -32,7 +33,7 @@ class UsersTableSeeder extends Seeder
             'id'=>3,
             'name'=> 'Testname3',
             'email'=>'test3@email.com',
-            'password'=>'Testpassword3',            
+            'password'=>\bcrypt('Testpassword3'),            
             'role_id'=>3 // Client
         ]);
     }

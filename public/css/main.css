@@ -8,7 +8,8 @@ html, body {
 #content {
     position: absolute;
     width: 100%;
-    margin-top: 110px;
+    margin-top: 90px;
+    margin-bottom: 110px;
 }
 
 .about {
@@ -20,6 +21,72 @@ html, body {
     padding-left: 200px;
     padding-right: 200px;       
 } 
+
+.address-container{    
+    width: 100%;    
+    margin: 0;
+    padding: 0;    
+    border: none;    
+}
+
+.address-form {
+    background-color: #fff;    
+    width: 700px;    
+    height: 100%;
+    min-height: 170px;
+    margin: 8% auto;
+    padding: 0px;
+    font-size: 1.2em;
+    padding: 20px 30px;    
+    border-radius: 5px;
+}
+
+.error-list {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    font-size: 0.9em;
+    /* margin: 10px;*/
+    padding: 0px;   
+    background-color: #FA8072;
+    font-weight: bold;
+}
+
+.error-list ul {    
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    list-style: disc;
+}
+
+#address-text {
+    width: 100%;
+    text-align: center;
+}
+
+#address-box {
+    width: 75%;
+    height: 50px;
+    text-align: left;
+    margin: 0;
+    padding: 15px;
+    border: solid 2px #bbb;
+    border-radius: 5px 0 0 5px;
+}
+
+#address-submit {
+    margin-left: -7px;
+    width: 25%;
+    height: 50px;    
+    background-color: #226abd;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;    
+}
+
+#address-submit:hover {
+    background-color: #00489b;
+}
 
 @media only screen and (max-width: 600px) {
     .about {
