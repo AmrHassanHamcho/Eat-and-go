@@ -90,7 +90,7 @@ class Restaurant extends Model
         {
             $restaurant = Restaurant::findOrFail($this->id);
             #$restaurant->admin()->associate($restaurant->admin);
-            $restaurant-> updated_at = now();
+            $restaurant->updated_at = now();
             $this->save();
             return true;
         }

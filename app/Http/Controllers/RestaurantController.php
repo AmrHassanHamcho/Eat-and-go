@@ -150,14 +150,122 @@ class RestaurantController extends Controller
         ]);
     }
 
-    public function editRestaurant()
+    public function editRestaurant(Request $request, $restaurantId)
     {
-        $this->emptyOrder();
-        return view('restaurant.editRestaurant');
+        
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        if(Auth::user()->id != $restaurant->admin_id && !Auth::user()->isAdminApp())
+        {
+            return redirect('logout');
+        }
+
+        try        
+        {                          
+            $button_action = request('restaurant-btn');           
+
+            switch($button_action)
+            {
+                case 'delete':
+                    Restaurant::deleteRestaurant($restaurant->id);                
+                    return redirect('/addRestaurants');       
+                    break;
+
+                case 'edit':
+                    if(!is_null(request('name')))                               
+                        $restaurant->name = request('name');
+                    
+                    if(!is_null(request('address')))                                    
+                        $restaurant->address = request('address');
+                    
+                    if(!is_null(request('bank_account')))                                    
+                        $restaurant->bank_account = request('bank_account');
+                    
+                    if(!is_null(request('phone')))                                    
+                        $restaurant->phone = request('phone');
+
+                    if(!is_null(request('image')))
+                    {     
+                        $imageName = $request->image->getClientOriginalName();  
+                        $restaurant->image_url = '/img/'.$imageName;
+                        
+                    }
+                    $restaurant->updateRestaurant();  
+                    
+                    if(!is_null(request('image')))
+                    {
+                        $imageName = $request->image->getClientOriginalName();  
+                        $request->image->move(public_path('img'), $imageName);
+                    }
+                    break;            
+                
+                case 'create':
+
+                    $this->validate(request(), [
+                        'name' => 'required',
+                        'address' => 'required',
+                        'bank_account' => 'required' ,
+                        'phone' => 'required',
+                        'image' => 'image',
+                    ]);
+
+                    $restaurant = new Restaurant;
+
+                    $restaurant->name = request('name');
+                    $restaurant->address = request('address');
+                    $restaurant->bank_account = request('bank_account');
+                    $restaurant->phone = request('phone');
+                    $restaurant->number_reviews = 0;
+                    $restaurant->admin_id = 2;
+                    if(!is_null(request('image')))
+                    {     
+                        $imageName = $request->image->getClientOriginalName();  
+                        $restaurant->image_url = '/img/'.$imageName;          
+                    }
+                    else
+                    {
+                        $restaurant->image_url = '/img/justeat.png';
+                    }
+
+                    Restaurant::createRestaurant($restaurant);  
+
+                    if(!is_null(request('image')))
+                    {
+                        $imageName = $request->image->getClientOriginalName();  
+                        $request->image->move(public_path('img'), $imageName);
+                    }                             
+                    break;   
+                
+                default:;
+            }
+
+            $restaurant = Restaurant::findOrFail($restaurantId);            
+            return view('restaurant.editRestaurant', compact(['restaurant']));
+ 
+        }
+        catch(QueryException $qe)
+        {                                 
+            return redirect()->back()->with([
+                'restaurantId',
+                'request',
+            ])->withErrors('There is a restaurant with that name taken.');    
+        } 
+        catch(Exception $e)
+        {
+            return redirect()->back()->with([
+                'restaurantId',
+                'request',
+            ])->withErrors('Unknown errors during operation!'); 
+        }
+
+        
     }
 
     public function addRestaurants(Request $request)
     {
+        if(!Auth::user()->isAdminApp())
+        {
+            return redirect('logout');
+        }
         $listRestaurants = [];
         try
         {   
@@ -168,9 +276,10 @@ class RestaurantController extends Controller
                     case 'create':
                         $this->validate(request(), [
                             'name' => 'required',
-                            'bank_account' => 'min:10|max:12' ,
-                            'phone' => 'min:9|max:11',
-                            'admin' => 'numeric',
+                            'address' => 'required',
+                            'bank_account' => 'required' ,
+                            'phone' => 'required',
+                            'image' => 'image',
                         ]);
                                 
                         $restaurant = new Restaurant;
@@ -180,10 +289,24 @@ class RestaurantController extends Controller
                         $restaurant->bank_account = request('bank_account');
                         $restaurant->phone = request('phone');
                         $restaurant->number_reviews = 0;
-                        $restaurant->image_url = '/img/justeat.png';
-                        $restaurant->admin_id = request('admin');
+                        $restaurant->admin_id = 2;
+                        if(!is_null(request('image')))
+                        {     
+                            $imageName = $request->image->getClientOriginalName();  
+                            $restaurant->image_url = '/img/'.$imageName;          
+                        }
+                        else
+                        {
+                            $restaurant->image_url = '/img/justeat.png';
+                        }
 
                         Restaurant::createRestaurant($restaurant);
+                        if(!is_null(request('image')))
+                        {
+                            $imageName = $request->image->getClientOriginalName();  
+                            $request->image->move(public_path('img'), $imageName);
+                        }
+
                         return redirect()->to('/addRestaurants');
                         break;
 
@@ -210,7 +333,7 @@ class RestaurantController extends Controller
         }
         catch(Exception $e)
         {
-            Redirect::back()->withErrors("Error to chungo.");
+            Redirect::back()->withErrors("Error during the operation!");
         }
         return view('restaurant.addRestaurants', [
             'listRestaurants' => $listRestaurants,
@@ -263,60 +386,66 @@ class RestaurantController extends Controller
 
     public function editFood($restaurantId, $foodId, Request $request)
     {                
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        if(Auth::user()->id != $restaurant->admin_id && !Auth::user()->isAdminApp())
+        {
+            return redirect('logout');
+        }
         $button_action = request('food-btn');
         $food = Food::find($foodId);               
         if(is_null($food) && strcmp($button_action,'create') != 0)                   
             return redirect('/restaurants/'.$restaurantId);        
 
-        switch($button_action)
+        try
         {
-            case 'delete':
-                Food::deleteFood($food->id);                
-                return redirect('/restaurants/'.$restaurantId);       
-                break;
+            switch($button_action)
+            {
+                case 'delete':
+                    Food::deleteFood($food->id);                
+                    return redirect('/restaurants/'.$restaurantId);       
+                    break;
 
-            case 'edit':
-                if(!is_null(request('name')))                
-                    $food->name = request('name');
+                case 'edit':
+                    if(!is_null(request('name')))                
+                        $food->name = request('name');
+                    
+                    if(!is_null(request('description')))                                    
+                        $food->description = request('description');
+                    
+                    if(!is_null(request('price')))                                    
+                        $food->price = request('price');
+
+                    $food->updateFood();                
+                    break;            
                 
-                if(!is_null(request('description')))                                    
-                    $food->description = request('description');
-                
-                if(!is_null(request('price')))                                    
-                    $food->price = request('price');
+                case 'create':
+                    $this->validate($request, [
+                        'name' => 'required',
+                        'description' => 'required' ,
+                        'price' => 'required|numeric'
+                    ]);
 
-                $food->updateFood();                
-                break;            
-            
-            case 'create':
-                $this->validate($request, [
-                    'name' => 'required',
-                    'description' => 'required' ,
-                    'price' => 'required|numeric'
-                ]);
+                    $food_new = new Food;
+                    $food_new->name = request('name');
+                    $food_new->description = request('description');
+                    $food_new->price = request('price');
+                    $food_new->restaurant_id = $restaurantId;
 
-                $food_new = new Food;
-                $food_new->name = request('name');
-                $food_new->description = request('description');
-                $food_new->price = request('price');
-                $food_new->restaurant_id = $restaurantId;
-
-                try
-                {
                     Food::createFood($food_new);  
-                }catch(QueryException $qe)
-                {                                 
-                    return redirect()->back()->with([
-                        'restaurantId',
-                        'foodId',
-                        'request',
-                    ])->withErrors('There is a food with that name taken.');    
-                }
 
-                $food = $food_new;                              
-                break;   
-            
-            default:;
+                    $food = $food_new;                              
+                    break;   
+                
+                default:;
+            }
+        }
+        catch(QueryException $qe)
+        {                                 
+            return redirect()->back()->with([
+                'restaurantId',
+                'foodId',
+                'request',
+            ])->withErrors('There is a food with that name taken.');    
         }
 
         $restaurant = Restaurant::findOrFail($restaurantId);            

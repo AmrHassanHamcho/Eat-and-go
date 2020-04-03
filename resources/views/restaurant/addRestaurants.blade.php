@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Restaurants')
+@section('title', 'AddRestaurants')
 
 @section('css-stylesheet', 'css/addRestaurants.css')
 
@@ -23,9 +23,6 @@
 
                 <b>Phone number</b><br> 
                 <input type="text" placeholder="Enter Restaurant Phone number" name="phone" value="{{old('phone')}}"> <br>
-
-                <b>Admin Email</b><br> 
-                <input type="text" placeholder="Enter Restaurant Admin email" name="admin" value="{{old('admin')}}"> <br>
 
                 <b>Restaurant icon</b><br> 
                 <input type="file" name="image" value="{{old('image')}}"> <br>
