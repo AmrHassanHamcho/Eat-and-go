@@ -15,9 +15,10 @@
 
 <div class="review-container">
     <h4>Write your opinion</h4>
-    <form class="review-form" method="post" name="review-form" action="/restaurants/{{ $restaurant->id }}/reviews">
+    @include('error-list')
+    <form class="review-form" method="post" id="review-form" action="/restaurants/{{ $restaurant->id }}/reviews">
         @csrf        
-        <input type="text" id="title-box" name="title" placeholder="Name your review.">
+        <input type="text" id="title-box" name="title" placeholder="Name your review">
         <select id="score-list" name="score">
             <option disabled selected>Enter score</option>
             <option value="1">Score: 1</option>
@@ -27,7 +28,9 @@
             <option value="5">Score: 5</option>
         </select>           
         {{-- <input type="text" id="comment-box" name="comment" placeholder="Write your comment...">             --}}
-        <textarea name="comment" id="comment-box" form="review-form" placeholder="Write your comment..."></textarea>
+        {{-- <textarea name="comment" id="comment-box" form="review-form" placeholder="Write your comment..."></textarea> --}}
+        {{-- <input type="text" name="comment"> --}}
+        <textarea name="comment" id="comment-box" form="review-form" placeholder="Write your comment..." formaction="/restaurants/{{ $restaurant->id }}/reviews"></textarea>
         <input type="submit" id="review-submit" value="Submit review">
-    </form>
+    </form>    
 </div>
