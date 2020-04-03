@@ -9,7 +9,9 @@
                         <span class="food-description">{{ $food->description }}</span>
                     </li>      
                     <div class="food-btns">              
-                        <button class="edit-btn" type="submit" name="food_id" value={{ $food->id }} formaction="/editFood/{{ $restaurant->id }}&{{ $food->id }}">Edit</button>
+                        @if(Auth::user()->id == $restaurant->admin_id || Auth::user()->isAdminApp())
+                            <button class="edit-btn" type="submit" name="food_id" value={{ $food->id }} formaction="/editFood/{{ $restaurant->id }}&{{ $food->id }}">Edit</button>
+                        @endif
                         <button type="submit" name="food_id" value={{ $food->id }}>+</button>
                     </div>
                 </div>                  
@@ -45,29 +47,31 @@
     </div>
 </div>
 
-<div class="food-form form">
-    <h4>Create new foods.</h4>
-    @include('error-list')
-    <form method="post" action="/editFood/{{ $restaurant->id }}&{{ 0 }}">
-        @csrf            
-        <input type="hidden" name="food_id" value=0>
+@if(Auth::user()->id == $restaurant->admin_id || Auth::user()->isAdminApp())
+    <div class="food-form form">
+        <h4>Create new foods.</h4>
+        @include('error-list')
+        <form method="post" action="/editFood/{{ $restaurant->id }}&{{ 0 }}">
+            @csrf            
+            <input type="hidden" name="food_id" value=0>
 
-        <div class="form-group">
-            <label>Name</label>        
-            <input type="text" name="name" placeholder="Insert name..." class="form-control">
-        <div>
+            <div class="form-group">
+                <label>Name</label>        
+                <input type="text" name="name" placeholder="Insert name..." class="form-control">
+            <div>
 
-        <div class="form-group">
-            <label>Description</label>
-            <input type="text" name="description" placeholder="Insert description..." class="form-control">
-        </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="description" placeholder="Insert description..." class="form-control">
+            </div>
 
-        <div class="form-group">
-            <label>Price (€)</label>
-            <input type="text" name="price" placeholder="Insert price..." class="form-control">
-        </div>
-        <div class="form-group btn">
-            <button type="submit" class="edit-food-btn create" name="food-btn" value="create">Create</button>
-        </div>
-    </form>
-</div>
+            <div class="form-group">
+                <label>Price (€)</label>
+                <input type="text" name="price" placeholder="Insert price..." class="form-control">
+            </div>
+            <div class="form-group btn">
+                <button type="submit" class="edit-food-btn create" name="food-btn" value="create">Create</button>
+            </div>
+        </form>
+    </div>
+@endif
