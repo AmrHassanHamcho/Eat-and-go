@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
@@ -12,6 +13,7 @@ use App\OrderLine;
 
 class OrderTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic feature test example.
      *
@@ -45,5 +47,167 @@ class OrderTest extends TestCase
 
         $this->assertInstanceOf(OrderLine::class, $orderlines[0]);
         $this->assertEquals($orderlines, OrderLine::where('order_id', $order->id)->get());
+    }
+
+    /** @test */ 
+    public function readOrder_test1(){
+        $expected = factory(Order::class)->create();
+
+        $actual = new Order;
+        $result = $actual->readOrder($expected->id);
+
+        $this->assertTrue($result);
+        $this->assertEquals($expected->attributes, $actual->attributes);        
+    }
+
+    /** @test */
+    public function readOrder_test2(){
+        $orderTest = new Order;
+        $result = $orderTest->readOrder(99);
+
+        $this->assertFalse($result);
+    }
+
+    /** @test */ 
+    public function deleteOrder_test1()
+    {
+        $order = factory(Order::class)->create();
+
+        $result = Order::deleteOrder($order->id);
+
+        $this->assertTrue($result);
+    }
+
+    /** @test */ 
+    public function deleteOrder_test2()
+    {
+        $order = new Order;
+        $order->id = 99;
+        $order->user_id = 1;
+        $order->restaurant_id = 1;
+        $order->total_price = 1;
+
+        $result = Order::deleteOrder($order->id);
+        $result2 = $order->readOrder($order->id);
+
+        $this->assertFalse($result);        
+        $this->assertFalse($result2);
+    }
+
+    /** @test */ 
+    public function createOrder_test1()
+    {
+        $order = new Order;        
+        $order->user_id = 3;
+        $order->restaurant_id = 3;
+        $order->total_price = 1;
+        $order->address = 'fake address';
+
+        $order_result = Order::createOrder($order);
+        $result2 = $order->readOrder($order_result->id);
+        
+        $this->assertTrue($result2);
+    }
+
+    /** @test */
+    public function listOrdersByRestaurant_test1(){
+        $restaurant = $this->aux_restaurant();
+        $orders = Order::listOrdersByRestaurant($restaurant, true);
+
+        $order_last = $orders[0];
+        foreach($orders as $order){
+            $this->assertTrue($order_last->created_at <= $order->created_at);
+            $order_last = clone $order;
+        }
+
+    }
+
+    /** @test */
+    public function listOrdersByRestaurant_test2(){
+        $restaurant = $this->aux_restaurant();
+        $orders = Order::listOrdersByRestaurant($restaurant, false);
+
+        $order_last = $orders[0];
+        foreach($orders as $order){
+            $this->assertTrue($order_last->created_at >= $order->created_at);
+            $order_last = clone $order;
+        }
+    }
+
+    /** @test */
+    public function listOrdersByUser_test1(){
+        $user = $this->aux_user();
+        $orders = Order::listOrdersByUser($user, true);
+
+        $order_last = $orders[0];
+        foreach($orders as $order){
+            $this->assertTrue($order_last->created_at <= $order->created_at);
+            $order_last = clone $order;
+        }
+    }
+
+    /** @test */
+    public function listOrdersByUser_test2(){
+        $user = $this->aux_user();
+        $orders = Order::listOrdersByUser($user, false);
+
+        $order_last = $orders[0];
+        foreach($orders as $order){
+            $this->assertTrue($order_last->created_at >= $order->created_at);
+            $order_last = clone $order;
+        }
+    }
+
+    private function aux_restaurant(){
+        $restaurant = factory(Restaurant::class)->create();
+
+        $user = factory(User::class, 'Client')->create();
+        $user->role_id = 3;
+
+        $order1 = new Order;
+        $order1->created_at = now();
+        $order1->user_id = $user->id;
+        $order1->restaurant_id = $restaurant->id;
+        $order1->total_price = 22;
+        $order1->address = 'fake address1';
+        
+
+        $order2 = new Order;
+        $order2->created_at = now();
+        $order2->user_id = $user->id;
+        $order2->restaurant_id = $restaurant->id;
+        $order2->total_price = 22;
+        $order2->address = 'fake address2';
+
+        Order::createOrder($order1);
+        Order::createOrder($order2);
+
+        return $restaurant;
+    }
+
+    private function aux_user(){
+        $restaurant = factory(Restaurant::class)->create();
+
+        $user = factory(User::class, 'Client')->create();
+        $user->role_id = 3;
+
+        $order1 = new Order;
+        $order1->created_at = now();
+        $order1->user_id = $user->id;
+        $order1->restaurant_id = $restaurant->id;
+        $order1->total_price = 22;
+        $order1->address = 'fake address1';
+
+        $order2 = new Order;
+        $order2->created_at = now();
+        $order2->user_id = $user->id;
+        $order2->restaurant_id = $restaurant->id;
+        $order2->total_price = 22;
+        $order2->address = 'fake address2';
+
+        Order::createOrder($order1);
+        Order::createOrder($order2);
+
+        return $user;
     }
 }

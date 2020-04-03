@@ -1,0 +1,136 @@
+ul {
+    list-style: none;                   
+}
+
+a {
+    text-decoration: none;
+}
+
+._main_container {
+    width: 60%;
+    margin: auto;
+    padding: 10px"
+}
+
+._main_address_container {
+    float: left;
+    width: 20%;
+    border-radius: 15px;
+    background: #bfbfbf;
+    padding: 25px;
+    position: absolute;
+    margin: 0px -200px; 
+}
+
+._main_restaurants_container {
+    float:right;
+    margin-right: 0px;
+}
+
+._restaurants {
+    display: inline-block;
+    margin-top: 2em;
+}
+
+._restaurant_container {
+    width: 900px;
+    height: 150px;
+    vertical-align: middle;
+    border-radius: 10px;
+    background: #f2f2f2;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+._restaurant_container img {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    float: left;
+    border-radius: 10px;
+    padding: 10;
+    margin: 0;
+}
+
+.restaurant-info {
+    display: block;        
+    padding-left: 30px;                
+}        
+
+.restaurant-info ul{      
+    font-size: 0.8em;              
+    margin-left: 75px;        
+    padding-top: 10px;
+}   
+
+.restaurant-info li{      
+    margin: 0px 0px;
+    /* padding-top:; */
+}   
+
+.restaurant-info .restaurant-name {
+    font-size: 1.9em;
+    margin-bottom: 2px;
+    color: #000;
+    text-decoration: none;
+}
+
+._restaurants_count {
+    float:left;
+    margin-right: 0px;
+}
+
+._restaurants_filter {
+    float:right;
+    margin-right: 0px;
+    vertical-align: middle;
+}
+
+._restaurants_filter form{
+    float:right;
+    margin-left: 10px;
+}
+
+._restaurants_filter form select{
+    padding-top: 3px;
+    height: 30px;
+}
+
+._restaurants_filter form input{
+    margin-left: 10px;
+    width: 20px; 
+    height: 20px; 
+}
+
+._filter option{
+    font-size: 1em;
+}
+
+._address_container {
+    padding: 0px;
+    vertical-align: bottom;
+    margin-bottom: 5%;
+}
+
+._address_container img {
+    vertical-align: top;
+    width: 25px;
+    height: 25px;
+}
+
+span {
+    font-size: 1.4em;
+    /*font-weight: bold;
+    vertical-align: bottom;*/
+}
+
+._main_address_container a {
+    font-weight: bold;
+    margin-left: 1.8em;
+}
+
+
+
+
+
+

@@ -19,6 +19,7 @@ class CreateReviewsTable extends Migration
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('restaurant_id');            
+            $table->string('title');
             $table->string('comment');
             $table->integer('score');
             

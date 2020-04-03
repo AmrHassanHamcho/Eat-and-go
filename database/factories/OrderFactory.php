@@ -4,6 +4,7 @@
 use App\User;
 use App\Restaurant;
 use App\Review;
+use App\Order;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -18,14 +19,13 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Review::class, function (Faker $faker) {
+$factory->define(Order::class, function (Faker $faker) {
     return [        
-        'title' => 'Factory title test',
-        'comment' => 'factory test comment for review',
-        'score' => 5,
+        'total_price' => 50,
         'created_at' => now(),
         'updated_at' => now(),
         'user_id' => factory(User::class, 'Client')->create()->id,        
-        'restaurant_id' => factory(Restaurant::class)->create()->id,        
+        'restaurant_id' => factory(Restaurant::class)->create()->id,       
+        'address'  => 'factory address',
     ];
 });

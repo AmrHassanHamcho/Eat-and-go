@@ -11,16 +11,39 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'UserController@login');
+Route::get('/login', 'UserController@login')->name('login');
+Route::post('/checklogin', 'UserController@checklogin');
+Route::get('/logout','UserController@logout');
+Route::get('/register', 'UserController@create');
+Route::post('/register', 'UserController@store');
 
-Route::get('/error/404', function() {
-    return view('error.404');
-});
-
+Route::get('/address', 'HomeController@address')->middleware('auth');
+Route::post('/address', 'HomeController@addressValidation')->middleware('auth');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 
 Route::get('/restaurants', 'RestaurantController@restaurants');
+Route::post('/restaurants', 'RestaurantController@restaurants');
+
+Route::get('/addRestaurants', 'RestaurantController@addRestaurants');
+Route::post('/addRestaurants', 'RestaurantController@addRestaurants');
+Route::get('/editRestaurant/{restaurantId}', 'RestaurantController@editRestaurant');
+Route::post('/editRestaurant/{restaurantId}', 'RestaurantController@editRestaurant');
+
 Route::get('/restaurants/{restaurantId}', 'RestaurantController@restaurant');
+Route::post('/addfood/{restaurantId}', 'RestaurantController@addfood');
+Route::post('/removefood/{restaurantId}', 'RestaurantController@removefood');
+Route::get('/restaurants/{restaurantId}/reviews', 'RestaurantController@reviews');
+Route::post('/restaurants/{restaurantId}/reviews', 'RestaurantController@addReview');
+Route::get('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
+Route::post('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
+
+Route::post('/summary/{restaurantId}', 'OrderController@summary');
+Route::post('/thanks', 'OrderController@store');
+Route::get('/summary/{restaurantId}', 'OrderController@summary');
+Route::get('/thanks', 'OrderController@store');
+
+Route::get('/error/404', function() {
+    return view('error.404');
+});

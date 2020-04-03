@@ -73,13 +73,24 @@ class Restaurant extends Model
         throw new Exception("The parameter must be an integer.");
     }    
 
+    public static function readRestaurantByName($name)
+    {
+        if(is_null($name))
+        {
+            $name = "";
+        }
+        $listRestaurants = Restaurant::where('name', 'like', "%{$name}%")->get(); 
+        //dd($listRestaurants);  
+        return $listRestaurants;
+    }
+
     public function updateRestaurant()
     {                   
         try
         {
             $restaurant = Restaurant::findOrFail($this->id);
             #$restaurant->admin()->associate($restaurant->admin);
-            $restaurant-> updated_at = now();
+            $restaurant->updated_at = now();
             $this->save();
             return true;
         }
@@ -129,17 +140,12 @@ class Restaurant extends Model
         throw new Exception("The parameter must be of type Restaurant.");   
     }
 
-    public static function listRestaurants($ascending)
+    public static function listRestaurants($filter, $order)
     {
-        if(!is_bool($ascending))
-        {
-            throw new Exception("The parameter must be of type bool.");   
-        }
-
-        if($ascending)
-            return Restaurant::orderBy('name', 'asc')->get();
+        //if($ascending)
+        return Restaurant::orderBy($filter, $order)->get();
             
-        return Restaurant::orderBy('name', 'desc')->get();
+        //return Restaurant::orderBy('name', 'desc')->get();
     }
 
 }
