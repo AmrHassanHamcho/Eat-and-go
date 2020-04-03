@@ -14,6 +14,7 @@ use Session;
 use Illuminate\Database\Eloquent\Collection;
 use Redirect;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantController extends Controller
 {
@@ -200,13 +201,15 @@ class RestaurantController extends Controller
                 
                 case 'create':
 
-                    $this->validate(request(), [
+                    $validator = Validator::make($request->all(), [
                         'name' => 'required',
                         'address' => 'required',
                         'bank_account' => 'required' ,
                         'phone' => 'required',
-                        'image' => 'image',
                     ]);
+                    if ($validator->fails()) { 
+                        Redirect::back()->withErrors("Introduce all restaurant information please!");
+                    }
 
                     $restaurant = new Restaurant;
 
@@ -242,13 +245,6 @@ class RestaurantController extends Controller
             return view('restaurant.editRestaurant', compact(['restaurant']));
  
         }
-        catch(QueryException $qe)
-        {                                 
-            return redirect()->back()->with([
-                'restaurantId',
-                'request',
-            ])->withErrors('There is a restaurant with that name taken.');    
-        } 
         catch(Exception $e)
         {
             return redirect()->back()->with([
@@ -274,14 +270,15 @@ class RestaurantController extends Controller
                 
                 switch ($action) {
                     case 'create':
-                        $this->validate(request(), [
+                        $validator = Validator::make($request->all(), [
                             'name' => 'required',
                             'address' => 'required',
                             'bank_account' => 'required' ,
                             'phone' => 'required',
-                            'image' => 'image',
                         ]);
-                                
+                        if ($validator->fails()) { 
+                            Redirect::back()->withErrors("Introduce all restaurant information please!");
+                        }
                         $restaurant = new Restaurant;
 
                         $restaurant->name = request('name');

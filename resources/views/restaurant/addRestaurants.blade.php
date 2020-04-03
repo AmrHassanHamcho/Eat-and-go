@@ -9,7 +9,7 @@
 
     <div class="_main_container">
 
-            <form name="form" id="form" method="post" action="" id="FORM_ID" >
+            <form name="form" id="form" method="post" action="" id="FORM_ID" enctype="multipart/form-data">
                 @csrf
                 <br>
                 <b>Name</b><br> 
