@@ -7,9 +7,11 @@
                     <li>
                         {{ $food->name }}: {{ $food->price }} € <br>
                         <span class="food-description">{{ $food->description }}</span>
-                    </li>                    
-                <button type="submit" name="food_id" value={{ $food->id }} formaction="/editFood/{{ $restaurant->id }}&{{ $food->id }}">Edit</button>
-                    <button type="submit" name="food_id" value={{ $food->id }}>+</button>
+                    </li>      
+                    <div class="food-btns">              
+                        <button class="edit-btn" type="submit" name="food_id" value={{ $food->id }} formaction="/editFood/{{ $restaurant->id }}&{{ $food->id }}">Edit</button>
+                        <button type="submit" name="food_id" value={{ $food->id }}>+</button>
+                    </div>
                 </div>                  
             @empty            
                 <li class="food"> The restaurant {{ $restaurant->name }} does not have foods available right now. </li>
@@ -18,7 +20,7 @@
     </ul>
 
     <div class="restaurant-order">          
-        <form method="post" action="/removefood/{{ $restaurant->id }}">
+        <form method="post" action="/removefood/{{ $restaurant->id }}" class="order-form">
             @csrf
             <div class="order">
                 <ul>

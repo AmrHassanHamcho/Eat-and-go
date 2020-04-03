@@ -19,7 +19,7 @@ a {
     height: 100px;
     display: flex;
     float: left;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .restaurant-info {
@@ -82,38 +82,53 @@ a {
     border-radius: 5px;
 }
 
-.food li {
-    width: 80%;
-    max-width: 80%;
+.food li {    
+    display: block;
+    width: 60%;
+    max-width: 80%;    
 }
 
 .food li .food-description {
     font-size: 0.8em;
 }
 
+.food-btns {   
+    width: 40%;
+    height: 100%;    
+    text-align: right;
+}
+
 .food button {
-    margin: auto 0px auto 90px;
-    padding: 0;
+    margin: 1px;
+    padding: 0;    
     width: 40px;
     height: 40px;        
     background-color: #226abd;
     border: none;
     border-radius: 5px;
     color:#fff;
-    font-size: 1.5em;
+    font-size: 1.5em;    
+}
+
+.food .edit-btn {
+    width: auto;
+    padding: 0px 10px;
 }
 
 .food button:hover {
     background-color: #00489b;
 }
 
-.restaurant-order {
-    float: left;
+.restaurant-order {    
+    display: inline-block;
     background-color: #fff;
-    width: 32%;
-    height: 100%;     
+    width: 32%;      
     border: none;
     border-radius: 5px;    
+}
+
+.restaurant-order .order-form{
+    border-radius: 5px;          
 }
 
 .buy-button {
@@ -137,13 +152,15 @@ a {
     width: 88%;        
     font-size: 0.90em;       
     margin: auto;
-    padding: 5px 0px;         
+    padding: 5px 0px;   
+    border-radius: 5px;            
 }
 
 .restaurant-order .order ul {                                                 
     margin: auto;
     padding: 0px;         
     font-size: 0.95em;  
+    border-radius: 5px;      
 }    
 
 .restaurant-order .remove-button{       
@@ -165,14 +182,17 @@ a {
 
 .restaurant-order .order li {
     margin: 0;
-    padding: 5px 0px;        
+    padding: 5px 0px;     
+    border-radius: 5px;         
 }
 
 .restaurant-order .no-food-selected {
     font-size: 0.9em;
     width: 100%;        
-    text-align: center;                
+    text-align: center;    
+    border-radius: 5px;                        
 }
+
 
 .restaurant-order .order .total-price {        
     display: flex;
@@ -189,7 +209,7 @@ a {
 .restaurant-order .order .total-price li {   
     width: 75%;     
     padding-left: 2px;        
-    padding-right: 2px;        
+    padding-right: 2px;            
 }
 
 .restaurant-order .order .total-price .price-number {                        
@@ -386,9 +406,16 @@ select {
 }
 
 @media only screen and (max-width: 1080px) {
+    
+    .restaurant {
+        width: 85%;
+    }
+
     .restaurant-order {        
         float: none;
-        width: 100%;
+        display: inline-block;
+        width: 100%;   
+        margin-top: 25px;     
     }
 
     .food-list {
@@ -401,4 +428,17 @@ select {
         margin: 1px 0;
         font-size: 0.9em;
     }
+
+    .food-btns {
+        font-size: 0.8em;        
+        height: 100%;        
+    }
+
+    .food button {
+        margin: 1px 0.5px;
+        padding: 0;    
+        width: 30px;
+        height: 30px;    
+        vertical-align: middle;
+    }        
 }
