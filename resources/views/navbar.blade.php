@@ -1,5 +1,5 @@
 <nav class="_navbar">
-    <div class="">
+    
         <a class="logo" href="/address">
             <img src="/img/justeat.png" alt="">
             Eat & Go
@@ -17,6 +17,8 @@
                 <li><a href='/login'>Log in</a></li>
                 <li><a href='/register'>Sign up</a></li>
             @endif
-        </ul>    
-    </div>
+        </ul>  
+        
+       
+    
 </nav>
