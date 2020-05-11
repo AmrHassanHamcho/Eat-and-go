@@ -98,9 +98,10 @@ class RestaurantController extends Controller
             Review::createReview($review);
         }catch(QueryException $qe)
         {            
-            return Redirect::back()->with([
-                'restaurantId'                
-            ])->withErrors('You have already created a review for this restaurant.');
+            $review = Review::where("user_id", Auth::user()->id)->where("restaurant_id", $restaurantId)->first();
+
+            return redirect('/editReview/'.$restaurantId.'&'.$review->id)                
+            ->withErrors('You had already created this review for this restaurant. You can edit it.');
         }
 
         $restaurant = Restaurant::findOrFail($restaurantId); 
@@ -389,7 +390,7 @@ class RestaurantController extends Controller
         {
             return redirect('logout');
         }
-        $button_action = request('food-btn');
+        $button_action = request('review-btn');
         $food = Food::find($foodId);               
         if(is_null($food) && strcmp($button_action,'create') != 0)                   
             return redirect('/restaurants/'.$restaurantId);        
@@ -448,5 +449,55 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::findOrFail($restaurantId);            
         return view('restaurant.editFood', compact(['food','restaurant']));
+    }
+
+    public function editReview($restaurantId, $reviewId, Request $request)
+    {                
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        $review = Review::findOrFail($reviewId);
+        
+        if(Auth::user()->id != $review->user->id)
+        {
+            return redirect('/restaurants/'.$restaurantId.'/reviews');      
+        }
+
+        $button_action = request('review-btn');              
+
+        try
+        {
+            switch($button_action)
+            {
+                case 'delete':
+                    Review::deleteReview($review->id);                
+                    return redirect('/restaurants/'.$restaurantId.'/reviews');       
+                    break;
+
+                case 'edit':
+                    if(!is_null(request('title')))                
+                        $review->title = request('title');
+                    
+                    if(!is_null(request('score')))                                    
+                        $review->score = request('score');
+                    
+                    if(!is_null(request('comment')))                                    
+                        $review->price = request('comment');
+
+                    $review->updateReview();                
+                    break;                             
+                
+                default:;
+            }
+        }
+        catch(QueryException $qe)
+        {                                 
+            return redirect()->back()->with([
+                'restaurantId',
+                'reviewId',
+                'request',
+            ])->withErrors('There is a food with that name taken.');    
+        }
+
+        $restaurant = Restaurant::findOrFail($restaurantId);            
+        return view('restaurant.editReview', compact(['review','restaurant']));
     }
 }

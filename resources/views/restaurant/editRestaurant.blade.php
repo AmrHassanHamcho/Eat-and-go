@@ -14,6 +14,15 @@
             </ul>
         </div>
         
+        <div class="restaurant-buttons">
+            <ul>
+                <li><a href="/restaurants/{{ $restaurant->id }}">Foods</a></li>
+                <li><a href="/restaurants/{{ $restaurant->id }}/reviews">Reviews</a></li>
+                @if((Auth::user()->id == $restaurant->admin_id && Auth::user()->isAdminRestaurant()) || Auth::user()->isAdminApp())
+                    <li><a href="/editRestaurant/{{ $restaurant->id }}">Edit</a></li>
+                @endif
+            </ul>
+        </div>
         
         <div class="food-form">
             <h4>Manage Restaurant information</h4>
