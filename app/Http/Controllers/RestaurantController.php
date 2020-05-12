@@ -500,4 +500,16 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::findOrFail($restaurantId);            
         return view('restaurant.editReview', compact(['review','restaurant']));
     }
+
+    public function myrestaurants()
+    {
+        if(!Auth::user()->isAdminRestaurant())        
+            return redirect('logout');        
+
+        $restaurants = Auth::user()->restaurants;
+
+        return view('restaurant.myrestaurants', [
+            'restaurants' => $restaurants,            
+        ]);
+    }
 }
