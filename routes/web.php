@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'UserController@login');
+Route::get('/', 'HomeController@welcome');
 Route::get('/login', 'UserController@login')->name('login');
 Route::post('/checklogin', 'UserController@checklogin');
 Route::get('/logout','UserController@logout');
