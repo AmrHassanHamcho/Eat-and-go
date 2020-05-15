@@ -20,18 +20,18 @@
       <ul class="nav navbar-nav navbar-right">
             @if(Auth::check())
                     @if(Auth::user()->isAdminApp())
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="/addRestaurants">Add restaurants</a>
                         </li>
                     @endif
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/logout">Log out</a>
                     </li>
                 @else
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href='/login'>Log in</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href='/register'>Sign up</a>
                     </li>
                 @endif
