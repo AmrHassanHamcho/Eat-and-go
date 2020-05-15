@@ -7,17 +7,8 @@
    
 
     <div class="container">
-        <!--
-        <div class="_main_address_container">
-            <div class="_address_container"> 
-                <img src="/img/position_icon.png" alt=""> <span>{{ $address ?? 'Default Address' }}</span>  
-            </div>
-            <a href="/address">Change address</a>
-        </div>
-    -->
-
         <div class="row">
-            <div class="card bg-light mb-3 col-lg-4 col-12" style="max-width: 16rem; max-height: 8rem;">
+            <div class="card bg-light ml-3 col-lg-4 col-12" style="max-width: 16rem; max-height: 8rem;">
                 <div class="card-header">
                     <img width="25" height="25" src="/img/position_icon.png" alt="">
                      <span>{{ $address ?? 'Default Address' }}</span>  
@@ -46,21 +37,23 @@
         
                 <div class="_restaurants">
                     @forelse($listRestaurants as $restaurant)
-                        <div class="card flex-row flex-wrap">
-                            
-                            <div class="card-header border-0">
-                                <img height="120" width="120" src="{{ $restaurant->image_url }}" alt="">
+                        <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-4">
+                                    <img height="120" width="120" src="{{ $restaurant->image_url }}" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+
+                                        <a class="card-title" href="restaurants/{{ $restaurant->id }}">
+                                            {{ $restaurant->name }}
+                                        </a>
+                                        <p class="card-subtitle text-muted">{{ $restaurant->number_reviews }} reviews</p>
+                                        <p class="card-text">{{ $restaurant->address }}</p>
+
+                                    </div> 
+                                </div>
                             </div>
-                            
-                            <div class="card-body">
-
-                                <a class="card-title" href="restaurants/{{ $restaurant->id }}">
-                                    {{ $restaurant->name }}
-                                </a>
-                                <p class="card-subtitle text-muted">{{ $restaurant->number_reviews }} reviews</p>
-                                <p class="card-text">{{ $restaurant->address }}</p>
-
-                            </div> 
                         </div>
                         <br>
                     @empty
@@ -70,7 +63,20 @@
             </div>
         </div>
     </div>
-
-   
-    
+<!--
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <img src="//placehold.it/200" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <div class="card-block px-2">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Description</p>
+                    <a href="#" class="btn btn-primary">BUTTON</a>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
 @endsection
