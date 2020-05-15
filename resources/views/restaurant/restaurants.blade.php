@@ -6,15 +6,15 @@
 @section('content')
    
 
-    <div class="_main_container">
-        <div class="_main_address_container">
+    <div class="_main_container col-sm-12">
+        <div class="_main_address_container col-3">
             <div class="_address_container"> 
                 <img src="/img/position_icon.png" alt=""> <span>{{ $address ?? 'Default Address' }}</span>  
             </div>
             <a href="/address">Change address</a>
         </div>
         
-        <div class="_main_restaurants_container">
+        <div class="_main_restaurants_container col-11">
             
             <div>
                 <div class="_restaurants_count">
