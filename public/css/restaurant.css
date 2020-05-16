@@ -416,9 +416,10 @@ select {
 }
 
 .summary .restaurant-order {    
+    font-size: 0.85em;
     width: 60%;    
     margin: auto;    
-    padding: auto;
+    padding: 0;
     text-align: justify;
 }
 
