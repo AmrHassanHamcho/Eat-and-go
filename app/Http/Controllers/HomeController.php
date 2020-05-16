@@ -7,6 +7,10 @@ use Session;
 
 class HomeController extends Controller
 {
+    public function welcome(){
+        return view('home.welcome');
+    }
+
     public function address()
     {               
         return view('home.address');            
@@ -31,4 +35,5 @@ class HomeController extends Controller
     {
         return view('home.contact');
     }    
+
 }

@@ -8,7 +8,7 @@
 <div class="summary">
     <div class="restaurant">
         <h2>Order summary</h2>    
-        <div class="restaurant-order">          
+        <div class="restaurant-order col-12 col-lg-8">          
             <form method="post" action="/thanks">
                 @csrf
                 <div class="order">

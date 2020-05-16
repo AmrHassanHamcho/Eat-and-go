@@ -4,6 +4,7 @@ ul {
 
 a {
     text-decoration: none;
+    color: #000;
 }
 
 .restaurant {             
@@ -92,13 +93,14 @@ a {
     font-size: 0.8em;
 }
 
-.food-btns {   
+.food-btns, .review-btns {   
     width: 40%;
     height: 100%;    
     text-align: right;
+    margin: auto;
 }
 
-.food button {
+.food button, .review button {
     margin: 1px;
     padding: 0;    
     width: 40px;
@@ -110,12 +112,12 @@ a {
     font-size: 1.5em;    
 }
 
-.food .edit-btn {
+.food .edit-btn, .review .edit-btn {
     width: auto;
     padding: 0px 10px;
 }
 
-.food button:hover {
+.food button:hover, .review button:hover {
     background-color: #00489b;
 }
 
@@ -229,12 +231,19 @@ a {
 }
 
 .review {
+    display: flex;
     width: 100%;
     margin: 0px 5px 0px 0px;
     padding: 10px 15px;
     background-color: #fff;
     border: solid 1px #ccc;
     border-radius: 5px;
+}
+
+.review li {    
+    display: block;
+    width: 70%;
+    max-width: 80%;    
 }
 
 .review-title {
@@ -268,10 +277,11 @@ a {
     padding: 25px;
     margin: auto;
 } 
-/* 
-.review-form select {
-    
-} */
+
+.review-btns .delete-btn {
+    background-color: white;
+    color: red;
+}
 
 #title-box {    
     width: 65%;
@@ -406,9 +416,10 @@ select {
 }
 
 .summary .restaurant-order {    
+    font-size: 0.85em;
     width: 60%;    
     margin: auto;    
-    padding: auto;
+    padding: 0;
     text-align: justify;
 }
 

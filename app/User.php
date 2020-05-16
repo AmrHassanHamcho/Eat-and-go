@@ -41,8 +41,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
-    public function restaurant(){
-        return $this->hasOne('App\Restaurant', 'admin_id');
+    public function restaurants(){
+        return $this->hasMany('App\Restaurant', 'admin_id');
     }
 
     public function reviews(){
@@ -64,7 +64,7 @@ class User extends Authenticatable
         return $user;
     }
 
-  public function readUser($id){
+    public function readUser($id){
         if(is_int($id))
         {
             try
