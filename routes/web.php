@@ -40,6 +40,7 @@ Route::get('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood')
 Route::post('/editFood/{restaurantId}&{foodId}', 'RestaurantController@editFood');
 Route::get('/editReview/{restaurantId}&{reviewId}', 'RestaurantController@editReview');
 Route::post('/editReview/{restaurantId}&{reviewId}', 'RestaurantController@editReview');
+Route::get('/myrestaurants', 'RestaurantController@myrestaurants');
 
 Route::post('/summary/{restaurantId}', 'OrderController@summary');
 Route::post('/thanks', 'OrderController@store');
