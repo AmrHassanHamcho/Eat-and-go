@@ -8,7 +8,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="card bg-light ml-3 col-lg-4 col-12" style="max-width: 16rem; max-height: 8rem;">
+            <div class="address card bg-light col-lg-4 col-12">
                 <div class="card-header">
                     <img width="25" height="25" src="/img/position_icon.png" alt="">
                      <span>{{ $address ?? 'Default Address' }}</span>  
@@ -39,10 +39,10 @@
                     @forelse($listRestaurants as $restaurant)
                         <div class="card">
                             <div class="row no-gutters">
-                                <div class="col-3">
+                                <div class="col-2">
                                     <img height="120" width="120" src="{{ $restaurant->image_url }}" alt="">
                                 </div>
-                                <div class="col-9">
+                                <div class="col-10">
                                     <div class="card-body">
 
                                         <a class="card-title" href="restaurants/{{ $restaurant->id }}">
