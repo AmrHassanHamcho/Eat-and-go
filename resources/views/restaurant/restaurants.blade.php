@@ -8,7 +8,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="card bg-light ml-3 col-lg-4 col-12" style="max-width: 16rem; max-height: 8rem;">
+            <div class="address card bg-light col-lg-4 col-12">
                 <div class="card-header">
                     <img width="25" height="25" src="/img/position_icon.png" alt="">
                      <span>{{ $address ?? 'Default Address' }}</span>  
