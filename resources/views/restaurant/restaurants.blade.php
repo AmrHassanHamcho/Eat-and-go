@@ -39,10 +39,10 @@
                     @forelse($listRestaurants as $restaurant)
                         <div class="card">
                             <div class="row no-gutters">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <img height="120" width="120" src="{{ $restaurant->image_url }}" alt="">
                                 </div>
-                                <div class="col-8">
+                                <div class="col-9">
                                     <div class="card-body">
 
                                         <a class="card-title" href="restaurants/{{ $restaurant->id }}">

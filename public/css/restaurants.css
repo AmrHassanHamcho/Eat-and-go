@@ -4,6 +4,7 @@ ul {
 
 a {
     text-decoration: none;
+    color: #000;    
 }
 
 ._main_container {
@@ -25,6 +26,15 @@ span {
     font-size: 1.4em;
     /*font-weight: bold;
     vertical-align: bottom;*/
+}
+
+.card, .card img
+{
+    border-radius: 5px;
+}
+
+.card-title {
+    font-weight: bold;
 }
 
 
