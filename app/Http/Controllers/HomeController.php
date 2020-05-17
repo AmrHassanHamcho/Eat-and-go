@@ -3,26 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function welcome(){
+        return view('home.welcome');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
+    public function address()
+    {               
+        return view('home.address');            
     }
+
+    public function addressValidation(Request $request)
+    {
+        $this->validate($request, [
+            'address' => 'required',            
+        ]);
+        
+        Session::put('address', $request->address);
+        return redirect('/restaurants');
+    }
+
+    public function about()
+    {
+        return view('home.about');
+    }
+
+    public function contact()
+    {
+        return view('home.contact');
+    }    
+
 }
