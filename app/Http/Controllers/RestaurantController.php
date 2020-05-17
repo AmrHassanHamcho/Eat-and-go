@@ -120,6 +120,7 @@ class RestaurantController extends Controller
             return redirect('/address');
 
         $this->emptyOrder();
+
         $filter = request('filter');
         $order = 'asc';
 
@@ -145,7 +146,17 @@ class RestaurantController extends Controller
                 $order = 'asc';
         }
 
-        $listRestaurants = Restaurant::listRestaurants($filter, $order);          
+        $restaurantSearch = request('restaurant-search');
+
+        
+        if(is_null($restaurantSearch))
+        {
+            $listRestaurants = Restaurant::listRestaurants($filter, $order);     
+        }
+        else{
+            //dd($restaurantSearch);
+            $listRestaurants = Restaurant::listRestaurantsByName($filter, $order, $restaurantSearch);  
+        }
 
         return view('restaurant.restaurants', [
             'listRestaurants' => $listRestaurants,
