@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@welcome');
+
 Route::get('/login', 'UserController@login')->name('login');
 Route::post('/checklogin', 'UserController@checklogin');
 Route::get('/logout','UserController@logout');
@@ -50,3 +50,6 @@ Route::get('/thanks', 'OrderController@store');
 Route::get('/error/404', function() {
     return view('error.404');
 });
+Auth::routes();
+Route::get('/', 'HomeController@welcome');
+
