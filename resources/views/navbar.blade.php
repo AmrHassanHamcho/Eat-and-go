@@ -26,6 +26,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/addRestaurants">Add restaurants</a>
                         </li>
+                    @elseif(Auth::user()->isAdminRestaurant())
+                      <li class="nav-item">
+                          <a class="nav-link" href="/myrestaurants">My restaurants</a>
+                      </li>
                     @endif
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log out</a>
