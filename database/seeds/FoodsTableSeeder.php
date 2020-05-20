@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class FoodsTableSeeder extends Seeder
 {
@@ -11,15 +12,21 @@ class FoodsTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create(app\Food);
+        $faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($faker));
         DB::table('foods')->delete();
-        DB::table('foods')->insert([
-            'id'=>1,
-            'restaurant_id'=>1,
-            'name'=>'Ravioli di Boletus',
-            'description'=>'The most delicious Ravioli di Boletus',
-            'price'=>9.70,
-        ]);
 
+        for($i = 1;$i <= 50;$i++){
+            DB::table('foods')->insert([
+                'id'=>$i,
+                'restaurant_id'=>$faker->numberBetween(1,10),
+                'name'=>$faker->foodName(),
+                'description'=>$faker->shuffle([$faker->dairyName(),$faker->vegetablesName(), $faker->meatName(), $faker->sauceName()]),
+                'price'=>numberBetween(5,500),
+            ]);
+        }
+        
+        /*
         DB::table('foods')->insert([
             'id'=>2,
             'restaurant_id'=>1,
@@ -59,5 +66,6 @@ class FoodsTableSeeder extends Seeder
             'description'=>'Food found in Tarkov. Usually carried by Skavs',
             'price'=>11,
         ]);
+        */
     }
 }
