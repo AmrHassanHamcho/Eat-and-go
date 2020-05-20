@@ -51,7 +51,7 @@ class RestaurantController extends Controller
             ]);
         }
         catch (Exception $e)
-        {            
+        {                        
             abort('404');
         }                
     }       
