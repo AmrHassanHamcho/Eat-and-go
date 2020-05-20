@@ -51,7 +51,7 @@ class RestaurantController extends Controller
             ]);
         }
         catch (Exception $e)
-        {            
+        {                        
             abort('404');
         }                
     }       
@@ -197,17 +197,18 @@ class RestaurantController extends Controller
                     if(!is_null(request('phone')))                                    
                         $restaurant->phone = request('phone');
 
-                    if(!is_null(request('image')))
+                    /*if(!is_null(request('image')))
                     {     
                         $imageName = $request->image->getClientOriginalName();  
                         $restaurant->image_url = '/img/'.$imageName;
                         
-                    }
+                    }*/
                     $restaurant->updateRestaurant();  
                     
                     if(!is_null(request('image')))
                     {
-                        $imageName = $request->image->getClientOriginalName();  
+                        //$imageName = $request->image->getClientOriginalName();  
+                        $imageName = $restaurant->id;
                         $request->image->move(public_path('img'), $imageName);
                     }
                     break;            
@@ -232,23 +233,27 @@ class RestaurantController extends Controller
                     $restaurant->phone = request('phone');
                     $restaurant->number_reviews = 0;
                     $restaurant->admin_id = 2;
-                    if(!is_null(request('image')))
+                    /*if(!is_null(request('image')))
                     {     
                         $imageName = $request->image->getClientOriginalName();  
                         $restaurant->image_url = '/img/'.$imageName;          
                     }
                     else
                     {
-                        $restaurant->image_url = '/img/justeat.png';
-                    }
+                        
+                    }*/
 
+                    $restaurant->image_url = '/img/justeat.png';
                     Restaurant::createRestaurant($restaurant);  
 
                     if(!is_null(request('image')))
                     {
-                        $imageName = $request->image->getClientOriginalName();  
+                        //$imageName = $request->image->getClientOriginalName();
+                        $imageName = $restaurant->id;
+                        $restaurant->image_url = '/img/'.$restaurant->id;
                         $request->image->move(public_path('img'), $imageName);
-                    }                             
+                        $restaurant->updateRestaurant();
+                    }                        
                     break;   
                 
                 default:;
@@ -300,21 +305,29 @@ class RestaurantController extends Controller
                         $restaurant->phone = request('phone');
                         $restaurant->number_reviews = 0;
                         $restaurant->admin_id = 2;
-                        if(!is_null(request('image')))
+                        
+                        
+                        /*if(!is_null(request('image')))
                         {     
-                            $imageName = $request->image->getClientOriginalName();  
-                            $restaurant->image_url = '/img/'.$imageName;          
+                            //$imageName = $request->image->getClientOriginalName();  
+                            //$restaurant->image_url = '/img/'.$imageName;
+
                         }
                         else
                         {
-                            $restaurant->image_url = '/img/justeat.png';
-                        }
+                            
+                        }*/
 
+                        $restaurant->image_url = '/img/justeat.png';
                         Restaurant::createRestaurant($restaurant);
+                        
                         if(!is_null(request('image')))
                         {
-                            $imageName = $request->image->getClientOriginalName();  
+                            //$imageName = $request->image->getClientOriginalName();  
+                            $imageName = $restaurant->id;
+                            $restaurant->image_url = '/img/'.$restaurant->id;
                             $request->image->move(public_path('img'), $imageName);
+                            $restaurant->updateRestaurant();
                         }
 
                         return redirect()->to('/addRestaurants');

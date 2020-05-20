@@ -11,12 +11,11 @@
 |
 */
 
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
+
 Route::get('/', 'HomeController@welcome');
-Route::get('/login', 'UserController@login')->name('login');
-Route::post('/checklogin', 'UserController@checklogin');
-Route::get('/logout','UserController@logout');
-Route::get('/register', 'UserController@create');
-Route::post('/register', 'UserController@store');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/address', 'HomeController@address')->middleware('auth');
 Route::post('/address', 'HomeController@addressValidation')->middleware('auth');
@@ -46,10 +45,3 @@ Route::post('/summary/{restaurantId}', 'OrderController@summary');
 Route::post('/thanks', 'OrderController@store');
 Route::get('/summary/{restaurantId}', 'OrderController@summary');
 Route::get('/thanks', 'OrderController@store');
-
-Route::get('/error/404', function() {
-    return view('error.404');
-
-auth::routes();
-
-});

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'Welcome')
 
@@ -8,7 +8,7 @@
         <hr class="my-4">
         <p>Here you will find loads of different options to satisfy your appetite!</p>
         <p class="lead">
-        <a class="btn btn-primary btn-lg" href="{{ action('UserController@login') }}" role="button">See more</a>
+        <a class="btn btn-primary btn-lg" href="/address" role="button">See more</a>
         </p>
   </div>
 @endsection
