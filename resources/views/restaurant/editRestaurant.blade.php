@@ -6,7 +6,7 @@
 @section('content')
     <div class="restaurant">                
         <div class="restaurant-info">
-            <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}">
+            <img height="120" width="120" src={{ asset( $restaurant->image_url ) }} alt="{{ $restaurant->name }}">
             <ul>
                 <li class="restaurant-name">{{ $restaurant->name }}</li>
                 <li>{{ $restaurant->number_reviews }} reviews</li>

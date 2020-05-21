@@ -11,25 +11,22 @@ class RestaurantsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $faker = Faker::create(app\Restaurant);
-        
-
+    {                
         DB::table('restaurants')->delete();
 
-        for($i = 1; $i <50; $i++){
+        for($i = 1; $i <=50; $i++){
+            $faker = Faker::create(Restaurant::class);
             DB::table('restaurants')->insert([
-                'id'=>$i,
-                'name'=> $faker->name,
-                'address'=>$faker->address,
+                // 'id'=>$i,
+                'name'=> $faker->unique()->name,
+                'address'=>$faker->unique()->address,
                 'bank_account'=>$faker->bankAccountNumber,
                 'phone'=>$faker->phoneNumber,
-                'admin_id'=>$i,
-                'number_reviews'=>$faker->numberBetween(1,100),
-                'image_url'=>$faker->imageUrl($width = 640, $height = 320),
-            ]);
-    
-
+                'admin_id'=>$faker->numberBetween(1,10),
+                'number_reviews'=>0, //$faker->numberBetween(1,100),
+                'image_url'=>'img/'.'faker'.$faker->numberBetween(1,3).'.jpeg',
+                // 'image_url'=>$faker->imageUrl($width = 120, $height = 120),
+            ]);    
         }
         /*
         DB::table('restaurants')->insert([

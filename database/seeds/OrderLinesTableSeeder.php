@@ -11,18 +11,20 @@ class OrderLinesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $faker = Faker::create(app\OrderLine);
+    {        
         DB::table('order_lines')->delete();
 
         for($i = 1;$i <= 50;$i++)
-        DB::table('order_lines')->insert([
-            'id'=>$i,
-            'order_id'=>numberBetween(1,10),
-            'food_id'=>numberBetween(1,10),
-            'quantity'=>numberBetween(1,20),
-            'total_price'=>numberBetween(5,500),
-        ]);
+        {
+            $faker = Faker::create(OrderLine::class);
+            DB::table('order_lines')->insert([
+                // 'id'=>$i,
+                'order_id'=>$faker->numberBetween(1,10),
+                'food_id'=>$faker->numberBetween(1,10),
+                'quantity'=>$faker->numberBetween(1,20),
+                'total_price'=>$faker->numberBetween(5,500),
+            ]);
+        }
         /*
         DB::table('order_lines')->insert([
             'id'=>2,

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use app\User;
 use Faker\Factory as Faker;
 
 class UsersTableSeeder extends Seeder
@@ -14,43 +13,26 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create(app\User);
-        
-        for($i = 1; $i <= 10; $i++){
-        
+        $faker = Faker::create(User::class);
         DB::table('users')->delete();
-        DB::table('users')->insert([
-            'id'=>$i,
-            'name'=> $faker->name,
-            'email'=>$faker->unique()->safeEmail,
-            'password'=>\bcrypt('admin'),            
-            'role_id'=>2 // AdminRestaurant
-        ]);
+        
+        for($i = 1; $i <= 10; $i++){                        
+            DB::table('users')->insert([            
+                'name'=> "admin".$i,
+                'email'=>"admin".$i."@gmail.com",
+                'password'=>\bcrypt('admin'),            
+                'role_id'=>2 // AdminRestaurant
+            ]);
         }
 
-        for($i = 10; $i <= 20; $i++){
-        
-            DB::table('users')->delete();
-            DB::table('users')->insert([
-                'id'=>$i,
-                'name'=> $faker->name,
+        for($i = 1; $i <= 10; $i++){
+            DB::table('users')->insert([                
+                'name'=> $faker->unique()->name,
                 'email'=>$faker->unique()->safeEmail,
-                'password'=>\bcrypt('superadmin'),            
-                'role_id'=>1 //AdminApp
+                'password'=>\bcrypt('client'),            
+                'role_id'=>3 // Client
             ]);
-            }
-
-            for($i = 20; $i <= 30; $i++){
-        
-                DB::table('users')->delete();
-                DB::table('users')->insert([
-                    'id'=>$i,
-                    'name'=> $faker->name,
-                    'email'=>$faker->unique()->safeEmail,
-                    'password'=>\bcrypt('client'),            
-                    'role_id'=>3 // Client
-                ]);
-                }
+        }
 
         /*
         DB::table('users')->insert([

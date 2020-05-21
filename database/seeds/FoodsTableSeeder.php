@@ -11,19 +11,24 @@ class FoodsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $faker = Faker::create(app\Food);
-        $faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($faker));
+    {        
         DB::table('foods')->delete();
 
-        for($i = 1;$i <= 50;$i++){
-            DB::table('foods')->insert([
-                'id'=>$i,
-                'restaurant_id'=>$faker->numberBetween(1,10),
-                'name'=>$faker->foodName(),
-                'description'=>$faker->shuffle([$faker->dairyName(),$faker->vegetablesName(), $faker->meatName(), $faker->sauceName()]),
-                'price'=>numberBetween(5,500),
-            ]);
+        $faker = Faker::create(Food::class);        
+        $faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($faker));
+
+        for($i = 1;$i <= 50;$i++){      
+            $total_foods = $faker->numberBetween(0, 20);
+            
+            for($j = 1; $j <= $total_foods; $j++){      
+                DB::table('foods')->insert([
+                    // 'id'=>$i,
+                    'restaurant_id'=> $i,
+                    'name'=>$faker->foodName().$j,
+                    'description'=>$faker->shuffle($faker->dairyName(), $faker->vegetableName(), $faker->meatName(), $faker->sauceName()),
+                    'price'=>$faker->numberBetween(5,50),
+                ]);
+            }
         }
         
         /*
