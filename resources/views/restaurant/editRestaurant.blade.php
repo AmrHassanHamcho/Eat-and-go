@@ -56,7 +56,6 @@
                 </div>
 
                 <div class="form-group btn">
-                    <button type="submit" class="edit-food-btn create" name="restaurant-btn" value="create">Create</button>
                     <button type="submit" class="edit-food-btn edit" name="restaurant-btn" value="edit">Update</button>
                     <button type="submit" class="edit-food-btn delete" name="restaurant-btn" value="delete">Delete</button>
                 </div>

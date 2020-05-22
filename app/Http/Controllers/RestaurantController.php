@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class RestaurantController extends Controller
 {
@@ -181,7 +182,7 @@ class RestaurantController extends Controller
             {
                 case 'delete':
                     Restaurant::deleteRestaurant($restaurant->id);                
-                    return redirect('/addRestaurants');       
+                    return redirect('/restaurants');       
                     break;
 
                 case 'edit':
@@ -213,7 +214,7 @@ class RestaurantController extends Controller
                     }
                     break;            
                 
-                case 'create':
+                /*case 'create':
 
                     $validator = Validator::make($request->all(), [
                         'name' => 'required',
@@ -233,7 +234,7 @@ class RestaurantController extends Controller
                     $restaurant->phone = request('phone');
                     $restaurant->number_reviews = 0;
                     $restaurant->admin_id = 2;
-                    /*if(!is_null(request('image')))
+                    if(!is_null(request('image')))
                     {     
                         $imageName = $request->image->getClientOriginalName();  
                         $restaurant->image_url = '/img/'.$imageName;          
@@ -241,7 +242,7 @@ class RestaurantController extends Controller
                     else
                     {
                         
-                    }*/
+                    }
 
                     $restaurant->image_url = '/img/justeat.png';
                     Restaurant::createRestaurant($restaurant);  
@@ -255,7 +256,7 @@ class RestaurantController extends Controller
                         $restaurant->updateRestaurant();
                     }                        
                     break;   
-                
+                */
                 default:;
             }
 
@@ -293,9 +294,11 @@ class RestaurantController extends Controller
                             'address' => 'required',
                             'bank_account' => 'required' ,
                             'phone' => 'required',
+                            'admin_email' => 'required',
                         ]);
                         if ($validator->fails()) { 
-                            Redirect::back()->withErrors("Introduce all restaurant information please!");
+                            return redirect()->back()->withErrors('Introduce all restaurant information please!'); 
+                            //Redirect::back()->withErrors("Introduce all restaurant information please!");
                         }
                         $restaurant = new Restaurant;
 
@@ -304,30 +307,33 @@ class RestaurantController extends Controller
                         $restaurant->bank_account = request('bank_account');
                         $restaurant->phone = request('phone');
                         $restaurant->number_reviews = 0;
-                        $restaurant->admin_id = 2;
-                        
-                        
-                        /*if(!is_null(request('image')))
-                        {     
-                            //$imageName = $request->image->getClientOriginalName();  
-                            //$restaurant->image_url = '/img/'.$imageName;
+                        $admin_email = request('admin_email');
 
-                        }
-                        else
+                        // $admin_user = \DB::table('users')
+                        //         ->where('email', $admin_email)
+                        //         ->first();
+                        $admin_user = User::where('email', $admin_email)->first();
+                        //dd($admin_user);
+                        //->update(['role_id' => 2]);
+                        
+                        if(!$admin_user)
                         {
-                            
-                        }*/
+                            //Redirect::back()->withErrors("This user does not exit!");
+                            return redirect()->back()->withErrors('This user does not exit!'); 
+                        }
 
-                        $restaurant->image_url = '/img/justeat.png';
-                        Restaurant::createRestaurant($restaurant);
+                        $admin_user->role_id = 2;
+                        $admin_user->updateUser();
+                        $restaurant->admin_id = $admin_user->id;
                         
+
                         if(!is_null(request('image')))
                         {
-                            //$imageName = $request->image->getClientOriginalName();  
-                            $imageName = $restaurant->id;
-                            $restaurant->image_url = '/img/'.$restaurant->id;
-                            $request->image->move(public_path('img'), $imageName);
-                            $restaurant->updateRestaurant();
+                            //$imageName = $request->image->getClientOriginalName(); 
+                            //$extension = $request->file('image')->extension(); 
+                            $imageName = $request->file('image')->store('img');
+                            $restaurant->image_url = $imageName;
+                            Restaurant::createRestaurant($restaurant);
                         }
 
                         return redirect()->to('/addRestaurants');
@@ -356,7 +362,8 @@ class RestaurantController extends Controller
         }
         catch(Exception $e)
         {
-            Redirect::back()->withErrors("Error during the operation!");
+            return redirect()->back()->withErrors('Error during the operation!'); 
+            //Redirect::back()->withErrors("Error during the operation!");
         }
         return view('restaurant.addRestaurants', [
             'listRestaurants' => $listRestaurants,
