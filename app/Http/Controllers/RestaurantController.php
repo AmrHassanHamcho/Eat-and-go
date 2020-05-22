@@ -421,7 +421,7 @@ class RestaurantController extends Controller
         {
             return redirect('logout');
         }
-        $button_action = request('review-btn');
+        $button_action = request('food-btn');
         $food = Food::find($foodId);               
         if(is_null($food) && strcmp($button_action,'create') != 0)                   
             return redirect('/restaurants/'.$restaurantId);        
