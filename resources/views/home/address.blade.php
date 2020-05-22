@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'Eat & Go')
 
@@ -13,11 +13,11 @@
         }
     </style>
     <div class="address-container">
-        <form class="address-form" method="post" name="address-form" action="/address">
+        <form class="address-form col-12 col-lg-8" method="post" name="address-form" action="/address">
             @csrf
             <p id="address-text">Address</p>
             <input type="text" id="address-box" name="address" placeholder="03690 San Vicente del Raspeig Alicante">
-            <input type="submit" id="address-submit" value="Find restaurants">
+            <input type="submit" id="address-submit" value="Find">
             @if($errors->any())
                 <div class="error-list">
                     <ul>

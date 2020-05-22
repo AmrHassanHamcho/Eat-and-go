@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class RestaurantsTableSeeder extends Seeder
 {
@@ -10,8 +11,24 @@ class RestaurantsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {                
         DB::table('restaurants')->delete();
+
+        for($i = 1; $i <=50; $i++){
+            $faker = Faker::create(Restaurant::class);
+            DB::table('restaurants')->insert([
+                // 'id'=>$i,
+                'name'=> $faker->unique()->name,
+                'address'=>$faker->unique()->address,
+                'bank_account'=>$faker->bankAccountNumber,
+                'phone'=>$faker->phoneNumber,
+                'admin_id'=>$faker->numberBetween(1,10),
+                'number_reviews'=>0, //$faker->numberBetween(1,100),
+                'image_url'=>'img/'.'faker'.$faker->numberBetween(1,3).'.jpeg',
+                // 'image_url'=>$faker->imageUrl($width = 120, $height = 120),
+            ]);    
+        }
+        /*
         DB::table('restaurants')->insert([
             'id'=>1,
             'name'=> 'Tony El Gordo restaurant',
@@ -44,5 +61,6 @@ class RestaurantsTableSeeder extends Seeder
             'number_reviews'=>0,
             'image_url'=>'/img/borisrestaurant.png',
         ]);
+        */
     }
 }

@@ -1,16 +1,24 @@
 <ul class="review-list">
-    @forelse($restaurant->reviews as $review)                
-        <div class="review">
-            <li>
-                <span class="review-title">{{ $review->title }}, by {{$review->user->name }}</span> <br>
-                <span class="review-score">score: {{ $review->score }}</span><br>
-                <span class="review-comment">{{ $review->comment }}</span>
-            </li>                                
-        </div>             
-    @empty                    
-        <p class="food">The restaurant {{ $restaurant->name }} does not have reviews yet.</p>
-        <p class="food">Be the first.</p>
-    @endforelse
+    <form method="post" action="">
+        @csrf
+        @forelse($restaurant->reviews as $review)                
+            <div class="review">            
+                <li>
+                    <span class="review-title">{{ $review->title }}, by {{$review->user->name }}</span> <br>
+                    <span class="review-score">score: {{ $review->score }}</span><br>
+                    <span class="review-comment">{{ $review->comment }}</span>                
+                </li>                                  
+                @if(Auth::user()->id == $review->user->id)
+                    <div class="review-btns">                              
+                        <button class="edit-btn" type="submit" name="review-btn" value="" formaction="/editReview/{{ $restaurant->id }}&{{ $review->id }}">Edit</button>
+                    </div>
+                @endif                    
+            </div>             
+        @empty                    
+            <p class="food">The restaurant {{ $restaurant->name }} does not have reviews yet.</p>
+            <p class="food">Be the first.</p>
+        @endforelse
+    </form>
 </ul>
 
 <div class="review-container">
@@ -27,9 +35,6 @@
             <option value="4">Score: 4</option>
             <option value="5">Score: 5</option>
         </select>           
-        {{-- <input type="text" id="comment-box" name="comment" placeholder="Write your comment...">             --}}
-        {{-- <textarea name="comment" id="comment-box" form="review-form" placeholder="Write your comment..."></textarea> --}}
-        {{-- <input type="text" name="comment"> --}}
         <textarea name="comment" id="comment-box" form="review-form" placeholder="Write your comment..." formaction="/restaurants/{{ $restaurant->id }}/reviews"></textarea>
         <input type="submit" id="review-submit" value="Submit review">
     </form>    

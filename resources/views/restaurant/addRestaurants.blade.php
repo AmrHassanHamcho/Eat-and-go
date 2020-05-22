@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'AddRestaurants')
 
@@ -23,6 +23,10 @@
 
                 <b>Phone number</b><br> 
                 <input type="text" placeholder="Enter Restaurant Phone number" name="phone" value="{{old('phone')}}"> <br>
+
+                <b>Admin email</b><br> 
+                <input type="text" placeholder="Enter Admin email" name="admin_email" value="{{old('admin_email')}}"> <br>
+                
 
                 <b>Restaurant icon</b><br> 
                 <input type="file" name="image" value="{{old('image')}}"> <br>

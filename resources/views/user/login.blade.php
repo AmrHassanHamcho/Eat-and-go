@@ -6,7 +6,7 @@
 
 @section('content')    
     <br />
-    <div class="container box">
+    <div class="container box col-12 col-lg-8">
         <h3 align="center">Login</h3><br />
 
         {{-- @if ($message = Session::get('error'))

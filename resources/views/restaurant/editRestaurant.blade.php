@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'Eat & Go - '.$restaurant->name)
 @section('css-stylesheet', asset('css/restaurant.css'))
@@ -6,7 +6,7 @@
 @section('content')
     <div class="restaurant">                
         <div class="restaurant-info">
-            <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}">
+            <img height="120" width="120" src={{ asset( $restaurant->image_url ) }} alt="{{ $restaurant->name }}">
             <ul>
                 <li class="restaurant-name">{{ $restaurant->name }}</li>
                 <li>{{ $restaurant->number_reviews }} reviews</li>
@@ -14,6 +14,15 @@
             </ul>
         </div>
         
+        <div class="restaurant-buttons">
+            <ul>
+                <li><a href="/restaurants/{{ $restaurant->id }}">Foods</a></li>
+                <li><a href="/restaurants/{{ $restaurant->id }}/reviews">Reviews</a></li>
+                @if((Auth::user()->id == $restaurant->admin_id && Auth::user()->isAdminRestaurant()) || Auth::user()->isAdminApp())
+                    <li><a href="/editRestaurant/{{ $restaurant->id }}">Edit</a></li>
+                @endif
+            </ul>
+        </div>
         
         <div class="food-form">
             <h4>Manage Restaurant information</h4>
@@ -47,7 +56,6 @@
                 </div>
 
                 <div class="form-group btn">
-                    <button type="submit" class="edit-food-btn create" name="restaurant-btn" value="create">Create</button>
                     <button type="submit" class="edit-food-btn edit" name="restaurant-btn" value="edit">Update</button>
                     <button type="submit" class="edit-food-btn delete" name="restaurant-btn" value="delete">Delete</button>
                 </div>

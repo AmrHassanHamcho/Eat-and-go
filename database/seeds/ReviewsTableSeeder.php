@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use App\Restaurant;
 
 class ReviewsTableSeeder extends Seeder
 {
@@ -10,8 +12,30 @@ class ReviewsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        
+        $faker = Faker::create(Review::class);
+
         DB::table('reviews')->delete();
+        for ($i = 1; $i <= 49; $i++){
+
+            $total_reviews = $faker->numberBetween(1,10) + 9;
+            for ($j = 11; $j <= $total_reviews; $j++){                
+                DB::table('reviews')->insert([
+                    // 'id'=>$i,
+                    'user_id'=>$j,
+                    'restaurant_id'=>$i,
+                    'title'=> $faker->randomElement(['Great','amazing', 'Alright', 'Bad']),
+                    'comment'=> 'test comment',
+                    'score'=>$faker->numberBetween(1,10)
+                ]);
+            }
+
+            $restaurant = Restaurant::find($i);
+            $restaurant->number_reviews = $restaurant->reviews->count();
+            $restaurant->updateRestaurant();
+        }
+
+        /*
         DB::table('reviews')->insert([
             'id'=>1,
             'user_id'=>5,
@@ -83,5 +107,6 @@ class ReviewsTableSeeder extends Seeder
             'comment'=> 'One of the best restaurants in Springfield but in general, it is a bit bad in comparison to other restaurants ive been.',
             'score'=>4
         ]);
+        */
     }
 }

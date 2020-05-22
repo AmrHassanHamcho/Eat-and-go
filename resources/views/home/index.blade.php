@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'Eat & Go')
 
@@ -13,7 +13,7 @@
         }
     </style>
     <div class="address-container">
-        <form class="address-form" method="post" name="address-form">
+        <form class="address-form col-12 col-lg-8" method="post" name="address-form">
             <p id="address-text">Address</p>
             <input type="text" id="address-box" name="address-text" placeholder="03690 San Vicente del Raspeig Alicante">
             <input type="submit" id="address-submit" value="Find restaurants">

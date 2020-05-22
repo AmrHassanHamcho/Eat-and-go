@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Faker\Factory as Faker;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,69 +13,32 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create(User::class);
         DB::table('users')->delete();
-        DB::table('users')->insert([
-            'id'=>1,
-            'name'=> 'admin1',
-            'email'=>'admin1@gmail.com',
-            'password'=>\bcrypt('admin'),            
-            'role_id'=>2 // AdminRestaurant
-        ]);
-
-        DB::table('users')->insert([
-            'id'=>2,
-            'name'=> 'admin2',
-            'email'=>'admin2@email.com',
-            'password'=>\bcrypt('admin'),            
-            'role_id'=>2 // AdminRestaurant
-        ]);
-
-        DB::table('users')->insert([
-            'id'=>3,
-            'name'=> 'admin3',
-            'email'=>'admin3@email.com',
-            'password'=>\bcrypt('admin'),            
-            'role_id'=>2 // AdminRestaurant
-        ]);        
-
-        DB::table('users')->insert([
-            'id'=>4,
+        
+        DB::table('users')->insert([            
             'name'=> 'superadmin',
             'email'=>'superadmin@gmail.com',
-            'password'=>\bcrypt('superadmin'),            
+            'password'=>\bcrypt('admin'),            
             'role_id'=>1 // AdminApp
         ]);
 
-        DB::table('users')->insert([
-            'id'=>5,
-            'name'=> 'Juan Ramón',
-            'email'=>'juanramon@gmail.com',
-            'password'=>\bcrypt('client'),            
-            'role_id'=>3 // Client
-        ]);
+        for($i = 1; $i <= 10; $i++){                        
+            DB::table('users')->insert([            
+                'name'=> "admin".$i,
+                'email'=>"admin".$i."@gmail.com",
+                'password'=>\bcrypt('admin'),            
+                'role_id'=>2 // AdminRestaurant
+            ]);
+        }
 
-        DB::table('users')->insert([
-            'id'=>6,
-            'name'=> 'Francisco Calvo',
-            'email'=>'franciscocalvo@gmail.com',
-            'password'=>\bcrypt('client'),            
-            'role_id'=>3 // Client
-        ]);
-
-        DB::table('users')->insert([
-            'id'=>7,
-            'name'=> 'Enrique Fernando',
-            'email'=>'enriquefernando@gmail.com',
-            'password'=>\bcrypt('client'),            
-            'role_id'=>3 // Client
-        ]);
-
-        DB::table('users')->insert([
-            'id'=>8,
-            'name'=> 'Roberto Carlos',
-            'email'=>'roberlocarlos@gmail.com',
-            'password'=>\bcrypt('client'),            
-            'role_id'=>3 // Client
-        ]);
+        for($i = 1; $i <= 10; $i++){
+            DB::table('users')->insert([                
+                'name'=> $faker->unique()->name,
+                'email'=>$faker->unique()->safeEmail,
+                'password'=>\bcrypt('client'),            
+                'role_id'=>3 // Client
+            ]);
+        }                
     }
 }

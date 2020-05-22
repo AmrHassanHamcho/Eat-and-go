@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class OrderLinesTableSeeder extends Seeder
 {
@@ -10,16 +11,21 @@ class OrderLinesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        
         DB::table('order_lines')->delete();
-        DB::table('order_lines')->insert([
-            'id'=>1,
-            'order_id'=>1,
-            'food_id'=>1,
-            'quantity'=>2,
-            'total_price'=>20,
-        ]);
-        
+
+        for($i = 1;$i <= 50;$i++)
+        {
+            $faker = Faker::create(OrderLine::class);
+            DB::table('order_lines')->insert([
+                // 'id'=>$i,
+                'order_id'=>$faker->numberBetween(1,10),
+                'food_id'=>$faker->numberBetween(1,10),
+                'quantity'=>$faker->numberBetween(1,20),
+                'total_price'=>$faker->numberBetween(5,500),
+            ]);
+        }
+        /*
         DB::table('order_lines')->insert([
             'id'=>2,
             'order_id'=>1,
@@ -27,5 +33,6 @@ class OrderLinesTableSeeder extends Seeder
             'quantity'=>1,
             'total_price'=>9,
         ]);
+        */
     }
 }

@@ -101,6 +101,7 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
             'League\\Flysystem\\' => 17,
             'League\\CommonMark\\Ext\\Table\\' => 28,
             'League\\CommonMark\\' => 18,
+            'Laravel\\Ui\\' => 11,
             'Laravel\\Tinker\\' => 15,
         ),
         'J' => 
@@ -116,6 +117,7 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         array (
             'Fideloper\\Proxy\\' => 16,
             'Faker\\' => 6,
+            'FakerRestaurant\\' => 16,
             'Facade\\Ignition\\' => 16,
             'Facade\\IgnitionContracts\\' => 25,
             'Facade\\FlareClient\\' => 19,
@@ -314,6 +316,10 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
         ),
+        'Laravel\\Ui\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/ui/src',
+        ),
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
@@ -337,6 +343,10 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
+        'FakerRestaurant\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jzonta/faker-restaurant/src',
         ),
         'Facade\\Ignition\\' => 
         array (
@@ -420,6 +430,9 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
+        'App\\Http\\Controllers\\RestaurantController' => __DIR__ . '/../..' . '/app/Http/Controllers/RestaurantController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -727,6 +740,17 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Facade\\Ignition\\Views\\Concerns\\CollectsViewExceptions' => __DIR__ . '/..' . '/facade/ignition/src/Views/Concerns/CollectsViewExceptions.php',
         'Facade\\Ignition\\Views\\Engines\\CompilerEngine' => __DIR__ . '/..' . '/facade/ignition/src/Views/Engines/CompilerEngine.php',
         'Facade\\Ignition\\Views\\Engines\\PhpEngine' => __DIR__ . '/..' . '/facade/ignition/src/Views/Engines/PhpEngine.php',
+        'FakerRestaurant\\Provider\\de_AT\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/de_AT/Restaurant.php',
+        'FakerRestaurant\\Provider\\de_DE\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/de_DE/Restaurant.php',
+        'FakerRestaurant\\Provider\\en_US\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/en_US/Restaurant.php',
+        'FakerRestaurant\\Provider\\es_PE\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/es_PE/Restaurant.php',
+        'FakerRestaurant\\Provider\\fr_FR\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/fr_FR/Restaurant.php',
+        'FakerRestaurant\\Provider\\id_ID\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/id_ID/Restaurant.php',
+        'FakerRestaurant\\Provider\\it_IT\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/it_IT/Restaurant.php',
+        'FakerRestaurant\\Provider\\ja_JP\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/ja_JP/Restaurant.php',
+        'FakerRestaurant\\Provider\\lt_LT\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/lt_LT/Restaurant.php',
+        'FakerRestaurant\\Provider\\pt_BR\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/pt_BR/Restaurant.php',
+        'FakerRestaurant\\Provider\\sv_SE\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/sv_SE/Restaurant.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
@@ -2110,6 +2134,13 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laravel\\Ui\\AuthCommand' => __DIR__ . '/..' . '/laravel/ui/src/AuthCommand.php',
+        'Laravel\\Ui\\Presets\\Bootstrap' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Bootstrap.php',
+        'Laravel\\Ui\\Presets\\Preset' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Preset.php',
+        'Laravel\\Ui\\Presets\\React' => __DIR__ . '/..' . '/laravel/ui/src/Presets/React.php',
+        'Laravel\\Ui\\Presets\\Vue' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Vue.php',
+        'Laravel\\Ui\\UiCommand' => __DIR__ . '/..' . '/laravel/ui/src/UiCommand.php',
+        'Laravel\\Ui\\UiServiceProvider' => __DIR__ . '/..' . '/laravel/ui/src/UiServiceProvider.php',
         'League\\CommonMark\\Block\\Element\\AbstractBlock' => __DIR__ . '/..' . '/league/commonmark/src/Block/Element/AbstractBlock.php',
         'League\\CommonMark\\Block\\Element\\AbstractStringContainerBlock' => __DIR__ . '/..' . '/league/commonmark/src/Block/Element/AbstractStringContainerBlock.php',
         'League\\CommonMark\\Block\\Element\\BlockQuote' => __DIR__ . '/..' . '/league/commonmark/src/Block/Element/BlockQuote.php',
@@ -4328,10 +4359,13 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
-        'Tests\\Unit\\AdminRestaurantTest' => __DIR__ . '/../..' . '/tests/Unit/UserTest.php',
-        'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
+        'Tests\\Unit\\FoodTest' => __DIR__ . '/../..' . '/tests/Unit/FoodTest.php',
+        'Tests\\Unit\\OrderLineTest' => __DIR__ . '/../..' . '/tests/Unit/OrderLineTest.php',
+        'Tests\\Unit\\OrderTest' => __DIR__ . '/../..' . '/tests/Unit/OrderTest.php',
         'Tests\\Unit\\RestaurantTest' => __DIR__ . '/../..' . '/tests/Unit/RestaurantTest.php',
         'Tests\\Unit\\ReviewTest' => __DIR__ . '/../..' . '/tests/Unit/ReviewTest.php',
+        'Tests\\Unit\\RoleTest' => __DIR__ . '/../..' . '/tests/Unit/RoleTest.php',
+        'Tests\\Unit\\UserTest' => __DIR__ . '/../..' . '/tests/Unit/UserTest.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',

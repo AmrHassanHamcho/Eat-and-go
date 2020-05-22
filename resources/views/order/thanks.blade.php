@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'Order summary')
 @section('css-stylesheet', asset('css/restaurant.css'))

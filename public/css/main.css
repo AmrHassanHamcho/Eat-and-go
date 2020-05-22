@@ -1,7 +1,7 @@
 html, body {    
     margin: 0px;
     padding: 0px;
-    width: 100%;    
+    width: 100%;        
     background-color: #ddd;
 }
 
@@ -23,8 +23,9 @@ html, body {
 } 
 
 .address-container{    
-    width: 100%;    
-    margin: 0;
+    width: 80%;    
+    height: auto;
+    margin: auto;
     padding: 0;    
     border: none;    
 }
@@ -33,7 +34,7 @@ html, body {
     background-color: #fff;    
     width: 700px;    
     height: 100%;
-    min-height: 170px;
+    min-height: 150px;
     margin: 8% auto;
     padding: 0px;
     font-size: 1.2em;
@@ -88,18 +89,67 @@ html, body {
     background-color: #00489b;
 }
 
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.9);
+}
+
+.navbar-nav .nav-item .nav-link:hover, a:hover {
+    text-decoration: underline;
+    color: rgba(0,0,0,.9);
+}
+
 @media only screen and (max-width: 600px) {
+    .address-form {      
+        font-size: 1.05em;
+        min-height: 140px;
+        padding: 15px 23px;    
+    }
+
     .about {
         font-size: 1.4em;
         padding-left: 50px;
         padding-right: 50px;
     }
+
+    .navbar {        
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-item {
+        margin: auto;
+        padding: auto;
+        text-align: center;
+        width: 100%;   
+        border-top: solid 1px rgba(0,0,0,.3);     
+    }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 850px) {
+@media only screen and (min-width: 600px) and (max-width: 990px) {
     .about {
         font-size: 1.6em;
         padding-left: 80px;
         padding-right: 80px;
+    }
+
+    .navbar {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-item {
+        margin: auto;
+        padding: auto;
+        text-align: center;
+        width: 100%;   
+        border-top: solid 1px rgba(0,0,0,.3);     
     }
 }

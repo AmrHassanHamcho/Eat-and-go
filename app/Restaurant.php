@@ -148,4 +148,15 @@ class Restaurant extends Model
         //return Restaurant::orderBy('name', 'desc')->get();
     }
 
+    public static function listRestaurantsByName($filter, $order, $name)
+    {
+        //if($ascending)
+        $listRestaurants = \DB::table('restaurants')
+            ->orderBy($filter, $order)
+            ->where('name', 'like', "%{$name}%")
+            ->get();
+        return $listRestaurants;
+        //return Restaurant::orderBy('name', 'desc')->get();
+    }
+
 }
