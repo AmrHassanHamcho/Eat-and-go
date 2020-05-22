@@ -51,7 +51,7 @@
                         <div class="card">
                             <div class="row no-gutters">
                                 <div class="col-4">
-                                    <img height="120" width="120" src="{{ $restaurant->image_url }}" alt="">
+                                    <img height="120" width="120" src={{ asset( $restaurant->image_url ) }} alt="{{ $restaurant->name }}">
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body">

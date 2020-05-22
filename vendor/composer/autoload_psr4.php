@@ -55,6 +55,7 @@ return array(
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'Fideloper\\Proxy\\' => array($vendorDir . '/fideloper/proxy/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
+    'FakerRestaurant\\' => array($vendorDir . '/jzonta/faker-restaurant/src'),
     'Facade\\Ignition\\' => array($vendorDir . '/facade/ignition/src'),
     'Facade\\IgnitionContracts\\' => array($vendorDir . '/facade/ignition-contracts/src'),
     'Facade\\FlareClient\\' => array($vendorDir . '/facade/flare-client-php/src'),

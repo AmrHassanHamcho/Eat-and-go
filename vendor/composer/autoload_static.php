@@ -117,6 +117,7 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         array (
             'Fideloper\\Proxy\\' => 16,
             'Faker\\' => 6,
+            'FakerRestaurant\\' => 16,
             'Facade\\Ignition\\' => 16,
             'Facade\\IgnitionContracts\\' => 25,
             'Facade\\FlareClient\\' => 19,
@@ -343,6 +344,10 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
+        'FakerRestaurant\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jzonta/faker-restaurant/src',
+        ),
         'Facade\\Ignition\\' => 
         array (
             0 => __DIR__ . '/..' . '/facade/ignition/src',
@@ -428,7 +433,6 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\RestaurantController' => __DIR__ . '/../..' . '/app/Http/Controllers/RestaurantController.php',
-        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -736,6 +740,17 @@ class ComposerStaticInit45b43c9efd766d38f4b00c1a55d2d895
         'Facade\\Ignition\\Views\\Concerns\\CollectsViewExceptions' => __DIR__ . '/..' . '/facade/ignition/src/Views/Concerns/CollectsViewExceptions.php',
         'Facade\\Ignition\\Views\\Engines\\CompilerEngine' => __DIR__ . '/..' . '/facade/ignition/src/Views/Engines/CompilerEngine.php',
         'Facade\\Ignition\\Views\\Engines\\PhpEngine' => __DIR__ . '/..' . '/facade/ignition/src/Views/Engines/PhpEngine.php',
+        'FakerRestaurant\\Provider\\de_AT\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/de_AT/Restaurant.php',
+        'FakerRestaurant\\Provider\\de_DE\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/de_DE/Restaurant.php',
+        'FakerRestaurant\\Provider\\en_US\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/en_US/Restaurant.php',
+        'FakerRestaurant\\Provider\\es_PE\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/es_PE/Restaurant.php',
+        'FakerRestaurant\\Provider\\fr_FR\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/fr_FR/Restaurant.php',
+        'FakerRestaurant\\Provider\\id_ID\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/id_ID/Restaurant.php',
+        'FakerRestaurant\\Provider\\it_IT\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/it_IT/Restaurant.php',
+        'FakerRestaurant\\Provider\\ja_JP\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/ja_JP/Restaurant.php',
+        'FakerRestaurant\\Provider\\lt_LT\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/lt_LT/Restaurant.php',
+        'FakerRestaurant\\Provider\\pt_BR\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/pt_BR/Restaurant.php',
+        'FakerRestaurant\\Provider\\sv_SE\\Restaurant' => __DIR__ . '/..' . '/jzonta/faker-restaurant/src/Provider/sv_SE/Restaurant.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
